@@ -1,0 +1,33 @@
+:root {
+  --application-width: 100%;
+  /*1440px;*/
+  --application-height: 100%;
+  /*1024px;*/
+  /*default colors*/
+  --outcoming-message-color: #376B5A;
+  --incoming-message-color: #293133;
+  --time-color: #EBE5E5;
+  /**light theme colors**/
+  --primary-color-light: #B3F8E1;
+  --secondary-color-light: #90CFBA;
+  --primary-font-color-light: #FFFFFF;
+  --secondary-font-color-light: #232829;
+  --secondary-sub-font-color-light: #293133;
+  --message-sender-color-light: #70A694;
+  /**dark theme colors**/
+  --primary-color-dark: #293133;
+  --secondary-color-dark: #232829;
+  --primary-font-color-dark: #FFFFFF;
+  --secondary-font-color-dark: #7EDEBE;
+  --secondary-sub-font-color-dark: #7FFFD4;
+  --message-sender-color-dark: #2E393C;
+
+  --asphalt-tinted: #293133;
+  --mint-solid: #7FFFD4;
+  --mint-tinted: #7EDEBE;
+  --olive-light: #B3F8E1;
+  --olive-tinted: #90CFBA;
+  --olive-dark: #70A694;
+  --gray: #EBE5E5;
+  --dark-context: #26493E;
+}
