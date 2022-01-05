@@ -22,6 +22,7 @@
   --secondary-sub-font-color-dark: #7FFFD4;
   --message-sender-color-dark: #2E393C;
 
+  --asphalt-solid: #232829;
   --asphalt-tinted: #293133;
   --mint-solid: #7FFFD4;
   --mint-tinted: #7EDEBE;
@@ -30,4 +31,5 @@
   --olive-dark: #70A694;
   --gray: #EBE5E5;
   --dark-context: #26493E;
+  --red-custom: #492626;
 }

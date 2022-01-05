@@ -1,8 +1,8 @@
 <template>
-  <div class="head__balance">
-    <div class="balance__headline">
-      <p>Balance</p>
-    </div>
+  <div class="balance">
+    <h1 class="headline">
+      Balance
+    </h1>
     <div class="top_balance">
       <div class="balance__info">
         <p class="balance__value">42.745 <span class="value__name">NIM</span></p>
@@ -79,5 +79,121 @@ export default {
 </script>
 
 <style scoped>
+.balance {
+  margin-left: 20px;
+  flex: 1;
+  overflow: auto;
+}
 
+.headline {
+  font-family: Inter, sans-serif;
+  font-size: 48px;
+  font-weight: bold;
+  color: #232829;
+}
+
+.balance__value {
+  font-family: Inter, sans-serif;
+  font-size: 96px;
+  font-weight: bold;
+  color: #232829;
+  margin-top: 26px;
+}
+
+.value__name {
+  font-family: Inter, sans-serif;
+  font-weight: 600;
+  font-size: 25px;
+}
+
+.top_balance {
+  display: flex; 
+  justify-content: space-between;
+  margin-bottom: 210px;
+}
+
+.operations {
+  font-family: Inter, sans-serif;
+  font-weight: bold;
+  color: #232829;
+  margin-top: 48px;
+  margin-right: 93px;
+  font-size: 28px;
+}
+
+#income {color: var(--olive-dark);}
+#gas {color: var(--asphalt-tinted);}
+#outcome {color: var(--dark-context);}
+
+.headline__table {
+  color: var(--secondary-color-dark);
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 25px;
+}
+
+.transaction__list {
+  padding-bottom: 10px;
+}
+
+.transaction__list table {
+  font-family: Inter;
+  color: var(--dark-context);
+  font-size: 18px;
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+}
+
+.transaction__list tr {
+  font-size: 18px;
+}
+
+.transaction__list tr th:first-of-type,
+.transaction__list tr td:first-of-type {
+  border: 1px solid var(--olive-dark);
+  border-right: none;
+}
+
+.transaction__list tr th,
+.transaction__list tr td {
+  border: 1px solid var(--olive-dark);
+  border-left: none;
+  border-right: none;
+  padding: 20px 30px;
+}
+
+.transaction__list tr th:last-of-type,
+.transaction__list tr td:last-of-type {
+  border: 1px solid var(--olive-dark);
+  border-left: none;
+}
+
+.transaction__list tr:first-of-type th:first-of-type {
+  border-top-left-radius: 30px;
+}
+
+.transaction__list tr:first-of-type th:last-of-type {
+  border-top-right-radius: 30px;
+}
+
+.transaction__list tr:last-of-type td:first-of-type {
+  border-bottom-left-radius: 30px;
+}
+
+.transaction__list tr:last-of-type td:last-of-type {
+  border-bottom-right-radius: 30px;
+}
+
+.transaction__list th {
+  text-align: left;
+  font-size: 24px;
+  background-color: var(--olive-tinted);
+}
+
+.transaction__list .sum {
+  text-align: center;
+  font-size:24px;
+  font-weight: bold;
+}
 </style>
