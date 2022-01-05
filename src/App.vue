@@ -1,55 +1,59 @@
 <template>
-    <Home/>
+  <main>
+    <div class="nim-application light-theme" id="main">
+      <!-- <div class="application-line">
+          <div class="application-name">
+              nim
+          </div>
+      </div> -->
+      <div class="application-body" id="main-body">
+
+        <Navbar v-if="isSignedIn"/>
+        <component :is="currentComponent"/>
+
+      </div>
+    </div>
+
+  </main>
 </template>
 
 <script>
-import Home from './components/Home.vue'
-
+import {mapState} from 'vuex'
+import SignIn from "./components/auth/SignIn";
+import SignUp from "./components/auth/SignUp";
+import Navbar from "./components/navbar/Navbar";
+import Messages from "./components/main/messages/Messages";
+import Balance from "./components/main/balance/Balance";
+import Tasks from "./components/main/tasks/Tasks";
+import Deals from "./components/main/deals/Deals";
 export default {
   name: 'App',
   components: {
-    Home
+    SignIn,
+    SignUp,
+    Navbar,
+    Messages,
+    Balance,
+    Tasks,
+    Deals
+  },
+  computed:{
+    ...mapState(['currentComponent', 'isSignedIn'])
+  },
+  created() {
+    window.addEventListener('load', function handler() {
+      window.removeEventListener('load', handler);
+      const preloader = document.querySelector('.preloader');
+      preloader.classList.add('preloader_hiding');
+      setTimeout(() => {
+        preloader.classList.remove('preloader_hiding');
+        preloader.classList.add('preloader_hidden');
+      }, 250);
+    });
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
 
-*{
-  margin: 0;
-  padding: 0;
-}
-
-html, body{
-  width: 100%;
-  height: 100%;
-}
-
-html{
-  overflow: hidden;
-}
-
-body{
-  overflow: auto;
-}
-
-.container {
-  padding: 20px;
-  margin: 10px auto;
-  width: 240px;
-  height: 200px;
-  text-align: center;
-  overflow: hidden;
-  border: 1px solid black;
-}
-
-.title{
-  font-size: 28px;
-  color: purple;
-}
 </style>

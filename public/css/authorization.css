@@ -112,6 +112,11 @@
   user-select: none;
 }
 
+.form__signup-text:hover{
+  cursor: pointer;
+  color: var(--mint-solid);
+}
+
 .form__signup-link {
   color: inherit;
 }
