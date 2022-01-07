@@ -9,7 +9,7 @@
         <input class="form__password" type="password" name="password-repeat" placeholder="repeat password" spellcheck="false">
         <div class="form__message"></div>
         <div class="form__actions">
-          <button class="form__submit" type="submit" @click="completeSignUp()">SIGN UP</button>
+          <button class="form__submit" type="submit" @click="completeSignUp(credentials)">SIGN UP</button>
           <div class="form__signup-text">or <span @click="setCurrentComponent('SignIn')" class="form__signup-link">sign In</span></div>
         </div>
       </form>
