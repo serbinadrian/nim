@@ -36,7 +36,7 @@
               </div>
               <div class="deal__controls">
                 <button
-                  :disabled="deal.state.toLowerCase() === 'confirmed'"
+                  :disabled="deal.state.toLowerCase()==='confirmed'"
                   @click.stop="deal.state = 'confirmed'"
                   class="deal__control deal__confirm">
                   Confirm

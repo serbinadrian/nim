@@ -61,7 +61,7 @@ const store = new Vuex.Store({
                     console.log(error);
                     this.state.userMessage = 'Ошибка 503: Сервер недоступен';
                 });
-            
+
             this.state.isSignedIn = true;
             this.state.currentComponent = "Messages";
 
