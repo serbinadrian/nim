@@ -17,8 +17,12 @@
           v-for="(deal, index) in deals.asCustomer" 
           :key="deal.title + index" 
           @click="deal.active = !deal.active" 
-          :class="deal.state.trim().replace(' ', '-').toLowerCase() || ''"
           class="deal">
+          <div 
+            :class="statusToClass(deal.status)"
+            class="deal__status">
+            {{ deal.status }}
+          </div>
           <div class="deal__title">{{ deal.title }}</div>
           <div class="deal__to-price">
             <div class="deal__to">
@@ -36,14 +40,14 @@
               </div>
               <div class="deal__controls">
                 <button
-                  :disabled="deal.state.toLowerCase()==='confirmed'"
-                  @click.stop="deal.state = 'confirmed'"
+                  :disabled="deal.status === dealStatus.CONFIRMED"
+                  @click.stop="deal.status = dealStatus.CONFIRMED"
                   class="deal__control deal__confirm">
                   Confirm
                 </button>
                 <button
-                  :disabled="deal.state.toLowerCase() === 'cancelled'"
-                  @click.stop="deal.state = 'cancelled'"
+                  :disabled="deal.status === dealStatus.CANCELLED"
+                  @click.stop="deal.status = dealStatus.CANCELLED"
                   class="deal__control deal__cancel">
                   Cancel
                 </button>
@@ -57,8 +61,12 @@
           v-for="(deal, index) in deals.asExecutor" 
           :key="deal.title + index" 
           @click="deal.active = !deal.active" 
-          :class="deal.state.trim().replace(' ', '-').toLowerCase() || ''"
           class="deal">
+          <div 
+            :class="statusToClass(deal.status)"
+            class="deal__status">
+            {{ deal.status }}
+          </div>
           <div class="deal__title">{{ deal.title }}</div>
           <div class="deal__to-price">
             <div class="deal__to">
@@ -76,20 +84,20 @@
               </div>
               <div class="deal__controls">
                 <button
-                  :disabled="deal.state.toLowerCase() === 'submitted'"
-                  @click.stop="deal.state = 'submitted'"
+                  :disabled="deal.status === dealStatus.SUBMITTED"
+                  @click.stop="deal.status = dealStatus.SUBMITTED"
                   class="deal__control deal__submit">
                   Submit
                 </button>
                 <button
-                  :disabled="deal.state.toLowerCase() === 'in progress'"
-                  @click.stop="deal.state = 'in progress'"
+                  :disabled="deal.status === dealStatus.IN_PROGRESS"
+                  @click.stop="deal.status = dealStatus.IN_PROGRESS"
                   class="deal__control deal__in-progress">
                   In progress
                 </button>
                 <button
-                  :disabled="deal.state.toLowerCase() === 'cancelled'"
-                  @click.stop="deal.state = 'cancelled'"
+                  :disabled="deal.status === dealStatus.CANCELLED"
+                  @click.stop="deal.status = dealStatus.CANCELLED"
                   class="deal__control deal__cancel">
                   Cancel
                 </button>
@@ -103,77 +111,86 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: "Deals",
   data() {
     return {
-      deals: {
-        asCustomer: [
-          {
-            title: 'Security system "Marci"',
-            nameTo: 'Babbage',
-            price: 14.621,
-            description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt voluptates molestiae qui magnam perspiciatis amet reprehenderit provident? Dignissimos fuga dolor, dolorem alias sit quae accusantium optio mollitia modi esse! Nesciunt!Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt voluptates molestiae qui magnam perspiciatis amet reprehenderit provident? Dignissimos fuga dolor, dolorem alias sit quae accusantium optio mollitia modi esse! Nesciunt!',
-            state: 'Cancelled',
-            active: false
-          },
-          {
-            title: 'Computing of bigINT',
-            nameTo: 'Buterin',
-            price: 0.457,
-            description: 'Some description',
-            state: 'Confirmed',
-            active: false
-          },
-          {
-            title: 'long long long long long long a a a a a a a a a a a a a a a a a  long long long long long long long long long long long long long ',
-            nameTo: 'long long long long long long a a a a a a a a a a a a a a a a a',
-            price: 7.2,
-            description: 'Firstly, we need a backup for our invention to prove we did it, we created this masterpiece of techical progress. Secondly, we have to test it. Write a program for this machine, launch this one and try again until successful changes.',
-            state: '',
-            active: false
-          }
-        ],
-        asExecutor: [
-          {
-            title: 'Security system "Marci"',
-            nameTo: 'Babbage',
-            price: 14.621,
-            description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt voluptates molestiae qui magnam perspiciatis amet reprehenderit provident? Dignissimos fuga dolor, dolorem alias sit quae accusantium optio mollitia modi esse! Nesciunt!Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt voluptates molestiae qui magnam perspiciatis amet reprehenderit provident? Dignissimos fuga dolor, dolorem alias sit quae accusantium optio mollitia modi esse! Nesciunt!',
-            state: 'In progress',
-            active: false
-          },
-          {
-            title: 'Security system "Marci"',
-            nameTo: 'Babbage',
-            price: 14.621,
-            description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt voluptates molestiae qui magnam perspiciatis amet reprehenderit provident? Dignissimos fuga dolor, dolorem alias sit quae accusantium optio mollitia modi esse! Nesciunt!Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt voluptates molestiae qui magnam perspiciatis amet reprehenderit provident? Dignissimos fuga dolor, dolorem alias sit quae accusantium optio mollitia modi esse! Nesciunt!',
-            state: 'Submitted',
-            active: false
-          },
-          {
-            title: 'Security system "Marci"',
-            nameTo: 'Babbage',
-            price: 14.621,
-            description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt voluptates molestiae qui magnam perspiciatis amet reprehenderit provident? Dignissimos fuga dolor, dolorem alias sit quae accusantium optio mollitia modi esse! Nesciunt!Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt voluptates molestiae qui magnam perspiciatis amet reprehenderit provident? Dignissimos fuga dolor, dolorem alias sit quae accusantium optio mollitia modi esse! Nesciunt!',
-            state: '',
-            active: false
-          },
-          {
-            title: 'Security system "Marci"',
-            nameTo: 'Babbage',
-            price: 14.621,
-            description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt voluptates molestiae qui magnam perspiciatis amet reprehenderit provident? Dignissimos fuga dolor, dolorem alias sit quae accusantium optio mollitia modi esse! Nesciunt!Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt voluptates molestiae qui magnam perspiciatis amet reprehenderit provident? Dignissimos fuga dolor, dolorem alias sit quae accusantium optio mollitia modi esse! Nesciunt!',
-            state: 'Cancelled',
-            active: false
-          }
-        ]
-      }
+      dealStatus: {},
     };
   },
+  computed: {
+    deals: {
+      asCustomer: [
+        {
+          title: 'Security system "Marci"',
+          nameTo: 'Babbage',
+          price: 14.621,
+          description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt voluptates molestiae qui magnam perspiciatis amet reprehenderit provident? Dignissimos fuga dolor, dolorem alias sit quae accusantium optio mollitia modi esse! Nesciunt!Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt voluptates molestiae qui magnam perspiciatis amet reprehenderit provident? Dignissimos fuga dolor, dolorem alias sit quae accusantium optio mollitia modi esse! Nesciunt!',
+          status: this.dealStatus.CANCELLED,
+          active: false
+        },
+        {
+          title: 'Computing of bigINT',
+          nameTo: 'Buterin',
+          price: 0.457,
+          description: 'Some description',
+          status: this.dealStatus.CONFIRMED,
+          active: false
+        },
+        {
+          title: 'long long long long long long a a a a a a a a a a a a a a a a a  long long long long long long long long long long long long long ',
+          nameTo: 'long long long long long long a a a a a a a a a a a a a a a a a',
+          price: 7.2,
+          description: 'Firstly, we need a backup for our invention to prove we did it, we created this masterpiece of techical progress. Secondly, we have to test it. Write a program for this machine, launch this one and try again until successful changes.',
+          status: this.dealStatus.PENDING,
+          active: false
+        }
+      ],
+      asExecutor: [
+        {
+          title: 'Security system "Marci"',
+          nameTo: 'Babbage',
+          price: 14.621,
+          description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt voluptates molestiae qui magnam perspiciatis amet reprehenderit provident? Dignissimos fuga dolor, dolorem alias sit quae accusantium optio mollitia modi esse! Nesciunt!Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt voluptates molestiae qui magnam perspiciatis amet reprehenderit provident? Dignissimos fuga dolor, dolorem alias sit quae accusantium optio mollitia modi esse! Nesciunt!',
+          status: this.dealStatus.IN_PROGRESS,
+          active: false
+        },
+        {
+          title: 'Security system "Marci"',
+          nameTo: 'Babbage',
+          price: 14.621,
+          description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt voluptates molestiae qui magnam perspiciatis amet reprehenderit provident? Dignissimos fuga dolor, dolorem alias sit quae accusantium optio mollitia modi esse! Nesciunt!Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt voluptates molestiae qui magnam perspiciatis amet reprehenderit provident? Dignissimos fuga dolor, dolorem alias sit quae accusantium optio mollitia modi esse! Nesciunt!',
+          status: this.dealStatus.SUBMITTED,
+          active: false
+        },
+        {
+          title: 'Security system "Marci"',
+          nameTo: 'Babbage',
+          price: 14.621,
+          description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt voluptates molestiae qui magnam perspiciatis amet reprehenderit provident? Dignissimos fuga dolor, dolorem alias sit quae accusantium optio mollitia modi esse! Nesciunt!Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt voluptates molestiae qui magnam perspiciatis amet reprehenderit provident? Dignissimos fuga dolor, dolorem alias sit quae accusantium optio mollitia modi esse! Nesciunt!',
+          status: this.dealStatus.PENDING,
+          active: false
+        },
+        {
+          title: 'Security system "Marci"',
+          nameTo: 'Babbage',
+          price: 14.621,
+          description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt voluptates molestiae qui magnam perspiciatis amet reprehenderit provident? Dignissimos fuga dolor, dolorem alias sit quae accusantium optio mollitia modi esse! Nesciunt!Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt voluptates molestiae qui magnam perspiciatis amet reprehenderit provident? Dignissimos fuga dolor, dolorem alias sit quae accusantium optio mollitia modi esse! Nesciunt!',
+          status: this.dealStatus.CANCELLED,
+          active: false
+        }
+      ]
+    }
+  },
+  created() {
+    this.dealStatus = this.getDealStatus();
+  },
   methods: {
-    dealActive(deal) {
-      alert(deal);
+    ...mapGetters(['getDealStatus']),
+    statusToClass(dealStatus) {
+      return dealStatus.trim().replace(' ', '-').toLowerCase() || '';
     }
   }
 }
@@ -210,6 +227,36 @@ export default {
   border: 1px solid var(--olive-dark);
   border-radius: 50px;
   box-shadow: 0 0 4px rgba(0,0,0,.5);
+}
+
+.deal__status {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  padding: 0.35em 0;
+  min-width: 7em;
+  text-align: center;
+  font-weight: 600;
+  font-size: 11px;
+  line-height: 1;
+  border-radius: 50px;
+  color: #fff;  
+}
+
+.deal__status.confirmed {
+  background-color: var(--dark-context);
+}
+
+.deal__status.cancelled {
+  background-color: var(--red-custom);
+}
+
+.deal__status.submitted {
+  background-color: var(--dark-context);
+}
+
+.deal__status.in-progress {
+  background-color: var(--olive-dark);
 }
 
 .deals__lists {
@@ -253,29 +300,6 @@ export default {
   border-radius: 50px;
   color: #fff;
 }
-
-
-/*-----states of deal-----*/
-.deal.confirmed::after {
-  content: 'Confirmed';
-  background-color: var(--dark-context);
-}
-
-.deal.cancelled::after {
-  content: 'Cancelled';
-  background-color: var(--red-custom);
-}
-
-.deal.submitted::after {
-  content: 'Submitted';
-  background-color: var(--dark-context);
-}
-
-.deal.in-progress::after {
-  content: 'In progress';
-  background-color: var(--olive-dark);
-}
-
 
 .deal__title {
   font-size: 24px;

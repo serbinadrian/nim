@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import components from './data/components/components.json'
 import errCodes from './data/status/errCodes.json'
+import dealStatus from './data/status/dealStatus.json'
 Vue.use(Vuex)
 
 
@@ -11,6 +12,7 @@ const store = new Vuex.Store({
 
         errCodes: errCodes,
         components: components,
+        dealStatus: dealStatus,
 
         /*net props*/
         backendUrl: 'http://bonch-ikt.ru:12881',
@@ -42,6 +44,9 @@ const store = new Vuex.Store({
         },
         getComponents(state) {
             return state.components;
+        },
+        getDealStatus(state) {
+            return state.dealStatus;
         }
     },
     actions: {

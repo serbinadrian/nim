@@ -1,0 +1,7 @@
+{
+  "CONFIRMED": "confirmed",
+  "SUBMITTED": "submitted",
+  "CANCELLED": "cancelled",
+  "IN_PROGRESS": "in progress",
+  "PENDING": ""
+}
