@@ -2,7 +2,6 @@
   {
     "to": "To",
     "description": "Description",
-    "asExecutor": "As executor",
     "confirm": "Confirm",
     "confirmed": "Confirmed",
     "submit": "Submit",
