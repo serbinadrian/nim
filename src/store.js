@@ -1,10 +1,17 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-
+import components from './data/components/components.json'
+import errCodes from './data/status/errCodes.json'
 Vue.use(Vuex)
+
 
 const store = new Vuex.Store({
     state: {
+        /*data*/
+
+        errCodes: errCodes,
+        components: components,
+
         /*net props*/
         backendUrl: 'http://bonch-ikt.ru:12881',
         matrixURL: 'http://bonch-ikt.ru:12808',
@@ -17,10 +24,9 @@ const store = new Vuex.Store({
             matrixAccessToken: '',
             matrixUserId: ''
         },
-        token: '',
 
         /*App props*/
-        currentComponent: 'SignIn',
+        currentComponent: components.SIGN_IN,
 
         /*User message*/
         userMessage: ''
@@ -31,6 +37,12 @@ const store = new Vuex.Store({
         }
     },
     getters: {
+        getErrCodes(state){
+            return state.errCodes;
+        },
+        getComponents(state) {
+            return state.components;
+        }
     },
     actions: {
         /*Auth*/
@@ -50,7 +62,7 @@ const store = new Vuex.Store({
                         });
                     } else if (response.status === 400) {
                         this.state.userMessage =  'Ошибка 400: Неверный пароль';
-                    } else if (response.status === 404) {
+                    } else if (response.status === errCodes.NOT_FOUND) {
                         this.state.userMessage = 'Пользователь не найден';
                     } else {
                         this.state.userMessage = 'Произошла ошибка, попробуйте позже';

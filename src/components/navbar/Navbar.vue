@@ -4,16 +4,16 @@
       <img src="../../../public/img/room-image.png" alt="avatar">
     </button>
     <div class="application-menu-item messenger"
-         :class="{'active': selectedNavbarItem === 'Messages'}"
-         @click="setCurrentComponent('Messages'); selectedNavbarItem = 'Messages'"
+         :class="{'active': selectedNavbarItem === components.MESSAGES}"
+         @click="selectNavbarItem(components.MESSAGES)"
          data-tooltip="Messages" data-flow="right">
       <svg width="40" height="40" viewBox="0 0 40 40" class="icon" xmlns="http://www.w3.org/2000/svg">
         <path d="M36 0H4C1.8 0 0 1.8 0 4V40L8 32H36C38.2 32 40 30.2 40 28V4C40 1.8 38.2 0 36 0ZM36 28H8L4 32V4H36V28Z"/>
       </svg>
     </div>
     <div class="application-menu-item balance"
-         :class="{'active': selectedNavbarItem === 'Balance'}"
-         @click="setCurrentComponent('Balance'); selectedNavbarItem = 'Balance'"
+         :class="{'active': selectedNavbarItem === components.BALANCE}"
+         @click="selectNavbarItem(components.BALANCE)"
          data-tooltip="Balance" data-flow="right">
       <svg width="40" height="37" viewBox="0 0 48 46" class="stroke-icon" xmlns="http://www.w3.org/2000/svg">
         <path
@@ -21,8 +21,8 @@
       </svg>
     </div>
     <div class="application-menu-item deals"
-         :class="{'active': selectedNavbarItem === 'Deals'}"
-         @click="setCurrentComponent('Deals'); selectedNavbarItem = 'Deals'"
+         :class="{'active': selectedNavbarItem === components.DEALS}"
+         @click="selectNavbarItem(components.DEALS)"
          data-tooltip="Deals" data-flow="right">
       <svg width="32" height="40" viewBox="0 0 43 51" class="stroke-icon"
            xmlns="http://www.w3.org/2000/svg">
@@ -31,8 +31,8 @@
       </svg>
     </div>
     <div class="application-menu-item tasks"
-         :class="{'active': selectedNavbarItem === 'Tasks'}"
-         @click="setCurrentComponent('Tasks'); selectedNavbarItem = 'Tasks'"
+         :class="{'active': selectedNavbarItem === components.TASKS}"
+         @click="selectNavbarItem(components.TASKS)"
          data-tooltip="Tasks" data-flow="right">
       <svg width="40" height="33" viewBox="0 0 40 33" class="icon" xmlns="http://www.w3.org/2000/svg">
         <path d="M32.95 4.71667L35.2833 7.05L14.05 28.2833L4.71667 18.95L7.05 16.6167L14.05 23.6167L32.95 4.71667ZM32.95 0L14.05 18.9L7.05 11.9L0 18.95L14.05 33L40 7.05L32.95 0Z"/>
@@ -40,7 +40,7 @@
       </svg>
     </div>
     <div class="application-menu-item exit" @click="signOut()"
-         data-tooltip="exit" data-flow="right">
+         data-tooltip="Exit" data-flow="right">
       <svg width="40" height="40" viewBox="0 0 40 40" class="icon" xmlns="http://www.w3.org/2000/svg">
         <path
             d="M15.7556 27.9778L18.8889 31.1111L30 20L18.8889 8.88889L15.7556 12.0222L21.4889 17.7778H0V22.2222H21.4889L15.7556 27.9778ZM35.5556 0H4.44444C1.97778 0 0 2 0 4.44444V13.3333H4.44444V4.44444H35.5556V35.5556H4.44444V26.6667H0V35.5556C0 38 1.97778 40 4.44444 40H35.5556C38 40 40 38 40 35.5556V4.44444C40 2 38 0 35.5556 0Z"/>
@@ -50,17 +50,26 @@
 </template>
 
 <script>
-import {mapMutations, mapActions} from 'vuex'
+import {mapGetters, mapMutations, mapActions} from 'vuex'
 export default {
   name: "Navbar",
   data(){
     return{
-      selectedNavbarItem: 'Messages'
+      components: '',
+      selectedNavbarItem: 'Messages',
     }
+  },
+  created() {
+    this.components = this.getComponents();
   },
   methods: {
     ...mapMutations(['setCurrentComponent']),
-    ...mapActions(['signOut'])
+    ...mapActions(['signOut']),
+    ...mapGetters(['getComponents']),
+    selectNavbarItem(item) {
+      this.setCurrentComponent(item);
+      this.selectedNavbarItem = item;
+    }
   }
 }
 </script>

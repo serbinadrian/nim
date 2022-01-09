@@ -86,9 +86,10 @@ export default {
     },
     emailValidation() {
       //TODO fix
-      //const regExpForEmail = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-      //this.validationStatus.email = regExpForEmail.test(this.credentials.email);
-      this.validationStatus.email = true;
+      // eslint-disable-next-line no-useless-escape
+      const regExpForEmail = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+      this.validationStatus.email = regExpForEmail.test(this.credentials.email);
+      //this.validationStatus.email = true;
     },
   }
 }
