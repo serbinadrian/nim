@@ -8,7 +8,7 @@
     "submitted": "Submitted",
     "inProgress": "In progress",
     "cancel": "Cancel",
-    "canceled": "Canceled"
+    "cancelled": "Cancelled"
   }
 */
 
