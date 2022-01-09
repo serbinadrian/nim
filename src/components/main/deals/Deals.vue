@@ -111,7 +111,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import {mapGetters} from 'vuex'
 
 export default {
   name: "Deals",
@@ -121,68 +121,71 @@ export default {
     };
   },
   computed: {
-    deals: {
-      asCustomer: [
-        {
-          title: 'Security system "Marci"',
-          nameTo: 'Babbage',
-          price: 14.621,
-          description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt voluptates molestiae qui magnam perspiciatis amet reprehenderit provident? Dignissimos fuga dolor, dolorem alias sit quae accusantium optio mollitia modi esse! Nesciunt!Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt voluptates molestiae qui magnam perspiciatis amet reprehenderit provident? Dignissimos fuga dolor, dolorem alias sit quae accusantium optio mollitia modi esse! Nesciunt!',
-          status: this.dealStatus.CANCELLED,
-          active: false
-        },
-        {
-          title: 'Computing of bigINT',
-          nameTo: 'Buterin',
-          price: 0.457,
-          description: 'Some description',
-          status: this.dealStatus.CONFIRMED,
-          active: false
-        },
-        {
-          title: 'long long long long long long a a a a a a a a a a a a a a a a a  long long long long long long long long long long long long long ',
-          nameTo: 'long long long long long long a a a a a a a a a a a a a a a a a',
-          price: 7.2,
-          description: 'Firstly, we need a backup for our invention to prove we did it, we created this masterpiece of techical progress. Secondly, we have to test it. Write a program for this machine, launch this one and try again until successful changes.',
-          status: this.dealStatus.PENDING,
-          active: false
-        }
-      ],
-      asExecutor: [
-        {
-          title: 'Security system "Marci"',
-          nameTo: 'Babbage',
-          price: 14.621,
-          description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt voluptates molestiae qui magnam perspiciatis amet reprehenderit provident? Dignissimos fuga dolor, dolorem alias sit quae accusantium optio mollitia modi esse! Nesciunt!Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt voluptates molestiae qui magnam perspiciatis amet reprehenderit provident? Dignissimos fuga dolor, dolorem alias sit quae accusantium optio mollitia modi esse! Nesciunt!',
-          status: this.dealStatus.IN_PROGRESS,
-          active: false
-        },
-        {
-          title: 'Security system "Marci"',
-          nameTo: 'Babbage',
-          price: 14.621,
-          description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt voluptates molestiae qui magnam perspiciatis amet reprehenderit provident? Dignissimos fuga dolor, dolorem alias sit quae accusantium optio mollitia modi esse! Nesciunt!Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt voluptates molestiae qui magnam perspiciatis amet reprehenderit provident? Dignissimos fuga dolor, dolorem alias sit quae accusantium optio mollitia modi esse! Nesciunt!',
-          status: this.dealStatus.SUBMITTED,
-          active: false
-        },
-        {
-          title: 'Security system "Marci"',
-          nameTo: 'Babbage',
-          price: 14.621,
-          description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt voluptates molestiae qui magnam perspiciatis amet reprehenderit provident? Dignissimos fuga dolor, dolorem alias sit quae accusantium optio mollitia modi esse! Nesciunt!Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt voluptates molestiae qui magnam perspiciatis amet reprehenderit provident? Dignissimos fuga dolor, dolorem alias sit quae accusantium optio mollitia modi esse! Nesciunt!',
-          status: this.dealStatus.PENDING,
-          active: false
-        },
-        {
-          title: 'Security system "Marci"',
-          nameTo: 'Babbage',
-          price: 14.621,
-          description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt voluptates molestiae qui magnam perspiciatis amet reprehenderit provident? Dignissimos fuga dolor, dolorem alias sit quae accusantium optio mollitia modi esse! Nesciunt!Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt voluptates molestiae qui magnam perspiciatis amet reprehenderit provident? Dignissimos fuga dolor, dolorem alias sit quae accusantium optio mollitia modi esse! Nesciunt!',
-          status: this.dealStatus.CANCELLED,
-          active: false
-        }
-      ]
+    deals() {
+      return {
+        asCustomer: [
+          {
+            title: 'Security system "Marci"',
+            nameTo: 'Babbage',
+            price: 14.621,
+            description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt voluptates molestiae qui magnam perspiciatis amet reprehenderit provident? Dignissimos fuga dolor, dolorem alias sit quae accusantium optio mollitia modi esse! Nesciunt!Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt voluptates molestiae qui magnam perspiciatis amet reprehenderit provident? Dignissimos fuga dolor, dolorem alias sit quae accusantium optio mollitia modi esse! Nesciunt!',
+            status: this.dealStatus.CANCELLED,
+            active: false
+          },
+          {
+            title: 'Computing of bigINT',
+            nameTo: 'Buterin',
+            price: 0.457,
+            description: 'Some description',
+            status: this.dealStatus.CONFIRMED,
+            active: false
+          },
+          {
+            title: 'long long long long long long a a a a a a a a a a a a a a a a a  long long long long long long long long long long long long long ',
+            nameTo: 'long long long long long long a a a a a a a a a a a a a a a a a',
+            price: 7.2,
+            description: 'Firstly, we need a backup for our invention to prove we did it, we created this masterpiece of techical progress. Secondly, we have to test it. Write a program for this machine, launch this one and try again until successful changes.',
+            status: this.dealStatus.PENDING,
+            active: false
+          }
+        ],
+        asExecutor: [
+          {
+            title: 'Security system "Marci"',
+            nameTo: 'Babbage',
+            price: 14.621,
+            description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt voluptates molestiae qui magnam perspiciatis amet reprehenderit provident? Dignissimos fuga dolor, dolorem alias sit quae accusantium optio mollitia modi esse! Nesciunt!Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt voluptates molestiae qui magnam perspiciatis amet reprehenderit provident? Dignissimos fuga dolor, dolorem alias sit quae accusantium optio mollitia modi esse! Nesciunt!',
+            status: this.dealStatus.IN_PROGRESS,
+            active: false
+          },
+          {
+            title: 'Security system "Marci"',
+            nameTo: 'Babbage',
+            price: 14.621,
+            description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt voluptates molestiae qui magnam perspiciatis amet reprehenderit provident? Dignissimos fuga dolor, dolorem alias sit quae accusantium optio mollitia modi esse! Nesciunt!Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt voluptates molestiae qui magnam perspiciatis amet reprehenderit provident? Dignissimos fuga dolor, dolorem alias sit quae accusantium optio mollitia modi esse! Nesciunt!',
+            status: this.dealStatus.SUBMITTED,
+            active: false
+          },
+          {
+            title: 'Security system "Marci"',
+            nameTo: 'Babbage',
+            price: 14.621,
+            description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt voluptates molestiae qui magnam perspiciatis amet reprehenderit provident? Dignissimos fuga dolor, dolorem alias sit quae accusantium optio mollitia modi esse! Nesciunt!Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt voluptates molestiae qui magnam perspiciatis amet reprehenderit provident? Dignissimos fuga dolor, dolorem alias sit quae accusantium optio mollitia modi esse! Nesciunt!',
+            status: this.dealStatus.PENDING,
+            active: false
+          },
+          {
+            title: 'Security system "Marci"',
+            nameTo: 'Babbage',
+            price: 14.621,
+            description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt voluptates molestiae qui magnam perspiciatis amet reprehenderit provident? Dignissimos fuga dolor, dolorem alias sit quae accusantium optio mollitia modi esse! Nesciunt!Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt voluptates molestiae qui magnam perspiciatis amet reprehenderit provident? Dignissimos fuga dolor, dolorem alias sit quae accusantium optio mollitia modi esse! Nesciunt!',
+            status: this.dealStatus.CANCELLED,
+            active: false
+          }
+        ]
+      };
     }
+
   },
   created() {
     this.dealStatus = this.getDealStatus();
