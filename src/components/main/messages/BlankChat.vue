@@ -1,5 +1,5 @@
 <template>
-  <div class="application-blank hide" id="application-blank">
+  <div class="application-blank" id="application-blank">
     <div class="application-blank__logo">[nim]</div>
     <div class="application-blank__text">Please select a chat</div>
   </div>

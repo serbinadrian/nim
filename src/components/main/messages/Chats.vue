@@ -9,7 +9,6 @@
           <input type="text" placeholder="@exampleName" spellcheck="false">
           <button type="submit" disabled>Create chat</button>
         </form>
-
         <div class="chat" data-roomId="">
           <div class="person-avatar">
             <img src="../../../../public/img/room-image.png" alt="">
