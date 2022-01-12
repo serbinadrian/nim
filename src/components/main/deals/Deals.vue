@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import {mapGetters} from 'vuex'
+import { mapState,mapGetters } from 'vuex'
 import deal from './Deal.vue'
 
 export default {
@@ -65,10 +65,11 @@ export default {
   },
   data() {
     return {
-      dealStatus: {},
+      // dealStatus: {},
     };
   },
   computed: {
+    ...mapState(['dealStatus']),
     deals() {
       return {
         asCustomer: [
@@ -129,7 +130,7 @@ export default {
 
   },
   created() {
-    this.dealStatus = this.getDealStatus();
+    // this.dealStatus = this.getDealStatus();
   },
   methods: {
     ...mapGetters(['getDealStatus']),

@@ -53,13 +53,17 @@
   user-select: none;
   background-color: var(--asphalt-tinted);
   color: var(--mint-solid);
+  outline: 0px solid transparent;
+  opacity: 1;
+  transition-property: outline, opacity;
+  transition-duration: .25s;
+  transition-timing-function: ease-out;
 }
 
 .form__email:focus,
 .form__login:focus,
-.form__password:focus,
-.form__submit:focus {
-  outline: 5px solid var(--olive-dark);
+.form__password:focus {
+  outline: 3px solid var(--olive-dark);
 }
 
 .form__email::placeholder,
@@ -95,10 +99,15 @@
   transition: color .25s ease-in-out;
 }
 
-.form__submit:hover {
+.form__submit:hover,
+.form__submit:focus {
   color: var(--mint-solid);
+  outline: none;
 }
 
+.form__email:disabled,
+.form__login:disabled,
+.form__password:disabled,
 .form__submit:disabled {
   opacity: .75;
   cursor: pointer;
@@ -112,11 +121,24 @@
   user-select: none;
 }
 
-.form__signup-text:hover{
-  cursor: pointer;
-  color: var(--mint-solid);
-}
-
 .form__signup-link {
   color: inherit;
+  background: none;
+  border: none;
+  text-decoration: underline;
+  transition-property: color, opacity;
+  transition-duration: .1s, .25s;
+  transition-timing-function: ease-out;
+}
+
+.form__signup-link:not(:disabled):hover,
+.form__signup-link:not(:disabled):focus {
+  cursor: pointer;
+  color: var(--mint-solid);
+  outline: none;
+}
+
+.form__signup-link:disabled {
+  opacity: .75;
+  cursor: pointer;
 }

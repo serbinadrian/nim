@@ -2,46 +2,42 @@
   <div class="authorization">
     <div class="authorization__form-wrapper">
       <h1 class="authorization__logo">[nim]</h1>
-      <form class="authorization__form form" novalidate>
-        <input @input="loginValidation"
-               :class="{'not-validated' : !validationStatus.login}"
+      <form class="authorization__form form" method="POST" novalidate>
+        <input :disabled="waitingForResponse"
+               :class="{'not-validated' : !isUsernameValid}"
                class="form__login"
                type="text"
-               name="login"
                placeholder="login"
                spellcheck="false"
-               v-model="credentials.login">
-        <input @input="emailValidation"
-               :class="{'not-validated' : !validationStatus.email}"
+               v-model="username">
+        <input :disabled="waitingForResponse"
+               :class="{'not-validated' : !isEmailValid}"
                class="form__email"
                type="email"
-               name="email"
                placeholder="email"
                spellcheck="false"
-               v-model="credentials.email">
-        <input @input="passwordValidation"
-               :class="{'not-validated' : !validationStatus.password}"
+               v-model="email">
+        <input :disabled="waitingForResponse"
+               :class="{'not-validated' : !isPasswordVaild}"
                class="form__password"
                type="password"
-               name="password"
                placeholder="password"
                spellcheck="false"
-               v-model="credentials.password">
-        <input @input="passwordValidation"
-               :class="{'not-validated' : !validationStatus.password}"
+               v-model="password">
+        <input :disabled="waitingForResponse"
+               :class="{'not-validated' : !isPasswordVaild}"
                class="form__password"
                type="password"
-               name="password-repeat"
                placeholder="repeat password"
                spellcheck="false"
                v-model="repeatPassword">
-        <div class="form__message"></div>
+        <div class="form__message">{{ errorMessage }}</div>
         <div class="form__actions">
-          <button :disabled="isEmpty"
+          <button :disabled="!isSignUpAllowed || waitingForResponse"
                   class="form__submit"
                   type="submit"
-                  @click="completeSignUp(credentials)">SIGN UP</button>
-          <div class="form__signup-text">or <span @click="setCurrentComponent('SignIn')" class="form__signup-link">sign In</span></div>
+                  @click.prevent="signUp({ username, email, password })">SIGN UP</button>
+          <div class="form__signup-text">or <button type="button" :disabled="waitingForResponse" @click="setCurrentComponent('SignIn')" class="form__signup-link">sign In</button></div>
         </div>
       </form>
     </div>
@@ -49,47 +45,74 @@
 </template>
 
 <script>
-import {mapActions, mapMutations} from "vuex";
+import {mapState, mapMutations} from "vuex";
 export default {
   name: "SignUp",
   data(){
     return{
-      credentials: {
-        login: '',
-        email: '',
-        password: ''
-      },
+      username: '',
+      email: '',
+      password: '',
       repeatPassword: '',
-      validationStatus: {
-        login: false,
-        email: false,
-        password: false
-      }
+      errorMessage: '',
+      waitingForResponse: false
     }
   },
   computed: {
+    ...mapState(['backendUrl', 'errCodes', 'components']),
     isEmpty(){
-      return this.credentials.login === '' || this.credentials.password === '' || this.credentials.email === '' || this.repeatPassword === '';
+      return this.username === '' || this.password === '' || this.email === '' || this.repeatPassword === '';
     },
+    isUsernameValid() {
+      return true;
+    },
+    isEmailValid() {
+      if (this.email.length === 0)
+        return true;
+      
+      const regExpForEmail = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
+      return regExpForEmail.test(this.email);
+    },
+    isPasswordVaild() {
+      if (this.password.length === 0 && this.repeatPassword.length === 0)
+        return true;
+      
+      return this.password === this.repeatPassword;
+    },
+    isSignUpAllowed() {
+      return (
+        !this.isEmpty && 
+        this.isUsernameValid && 
+        this.isEmailValid &&
+        this.isPasswordVaild
+      );
+    }
   },
   methods:{
-    ...mapActions(['signUp']),
     ...mapMutations(['setCurrentComponent']),
-    completeSignUp(){
-      this.signUp();
-    },
-    loginValidation() {
-      this.validationStatus.login = true;
-    },
-    passwordValidation() {
-      this.validationStatus.password = this.credentials.password === this.repeatPassword;
-    },
-    emailValidation() {
-      //TODO fix
-      // eslint-disable-next-line no-useless-escape
-      const regExpForEmail = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-      this.validationStatus.email = regExpForEmail.test(this.credentials.email);
-      //this.validationStatus.email = true;
+    signUp(credentials){
+      this.waitingForResponse = true;
+      this.errorMessage = '';
+      fetch(this.backendUrl + `/api/v1/user/`, {
+        method: 'POST',
+        body: JSON.stringify(credentials)
+      })
+      .then(response => {
+        this.waitingForResponse = false;
+        if (response.status === 200) {
+          this.setCurrentComponent(this.components.SIGN_IN);
+        }  else {
+          // eslint-disable-next-line no-console
+          console.log(response);
+          this.errorMessage= 'Произошла ошибка, попробуйте позже';
+        }
+      })
+      .catch(error => {
+        this.waitingForResponse = false;
+        // eslint-disable-next-line no-console
+        console.log(error);
+        this.errorMessage = 'Ошибка 503: Сервер недоступен';
+      });
     },
   }
 }
@@ -97,7 +120,6 @@ export default {
 
 <style scoped>
 .not-validated, .weak{
-  border: 1px solid darkred;
-  box-shadow: 0 0 3px darkred;
+  outline: 3px solid brown;
 }
 </style>

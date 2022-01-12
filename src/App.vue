@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import {mapState} from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 import SignIn from "./components/auth/SignIn";
 import SignUp from "./components/auth/SignUp";
 import Navbar from "./components/navbar/Navbar";
@@ -41,7 +41,8 @@ export default {
     Deals
   },
   computed:{
-    ...mapState(['currentComponent', 'isSignedIn']),
+    ...mapState(['currentComponent']),
+    ...mapGetters(['isSignedIn']),
     currentComponentApplicationBodyClass() {
       return `application-body_${this.currentComponent}`;
     }
