@@ -475,7 +475,8 @@ background: #26493E
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
   border-radius: 30px;
   -webkit-border-radius: 30px;
-  position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
 .make-call, .make-videocall, .options {
@@ -484,12 +485,9 @@ background: #26493E
 }
 
 .current-chat-menu {
-  position: absolute;
   width: 100%;
   padding: 0 15px 0 45px;
   z-index: 3;
-  top: 0;
-  left: 0;
   display: -webkit-flex;
   display: -ms-flex;
   display: flex;
@@ -574,10 +572,8 @@ background: #26493E
 }
 
 .chat-block {
-  position: absolute;
-  bottom: 75px;
-  width: 100% !important;
-  height: calc(100% - 135px);
+  flex: 1;
+  width: 100%;
   overflow: auto;
   display: flex;
   flex-direction: column-reverse;
@@ -631,9 +627,6 @@ background: #26493E
 
 .send-message {
   padding: 10px 0;
-  position: absolute;
-  left: 0;
-  bottom: 0;
   display: -webkit-flex;
   display: -ms-flex;
   display: flex;
@@ -672,7 +665,9 @@ background: #26493E
   border: 0;
   outline: 0;
   width: 100%;
+  height: calc(1.8rem + 20px);
   max-height: calc(10 * 1.6rem + 20px);
+  overflow: hidden;
   resize: none;
 }
 

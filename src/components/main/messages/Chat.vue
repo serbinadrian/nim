@@ -18,7 +18,6 @@
       <div class="person-name">
         Albert Einstein
       </div>
-      <!--
       <div class="make-call chat-menu-item">
           <svg class="icon" width="31" height="31" viewBox="0 0 31 31">
               <path
@@ -31,7 +30,6 @@
                   d="M36.5556 11.625V2.58333C36.5556 1.1625 35.3806 0 33.9444 0H2.61111C1.175 0 0 1.1625 0 2.58333V28.4167C0 29.8375 1.175 31 2.61111 31H33.9444C35.3806 31 36.5556 29.8375 36.5556 28.4167V19.375L47 29.7083V1.29167L36.5556 11.625Z" />
           </svg>
       </div>
-      -->
       <div class="options chat-menu-item">
         <svg class="icon" width="40" height="12" viewBox="0 0 40 12">
           <g>
@@ -100,8 +98,12 @@
         </svg>
       </div>
       <div class="write-message ">
-                                <textarea type="text" name="" value="" rows="1"
-                                          placeholder="Напишите сообщение..."></textarea>
+        <textarea 
+          v-model="message"
+          @input="messageBoxHeightCalculate"
+          rows="1"
+          placeholder="Напишите сообщение...">
+        </textarea>
       </div>
       <div class="record-message chat-menu-item">
         <svg class="icon" width="34" height="45" viewBox="0 0 34 45">
@@ -115,7 +117,29 @@
 
 <script>
 export default {
-  name: "Chat"
+  name: "Chat",
+  data() {
+    return {
+      message: "",
+    }
+  },
+  methods: {
+    messageBoxHeightCalculate(event) {
+      const messageBoxMaxRows = 10;
+      const messageBoxLineHeight = 18;
+      const messageBoxVerticalPaddings = 20;
+      const messageBoxMaxHeight = messageBoxMaxRows * messageBoxLineHeight + messageBoxVerticalPaddings;
+      event.target.style.height = 'auto';
+      if (event.target.scrollHeight >= messageBoxMaxHeight) {
+        event.target.style.overflowY = 'auto';
+        event.target.scrollTop = event.target.scrollHeight;
+      }
+      else {
+        event.target.style.overflowY = '';
+      }
+      event.target.style.height = `${event.target.scrollHeight}px`;
+    }
+  }
 }
 </script>
 
