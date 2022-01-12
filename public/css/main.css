@@ -240,6 +240,9 @@ background: #26493E
   display: -ms-flex;
   display: flex;
   flex-wrap: nowrap;
+}
+
+.application-body:not(.application-body_SignIn):not(.application-body_SignUp) {
   padding: 25px;
 }
 

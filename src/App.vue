@@ -6,7 +6,10 @@
               nim
           </div>
       </div> -->
-      <div class="application-body" id="main-body">
+      <div 
+        :class="currentComponentApplicationBodyClass"
+        class="application-body" 
+        id="main-body">
 
         <Navbar v-if="isSignedIn"/>
         <component :is="currentComponent"/>
@@ -38,7 +41,10 @@ export default {
     Deals
   },
   computed:{
-    ...mapState(['currentComponent', 'isSignedIn'])
+    ...mapState(['currentComponent', 'isSignedIn']),
+    currentComponentApplicationBodyClass() {
+      return `application-body_${this.currentComponent}`;
+    }
   },
   created() {
     window.addEventListener('load', function handler() {
