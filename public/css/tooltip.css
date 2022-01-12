@@ -34,9 +34,7 @@
     background: #293133;
     color: #7FFFD4;
     z-index: 99;
-    text-shadow: 
-        0 0 5px #7FFFD4,
-        0 0 15px #7FFFD4;
+    text-shadow: 0 0 5px #7FFFD4;
 }
 [data-tooltip]:hover:before,
 [data-tooltip]:hover:after {
