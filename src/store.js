@@ -19,7 +19,7 @@ const store = new Vuex.Store({
         matrixURL: 'http://bonch-ikt.ru:12808',
 
         /*Auth props*/
-        isSignedIn: false,
+        isSignedIn: true,
         currentUser: {
             accessToken: '',
             refreshToken: '',
@@ -28,7 +28,7 @@ const store = new Vuex.Store({
         },
 
         /*App props*/
-        currentComponent: components.SIGN_IN,
+        currentComponent: components.MESSAGES,
 
         /*User message*/
         userMessage: ''
