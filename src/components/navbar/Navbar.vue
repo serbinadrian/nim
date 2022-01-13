@@ -59,18 +59,23 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from 'vuex'
+import { mapState, mapMutations, mapGetters } from 'vuex'
 export default {
   name: "Navbar",
   data(){
     return{
+      language: {},
       selectedNavbarItem: 'Messages',
     }
+  },
+  created(){
+    //this.language = this.getLanguage(this.components.NAVBAR);
   },
   computed: {
     ...mapState(['components'])
   },
   methods: {
+    ...mapGetters(['getLanguage']),
     ...mapMutations(['setCurrentUser', 'setCurrentComponent']),
     selectNavbarItem(item) {
       this.setCurrentComponent(item);

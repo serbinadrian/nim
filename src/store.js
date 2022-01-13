@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+//import language from './data/lang/language_en.json'
 import errCodes from './data/status/errCodes.json'
 import components from './data/components/components.json'
 import dealStatus from './data/status/dealStatus.json'
@@ -26,12 +27,20 @@ const store = new Vuex.Store({
         },
 
         /*App props*/
+        selectedLanguage: 'ru',
         currentComponent: components.SIGN_IN
     },
     getters: {
         isSignedIn(state) {
             return Object.values(state.currentUser).every(val => val !== '');
-        }
+        },
+        /*getLanguage(state, component) {
+            switch (component){
+                case components.NAVBAR:
+                    return language;
+                    //break;
+            }
+        }*/
     },
     mutations: {
         setCurrentComponent(state, component) {

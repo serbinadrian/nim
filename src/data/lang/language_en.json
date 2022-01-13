@@ -1,0 +1,50 @@
+{
+  "nav": {
+    "messages": "Messages",
+    "balance": "Balance",
+    "deals": "Deals",
+    "tasks": "Tasks",
+    "exit": "Exit"
+  },
+  "deals": {
+    "deals": "Deals",
+    "as customer": "As customer",
+    "as executor": "As executor",
+    "to": "to",
+    "description": "Description",
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "submit": "Submit",
+    "in progress": "In progress",
+    "cancelled": "Cancelled",
+    "submitted": "Submitted"
+  },
+  "signIn": {
+    "login": "login",
+    "password": "password",
+    "sign in": "SIGN IN",
+    "or": "or",
+    "sign up": "sign up"
+  },
+  "signUp": {
+    "login": "login",
+    "email": "email",
+    "password": "password",
+    "repeat password": "repeat password",
+    "sign up": "SIGN UP",
+    "or": "or",
+    "sign in": "sign in"
+  },
+  "messages": {
+    "search": "Search"
+  },
+  "balance": {
+    "balance": "Balance",
+    "income": "INCOME",
+    "gas": "GAS",
+    "outcome": "OUTCOME"
+  },
+  "tasks": {
+    "tasks": "Tasks"
+  }
+}
