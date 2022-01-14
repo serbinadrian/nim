@@ -69,7 +69,7 @@ export default {
     }
   },
   created(){
-    //this.language = this.getLanguage(this.components.NAVBAR);
+    this.language = this.getLanguage(this.components.NAVBAR);
   },
   computed: {
     ...mapState(['components'])
