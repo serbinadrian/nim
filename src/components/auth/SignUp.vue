@@ -65,7 +65,7 @@ export default {
   computed: {
     ...mapState(['backendUrl', 'errCodes', 'components']),
     language() {
-      return this.$store.getters.getLanguageData[this.components.SIGN_UP] || {};
+      // return this.$store.getters.getLanguageData[this.components.SIGN_UP] || {};
     },
     isEmpty(){
       return this.username === '' || this.password === '' || this.email === '' || this.repeatPassword === '';

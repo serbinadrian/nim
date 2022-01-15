@@ -63,7 +63,7 @@ export default {
   computed: {
     ...mapState(['components', 'dealStatus']),
     language() {
-      return this.$store.getters.getLanguageData[this.components.DEALS] || {};
+      // return this.$store.getters.getLanguageData[this.components.DEALS] || {};
     },
     deals() {
       return {
