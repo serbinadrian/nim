@@ -9,6 +9,7 @@
                type="text"
                placeholder="login"
                spellcheck="false"
+               autocomplete="new-password"
                v-model="username">
         <input :disabled="waitingForResponse"
                :class="{'not-validated' : !isEmailValid}"
@@ -16,6 +17,7 @@
                type="email"
                placeholder="email"
                spellcheck="false"
+               autocomplete="new-password"
                v-model="email">
         <input :disabled="waitingForResponse"
                :class="{'not-validated' : !isPasswordVaild}"
@@ -23,6 +25,7 @@
                type="password"
                placeholder="password"
                spellcheck="false"
+               autocomplete="new-password"
                v-model="password">
         <input :disabled="waitingForResponse"
                :class="{'not-validated' : !isPasswordVaild}"
@@ -30,6 +33,7 @@
                type="password"
                placeholder="repeat password"
                spellcheck="false"
+               autocomplete="new-password"
                v-model="repeatPassword">
         <div class="form__message">{{ errorMessage }}</div>
         <div class="form__actions">
