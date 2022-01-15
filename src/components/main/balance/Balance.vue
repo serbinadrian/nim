@@ -1,16 +1,16 @@
 <template>
   <div class="balance">
     <h1 class="headline">
-      Balance
+      {{ language['balance'] }}
     </h1>
     <div class="top_balance">
       <div class="balance__info">
         <p class="balance__value">42.745 <span class="value__name">NIM</span></p>
       </div>
       <div class="operations">
-        <p id="income">INCOME : +74.125 </p>
-        <p id="gas">GAS: -12.1</p>
-        <p id="outcome">OUTCOME : -19.28 </p>
+        <p id="income">{{ language['income'] }} : +74.125 </p>
+        <p id="gas">{{ language['gas'] }}: -12.1</p>
+        <p id="outcome">{{ language['outcome'] }} : -19.28 </p>
       </div>
     </div>
     <div class="transaction__list">
@@ -73,8 +73,16 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
-  name: "Balance"
+  name: "Balance",
+  computed: {
+    ...mapState(['components']),
+    language() {
+      return this.$store.getters.getLanguageData[this.components.BALANCE] || {};
+    }
+  }
 }
 </script>
 

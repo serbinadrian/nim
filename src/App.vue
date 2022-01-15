@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex'
+import { mapState, mapGetters, mapActions } from 'vuex'
 import SignIn from "./components/auth/SignIn";
 import SignUp from "./components/auth/SignUp";
 import Navbar from "./components/navbar/Navbar";
@@ -47,7 +47,12 @@ export default {
       return `application-body_${this.currentComponent}`;
     }
   },
+  methods: {
+    ...mapActions(['defineLanguageData', 'defineCurrentComponent'])
+  },
   created() {
+    this.defineLanguageData();
+    this.defineCurrentComponent();
     window.addEventListener('load', function handler() {
       window.removeEventListener('load', handler);
       const preloader = document.querySelector('.preloader');

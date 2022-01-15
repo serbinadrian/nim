@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import createPersistedState from "vuex-persistedstate";
 //import language from './data/lang/language_en.json'
 import errCodes from './data/status/errCodes.json'
 import components from './data/components/components.json'
@@ -9,6 +10,9 @@ Vue.use(Vuex)
 
 
 const store = new Vuex.Store({
+    plugins: [createPersistedState({
+        paths: ['currentUser', 'selectedLanguage']
+    })],
     state: {
         /*data*/
         errCodes: errCodes,
@@ -28,43 +32,24 @@ const store = new Vuex.Store({
         },
 
         /*App props*/
-        selectedLanguage: 'ru',
-        currentComponent: components.SIGN_IN
+        selectedLanguage: '',
+        languageData: {},
+        currentComponent: ''
     },
     getters: {
         isSignedIn(state) {
             return Object.values(state.currentUser).every(val => val !== '');
         },
-        getLanguage(state, component) {
-            let result;
-            switch (state.selectedLanguage) {
-                case "en":
-                    import('./data/lang/language_en.json')
-                        .then(language => {
-                            result = language[component];
-                        })
-                        .catch(err => {
-                            // eslint-disable-next-line no-console
-                            console.log(err);
-                        });
-                    break;
-                case "ru":
-                    import('./data/lang/language_ru.json')
-                        .then(language => {
-                            result = language[component];
-                        })
-                        .catch(err => {
-                            // eslint-disable-next-line no-console
-                            console.log(err);
-                        });
-
-            }
-            return result;
+        getLanguageData(state) {
+            return state.languageData;
         }
     },
     mutations: {
-        setApplicationLanguage(state, language) {
+        setSelectedLanguage(state, language) {
             state.selectedLanguage = language;
+        },
+        setLanguageData(state, languageData) {
+            state.languageData = languageData;
         },
         setCurrentComponent(state, component) {
             state.currentComponent = component;
@@ -78,6 +63,25 @@ const store = new Vuex.Store({
     },
     actions: {
         /*Auth*/
+        defineLanguageData({ state, commit }, languageToSet) {
+            if (state.selectedLanguage === '')
+                commit('setSelectedLanguage', 'ru');
+            else if (languageToSet)
+                commit('setSelectedLanguage', languageToSet);
+
+            import(`./data/lang/language_${state.selectedLanguage}.json`)
+                .then(language => {
+                    commit('setLanguageData', language);
+                })
+                .catch(err => {
+                    // eslint-disable-next-line no-console
+                    console.log(err);
+                });
+        },
+
+        defineCurrentComponent({ commit, getters }) {
+            commit('setCurrentComponent', getters.isSignedIn ? components.MESSAGES : components.SIGN_IN);
+        }
 
         /*Messages*/
 

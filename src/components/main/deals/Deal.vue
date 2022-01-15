@@ -1,36 +1,22 @@
-/* Для файла lang
-  {
-    "to": "To",
-    "description": "Description",
-    "confirm": "Confirm",
-    "confirmed": "Confirmed",
-    "submit": "Submit",
-    "submitted": "Submitted",
-    "inProgress": "In progress",
-    "cancel": "Cancel",
-    "cancelled": "Cancelled"
-  }
-*/
-
 <template>
   <div class="deal" @click="active = !active">
     <template v-if="displayAs === 'customer'">
       <div 
         :class="statusToClass"
         class="deal__status">
-        {{ statusToPrint }}
+        {{ language[status] }}
       </div>
       <div class="deal__title">{{ title }}</div>
       <div class="deal__to-price">
         <div class="deal__to">
-          To: <span class="deal__to-name">{{ nameTo }}</span>
+          {{ language['to'] }}: <span class="deal__to-name">{{ nameTo }}</span>
         </div>
         <div class="deal__price">{{ price }} NIM</div>
       </div>
       <transition name="expand">
         <div v-show="active">
           <div class="deal__description">
-            <div class="deal__description-title">Description:</div>
+            <div class="deal__description-title">{{ language['description'] }}:</div>
             <div class="deal__description-content">
               {{ description }}
             </div>
@@ -40,13 +26,13 @@
               :disabled="status === dealStatus.CONFIRMED"
               @click.stop="status = dealStatus.CONFIRMED"
               class="deal__control deal__confirm">
-              Confirm
+              {{ language['confirm'] }}
             </button>
             <button
               :disabled="status === dealStatus.CANCELLED"
               @click.stop="status = dealStatus.CANCELLED"
               class="deal__control deal__cancel">
-              Cancel
+              {{ language['cancel'] }}
             </button>
           </div>
         </div>
@@ -56,19 +42,19 @@
       <div
         :class="statusToClass"
         class="deal__status">
-        {{ statusToPrint }}
+        {{ language[status] }}
       </div>
       <div class="deal__title">{{ title }}</div>
       <div class="deal__to-price">
         <div class="deal__to">
-          To: <span class="deal__to-name">{{ nameTo }}</span>
+          {{ language['to'] }}: <span class="deal__to-name">{{ nameTo }}</span>
         </div>
         <div class="deal__price">{{ price }} NIM</div>
       </div>
       <transition name="expand">
         <div v-show="active">
           <div class="deal__description">
-            <div class="deal__description-title">Description:</div>
+            <div class="deal__description-title">{{ language['description'] }}:</div>
             <div class="deal__description-content">
               {{ description }}
             </div>
@@ -78,19 +64,19 @@
               :disabled="status === dealStatus.SUBMITTED"
               @click.stop="status = dealStatus.SUBMITTED"
               class="deal__control deal__submit">
-              Submit
+              {{ language['submit'] }}
             </button>
             <button
               :disabled="status === dealStatus.IN_PROGRESS"
               @click.stop="status = dealStatus.IN_PROGRESS"
               class="deal__control deal__in-progress">
-              In progress
+              {{ language['in progress'] }}
             </button>
             <button
               :disabled="status === dealStatus.CANCELLED"
               @click.stop="status = dealStatus.CANCELLED"
               class="deal__control deal__cancel">
-              Cancel
+              {{ language['cancel'] }}
             </button>
           </div>
         </div>
@@ -100,6 +86,8 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
   name: "Deal",
 
@@ -121,14 +109,12 @@ export default {
   },
   
   computed: {
+    ...mapState(['components']),
+    language() {
+      return this.$store.getters.getLanguageData[this.components.DEALS] || {};
+    },
     statusToClass() {
       return this.status.replace(' ', '-').toLowerCase() || '';
-    },
-    statusToPrint() {
-      if (this.status === '')
-        return '';
-
-      return this.status[0].toUpperCase() + this.status.slice(1);
     }
   }
 }
@@ -152,8 +138,8 @@ export default {
   position: absolute;
   top: 20px;
   right: 24px;
-  padding: 0.35em 0;
-  min-width: 7em;
+  padding: 0.35em 1em;
+  min-width: 8em;
   text-align: center;
   font-weight: 600;
   font-size: 11px;
@@ -184,7 +170,7 @@ export default {
 
 .deal__title {
   font-size: 24px;
-  padding-right: 80px;
+  padding-right: 120px;
   margin-bottom: 1em;
   font-weight: bold;
   color: var(--dark-context);
@@ -236,7 +222,7 @@ export default {
 }
 
 .deal__control {
-  padding: 0.4em 0;
+  padding: 0.4em 1em;
   min-width: 7.5em;
   line-height: 1;
   font-weight: 600;

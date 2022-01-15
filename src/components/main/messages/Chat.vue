@@ -102,7 +102,7 @@
           v-model="message"
           @input="messageBoxHeightCalculate"
           rows="1"
-          placeholder="Напишите сообщение...">
+          :placeholder="language['type your message here']">
         </textarea>
       </div>
       <div class="record-message chat-menu-item">
@@ -116,11 +116,19 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
   name: "Chat",
   data() {
     return {
       message: "",
+    }
+  },
+  computed: {
+    ...mapState(['components']),
+    language() {
+      return this.$store.getters.getLanguageData[this.components.MESSAGES] || {};
     }
   },
   methods: {

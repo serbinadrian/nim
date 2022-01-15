@@ -1,7 +1,7 @@
 <template>
     <div class="application-chats" id="main-chats">
       <div class="search-chats" id="chat-search">
-        <input type="text" placeholder="Search" value="">
+        <input type="text" :placeholder="language['search']" value="">
       </div>
       <div class="chats" id="chats">
         <button class="chat chat-add-new" type="button"></button>
@@ -53,8 +53,16 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
-  name: "Chats"
+  name: "Chats",
+  computed: {
+    ...mapState(['components']),
+    language() {
+      return this.$store.getters.getLanguageData[this.components.MESSAGES] || {};
+    }
+  }
 }
 </script>
 

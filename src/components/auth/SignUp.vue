@@ -7,7 +7,7 @@
                :class="{'not-validated' : !isUsernameValid}"
                class="form__login"
                type="text"
-               placeholder="login"
+               :placeholder="language['login']"
                spellcheck="false"
                autocomplete="new-password"
                v-model="username">
@@ -15,7 +15,7 @@
                :class="{'not-validated' : !isEmailValid}"
                class="form__email"
                type="email"
-               placeholder="email"
+               :placeholder="language['email']"
                spellcheck="false"
                autocomplete="new-password"
                v-model="email">
@@ -23,7 +23,7 @@
                :class="{'not-validated' : !isPasswordVaild}"
                class="form__password"
                type="password"
-               placeholder="password"
+               :placeholder="language['password']"
                spellcheck="false"
                autocomplete="new-password"
                v-model="password">
@@ -31,7 +31,7 @@
                :class="{'not-validated' : !isPasswordVaild}"
                class="form__password"
                type="password"
-               placeholder="repeat password"
+               :placeholder="language['repeat password']"
                spellcheck="false"
                autocomplete="new-password"
                v-model="repeatPassword">
@@ -40,8 +40,8 @@
           <button :disabled="!isSignUpAllowed || waitingForResponse"
                   class="form__submit"
                   type="submit"
-                  @click.prevent="signUp({ username, email, password })">SIGN UP</button>
-          <div class="form__signup-text">or <button type="button" :disabled="waitingForResponse" @click="setCurrentComponent('SignIn')" class="form__signup-link">sign In</button></div>
+                  @click.prevent="signUp({ username, email, password })">{{ language['sign up'] }}</button>
+          <div class="form__signup-text">{{ language['or'] }} <button type="button" :disabled="waitingForResponse" @click="setCurrentComponent('SignIn')" class="form__signup-link">{{ language['sign in'] }}</button></div>
         </div>
       </form>
     </div>
@@ -64,6 +64,9 @@ export default {
   },
   computed: {
     ...mapState(['backendUrl', 'errCodes', 'components']),
+    language() {
+      return this.$store.getters.getLanguageData[this.components.SIGN_UP] || {};
+    },
     isEmpty(){
       return this.username === '' || this.password === '' || this.email === '' || this.repeatPassword === '';
     },

@@ -1,12 +1,13 @@
 {
-  "nav": {
+  "Navbar": {
     "messages": "Сообщения",
     "balance": "Баланс",
     "deals": "Сделки",
     "tasks": "Задачи",
+    "switch language": "Сменить язык",
     "exit": "Выйти"
   },
-  "deals": {
+  "Deals": {
     "deals": "Сделки",
     "as customer": "Заказчик",
     "as executor": "Исполнитель",
@@ -17,16 +18,17 @@
     "submit": "Отправить",
     "in progress": "В прогрессе",
     "cancelled": "Отменено",
-    "submitted": "Отправлено"
+    "submitted": "Отправлено",
+    "confirmed": "Подтверждено"
   },
-  "signIn": {
+  "SignIn": {
     "login": "логин",
     "password": "пароль",
     "sign in": "ВОЙТИ",
     "or": "или",
     "sign up": "зарегистрироваться"
   },
-  "signUp": {
+  "SignUp": {
     "login": "логин",
     "email": "email",
     "password": "пароль",
@@ -35,16 +37,17 @@
     "or": "или",
     "sign in": "войти"
   },
-  "messages": {
-    "search": "Поиск"
+  "Messages": {
+    "search": "Поиск",
+    "type your message here": "Напишите сообщение…"
   },
-  "balance": {
+  "Balance": {
     "balance": "Баланс",
     "income": "INCOME",
     "gas": "GAS",
     "outcome": "OUTCOME"
   },
-  "tasks": {
-    "tasks": "Tasks"
+  "Tasks": {
+    "tasks": "Задачи"
   }
 }

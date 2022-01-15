@@ -1,22 +1,14 @@
-/* Для файла lang
-  {
-    "deals": "Deals",
-    "asCustomer": "As customer",
-    "asExecutor": "As executor"
-  }
-*/
-
 <template>
   <div class="deals">
     <h1 class="headline">
-      Deals
+      {{ language['deals'] }}
     </h1>
     <div class="deals__titles">
       <h2 class="title">
-        As customer
+        {{ language['as customer'] }}
       </h2>
       <h2 class="title">
-        As executor
+        {{ language['as executor'] }}
       </h2>
     </div>
     <div class="deals__lists">
@@ -55,7 +47,7 @@
 </template>
 
 <script>
-import { mapState,mapGetters } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 import deal from './Deal.vue'
 
 export default {
@@ -69,7 +61,10 @@ export default {
     };
   },
   computed: {
-    ...mapState(['dealStatus']),
+    ...mapState(['components', 'dealStatus']),
+    language() {
+      return this.$store.getters.getLanguageData[this.components.DEALS] || {};
+    },
     deals() {
       return {
         asCustomer: [

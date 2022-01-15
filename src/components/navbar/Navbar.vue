@@ -6,7 +6,7 @@
     <button class="application-menu-item messenger"
          :class="{'active': selectedNavbarItem === components.MESSAGES}"
          @click="selectNavbarItem(components.MESSAGES)"
-         data-tooltip="Messages" data-flow="right">
+         :data-tooltip="language['messages']" data-flow="right">
       <div class="application-menu-item__wrapper">
         <svg width="40" height="40" viewBox="0 0 40 40" class="icon" xmlns="http://www.w3.org/2000/svg">
           <path d="M36 0H4C1.8 0 0 1.8 0 4V40L8 32H36C38.2 32 40 30.2 40 28V4C40 1.8 38.2 0 36 0ZM36 28H8L4 32V4H36V28Z"/>
@@ -16,7 +16,7 @@
     <button class="application-menu-item balance"
          :class="{'active': selectedNavbarItem === components.BALANCE}"
          @click="selectNavbarItem(components.BALANCE)"
-         data-tooltip="Balance" data-flow="right">
+         :data-tooltip="language['balance']" data-flow="right">
       <div class="application-menu-item__wrapper">
         <svg width="40" height="37" viewBox="0 0 48 46" class="stroke-icon" xmlns="http://www.w3.org/2000/svg">
           <path
@@ -27,7 +27,7 @@
     <button class="application-menu-item deals"
          :class="{'active': selectedNavbarItem === components.DEALS}"
          @click="selectNavbarItem(components.DEALS)"
-         data-tooltip="Deals" data-flow="right">
+         :data-tooltip="language['deals']" data-flow="right">
       <div class="application-menu-item__wrapper">
         <svg width="32" height="40" viewBox="0 0 43 51" class="stroke-icon"
              xmlns="http://www.w3.org/2000/svg">
@@ -39,15 +39,24 @@
     <button class="application-menu-item tasks"
          :class="{'active': selectedNavbarItem === components.TASKS}"
          @click="selectNavbarItem(components.TASKS)"
-         data-tooltip="Tasks" data-flow="right">
+         :data-tooltip="language['tasks']" data-flow="right">
       <div class="application-menu-item__wrapper">
         <svg width="40" height="33" viewBox="0 0 40 33" class="icon" xmlns="http://www.w3.org/2000/svg">
           <path d="M32.95 4.71667L35.2833 7.05L14.05 28.2833L4.71667 18.95L7.05 16.6167L14.05 23.6167L32.95 4.71667ZM32.95 0L14.05 18.9L7.05 11.9L0 18.95L14.05 33L40 7.05L32.95 0Z"/>
         </svg>
       </div>
     </button>
+    <button class="application-menu-item language"
+         @click="defineLanguageData(selectedLanguage === 'ru' ? 'en' : 'ru')"
+         :data-tooltip="language['switch language']" data-flow="right">
+      <div class="application-menu-item__wrapper">
+        <svg width="24" height="24" viewBox="0 0 24 24" class="icon" xmlns="http://www.w3.org/2000/svg">
+          <path fill="none" stroke="#000" stroke-width="2" d="M12,23 C18.0751322,23 23,18.0751322 23,12 C23,5.92486775 18.0751322,1 12,1 C5.92486775,1 1,5.92486775 1,12 C1,18.0751322 5.92486775,23 12,23 Z M12,23 C15,23 16,18 16,12 C16,6 15,1 12,1 C9,1 8,6 8,12 C8,18 9,23 12,23 Z M2,16 L22,16 M2,8 L22,8"/>
+        </svg>
+      </div>
+    </button>
     <button class="application-menu-item exit" @click="signOut()"
-         data-tooltip="Exit" data-flow="right">
+         :data-tooltip="language['exit']" data-flow="right">
       <div class="application-menu-item__wrapper">
         <svg width="40" height="40" viewBox="0 0 40 40" class="icon" xmlns="http://www.w3.org/2000/svg">
           <path
@@ -59,24 +68,23 @@
 </template>
 
 <script>
-import { mapState, mapMutations, mapGetters } from 'vuex'
+import { mapState, mapMutations, mapActions } from 'vuex'
 export default {
   name: "Navbar",
   data(){
     return{
-      language: {},
       selectedNavbarItem: 'Messages',
     }
   },
-  created(){
-    this.language = this.getLanguage(this.components.NAVBAR);
-  },
   computed: {
-    ...mapState(['components'])
+    ...mapState(['components', 'selectedLanguage']),
+    language() {
+      return this.$store.getters.getLanguageData[this.components.NAVBAR] || {};
+    }
   },
   methods: {
-    ...mapGetters(['getLanguage']),
     ...mapMutations(['setCurrentUser', 'setCurrentComponent']),
+    ...mapActions(['defineLanguageData']),
     selectNavbarItem(item) {
       this.setCurrentComponent(item);
       this.selectedNavbarItem = item;

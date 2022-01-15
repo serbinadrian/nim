@@ -7,14 +7,14 @@
                :class="{'not-validated' : !isUsernameValid}"
                class="form__login"
                type="text"
-               placeholder="login"
+               :placeholder="language['login']"
                spellcheck="false"
                v-model="username">
         <input :disabled="waitingForResponse"
                :class="{'not-validated' : !isPasswordValid}"
                class="form__password"
                type="password"
-               placeholder="password"
+               :placeholder="language['password']"
                spellcheck="false"
                v-model="password">
         <div class="form__message">{{ errorMessage }}</div>
@@ -22,8 +22,8 @@
           <button :disabled="isEmpty || waitingForResponse"
                   class="form__submit"
                   type="submit"
-                  @click.prevent="signIn({ username, password })">SIGN IN</button>
-          <div class="form__signup-text">or <button type="button" :disabled="waitingForResponse" @click="setCurrentComponent(components.SIGN_UP)" class="form__signup-link">sign up</button></div>
+                  @click.prevent="signIn({ username, password })">{{ language['sign in'] }}</button>
+          <div class="form__signup-text">{{ language['or'] }} <button type="button" :disabled="waitingForResponse" @click="setCurrentComponent(components.SIGN_UP)" class="form__signup-link">{{ language['sign up'] }}</button></div>
         </div>
       </form>
     </div>
@@ -45,6 +45,9 @@ export default {
   },
   computed: {
     ...mapState(['backendUrl', 'errCodes', 'components']),
+    language() {
+      return this.$store.getters.getLanguageData[this.components.SIGN_IN] || {};
+    },
     isUsernameValid() {
       return true;
     },
