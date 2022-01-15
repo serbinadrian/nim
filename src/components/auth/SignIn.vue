@@ -46,7 +46,7 @@ export default {
   computed: {
     ...mapState(['backendUrl', 'errCodes', 'components']),
     language() {
-      // return this.$store.getters.getLanguageData[this.components.SIGN_IN] || {};
+      return this.$store.getters.getLanguageData[this.components.SIGN_IN] || {};
     },
     isUsernameValid() {
       return true;

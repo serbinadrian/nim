@@ -12,7 +12,7 @@ export default {
   computed: {
     ...mapState(['components']),
     language() {
-      // return this.$store.getters.getLanguageData[this.components.TASKS] || {};
+      return this.$store.getters.getLanguageData[this.components.TASKS] || {};
     }
   }
 }

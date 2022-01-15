@@ -79,7 +79,7 @@ export default {
   computed: {
     ...mapState(['components', 'selectedLanguage']),
     language() {
-      // return this.$store.getters.getLanguageData[this.components.NAVBAR] || {};
+      return this.$store.getters.getLanguageData[this.components.NAVBAR] || {};
     }
   },
   methods: {

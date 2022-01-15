@@ -80,7 +80,7 @@ export default {
   computed: {
     ...mapState(['components']),
     language() {
-      // return this.$store.getters.getLanguageData[this.components.BALANCE] || {};
+      return this.$store.getters.getLanguageData[this.components.BALANCE] || {};
     }
   }
 }
