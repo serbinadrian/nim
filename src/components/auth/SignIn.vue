@@ -72,7 +72,7 @@ export default {
             this.setCurrentUser(data);
           });
         } else if (response.status === 400) {
-          this.errorMessage =  'Ошибка 400: Неверный пароль';
+          this.errorMessage =  'Неверный пароль';
         } else if (response.status === this.errCodes.NOT_FOUND) {
           this.errorMessage = 'Пользователь не найден';
         } else {

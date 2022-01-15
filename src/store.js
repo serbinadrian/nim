@@ -35,7 +35,7 @@ const store = new Vuex.Store({
         isSignedIn(state) {
             return Object.values(state.currentUser).every(val => val !== '');
         },
-        getLanguage: function (state, component) {
+        getLanguage(state, component) {
             let result;
             switch (state.selectedLanguage) {
                 case "en":
@@ -49,7 +49,7 @@ const store = new Vuex.Store({
                         });
                     break;
                 case "ru":
-                    import('./data/lang/language_en.json')
+                    import('./data/lang/language_ru.json')
                         .then(language => {
                             result = language[component];
                         })
