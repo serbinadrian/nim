@@ -55,7 +55,7 @@ export default {
   .task-category-indicator{
     width: 10%;
     height: 100%;
-    //background: blue;
+    /* background: blue; */
   }
 
   .task-body{
@@ -91,7 +91,6 @@ export default {
 
   .task-executors:hover .task-executor{
     margin-right: 7px;
-    transition: .3s ease;
   }
 
   .task-executor{
@@ -100,6 +99,7 @@ export default {
     overflow: hidden;
     margin-right: -7px;
     border-radius: 50%;
+    transition: .3s ease;
   }
 
   .task-executor img{
