@@ -9,10 +9,6 @@
          {{ language[taskCategory.category] }}:
        </div>
        <Task :categoryIndicator="taskCategory.color"/>
-       <Task :categoryIndicator="taskCategory.color"/>
-       <Task :categoryIndicator="taskCategory.color"/>
-       <Task :categoryIndicator="taskCategory.color"/>
-       <Task :categoryIndicator="taskCategory.color"/>
      </div>
    </div>
  </div>
@@ -50,7 +46,6 @@ export default {
   .tasks {
     margin-left: 20px;
     flex: 1;
-    overflow: auto;
   }
 
   .task-list{
