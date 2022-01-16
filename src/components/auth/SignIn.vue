@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from "vuex";
+import { mapState, mapMutations, mapActions } from "vuex";
 
 export default {
   name: "SignIn",
@@ -60,6 +60,7 @@ export default {
   },
   methods:{
     ...mapMutations(['setCurrentComponent', 'setCurrentUser']),
+    ...mapActions(['defineMatrixUser']),
     signIn(credentials){
       this.waitingForResponse = true;
       this.errorMessage = '';
@@ -73,6 +74,7 @@ export default {
           response.json().then(data => {
             this.setCurrentComponent(this.components.MESSAGES);
             this.setCurrentUser(data);
+            this.defineMatrixUser();
           });
         } else if (response.status === 400) {
           this.errorMessage =  'Неверный пароль';

@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import createPersistedState from "vuex-persistedstate";
+import * as matrixSDK from "matrix-js-sdk";
 //import language from './data/lang/language_en.json'
 import errCodes from './data/status/errCodes.json'
 import components from './data/components/components.json'
@@ -30,6 +31,7 @@ const store = new Vuex.Store({
             matrixAccessToken: '',
             matrixUserId: ''
         },
+        matrixUser: {},
 
         /*App props*/
         selectedLanguage: '',
@@ -45,12 +47,6 @@ const store = new Vuex.Store({
         }
     },
     mutations: {
-        setSelectedLanguage(state, language) {
-            state.selectedLanguage = language;
-        },
-        setLanguageData(state, languageData) {
-            state.languageData = languageData;
-        },
         setCurrentComponent(state, component) {
             state.currentComponent = component;
         },
@@ -59,10 +55,27 @@ const store = new Vuex.Store({
             state.currentUser.refreshToken = newCurrentUser.refreshToken ?? '';
             state.currentUser.matrixAccessToken = newCurrentUser.matrixAccessToken ?? '';
             state.currentUser.matrixUserId = newCurrentUser.matrixUserId ?? '';
-        }
+        },
+        setMatrixUser(state, newMatrixUser) {
+            state.matrixUser = newMatrixUser;
+        },
+        setSelectedLanguage(state, language) {
+            state.selectedLanguage = language;
+        },
+        setLanguageData(state, languageData) {
+            state.languageData = languageData;
+        },
     },
     actions: {
-        /*Auth*/
+        /*Global*/
+        defineCurrentComponent({ commit, getters }) {
+            commit('setCurrentComponent', getters.isSignedIn ? components.MESSAGES : components.SIGN_IN);
+        },
+
+        defineMatrixUser({ commit, state }) {
+            commit('setMatrixUser', matrixSDK.createClient(state.matrixURL));
+        },
+
         defineLanguageData({ state, commit }, languageToSet) {
             if (state.selectedLanguage === '')
                 commit('setSelectedLanguage', 'ru');
@@ -78,11 +91,9 @@ const store = new Vuex.Store({
                     console.log(err);
                 });
         },
-
-        defineCurrentComponent({ commit, getters }) {
-            commit('setCurrentComponent', getters.isSignedIn ? components.MESSAGES : components.SIGN_IN);
-        }
-
+        
+        /*Auth*/
+        
         /*Messages*/
 
         /*Deals*/

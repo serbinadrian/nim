@@ -48,9 +48,11 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['defineLanguageData', 'defineCurrentComponent'])
+    ...mapActions(['defineCurrentComponent', 'defineMatrixUser', 'defineLanguageData'])
   },
   created() {
+    if (this.isSignedIn)
+      this.defineMatrixUser();
     this.defineLanguageData();
     this.defineCurrentComponent();
     window.addEventListener('load', function handler() {
@@ -67,6 +69,7 @@ export default {
 </script>
 
 <style>
+/* For Balance, Deals, Tasks */
 .headline {
   font-family: Inter, sans-serif;
   font-size: 48px;
