@@ -103,7 +103,6 @@ export default {
 }
 
 .nim-application.light-theme .application-menu-item:hover svg,
-.nim-application.light-theme .application-menu-item:focus svg,
 .nim-application.light-theme .application-menu-item.active svg {
   opacity: 1;
 }
@@ -116,9 +115,8 @@ export default {
   background: var(--secondary-color-dark);
 }
 
-.nim-application.dark-theme .application-menu-item:hover svg,
-.nim-application.dark-theme .application-menu-item:focus svg,
-.nim-application.dark-theme .application-menu-item:active svg {
+.nim-application.dark-theme .application-menu-item:hover,
+.nim-application.dark-theme .application-menu-item:active {
   opacity: 1;
 }
 
@@ -150,7 +148,6 @@ export default {
   border-radius: 50px;
   border: none;
   background-color: transparent;
-  outline: none;
   position: relative;
 }
 
