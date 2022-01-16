@@ -48,6 +48,11 @@
     "outcome": "OUTCOME"
   },
   "Tasks": {
-    "tasks": "Задачи"
+    "tasks": "Задачи",
+    "to do": "Нужно сделать",
+    "in progress": "В процессе",
+    "review": "На проверке",
+    "complete": "Выполнены",
+    "cancelled": "Отменены"
   }
 }

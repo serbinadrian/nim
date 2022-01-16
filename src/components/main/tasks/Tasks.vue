@@ -1,10 +1,12 @@
 <template>
  <div class="tasks">
-   <h1>{{ language['tasks'] }}</h1>
+   <h1 class="headline">
+     {{ language['tasks'] }}
+   </h1>
    <div class="task-list">
      <div class="class-category" v-for="taskCategory in taskCategories" :key="taskCategory.category">
        <div class="category-name" :style="{background: taskCategory.color}">
-         {{taskCategory.category}}
+         {{ language[taskCategory.category] }}:
        </div>
        <Task :categoryIndicator="taskCategory.color"/>
      </div>

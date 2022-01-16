@@ -1,10 +1,10 @@
 {
     "TO_DO": {
-        "category": "todo",
+        "category": "to do",
         "color": "#72B1EB"
     },
     "IN_PROGRESS": {
-        "category": "inProgress",
+        "category": "in progress",
         "color": "#f6e924"
     } ,
     "REVIEW": {

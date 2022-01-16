@@ -48,6 +48,11 @@
     "outcome": "OUTCOME"
   },
   "Tasks": {
-    "tasks": "Tasks"
+    "tasks": "Tasks",
+    "to do": "To Do",
+    "in progress": "In progress",
+    "review": "Review",
+    "complete": "Complete",
+    "cancelled": "Cancelled"
   }
 }
