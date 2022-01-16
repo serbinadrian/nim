@@ -140,14 +140,6 @@ export default {
   flex: 1;
 }
 
-.headline {
-  font-size: 48px;
-  font-weight: bold;
-  line-height: 1;
-  margin: .3em 0 .7em;
-  color: #232829;
-}
-
 .deals__titles {
   padding: 4px 4px 28px;
   overflow: auto;

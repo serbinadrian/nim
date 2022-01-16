@@ -9,6 +9,10 @@
          {{ language[taskCategory.category] }}:
        </div>
        <Task :categoryIndicator="taskCategory.color"/>
+       <Task :categoryIndicator="taskCategory.color"/>
+       <Task :categoryIndicator="taskCategory.color"/>
+       <Task :categoryIndicator="taskCategory.color"/>
+       <Task :categoryIndicator="taskCategory.color"/>
      </div>
    </div>
  </div>
@@ -43,16 +47,23 @@ export default {
 </script>
 
 <style scoped>
+  .tasks {
+    margin-left: 20px;
+    flex: 1;
+    overflow: auto;
+  }
+
   .task-list{
     display: flex;
+    gap: 20px;
   }
 
   .class-category{
-    margin: 0 15px;
+    /* margin: 0 15px; */
   }
 
   .category-name{
-    width: 250px;
+    min-width: 250px;
     padding: 10px 25px;
     font-weight: 600;
     font-size: 24px;

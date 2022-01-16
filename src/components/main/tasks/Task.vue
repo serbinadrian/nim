@@ -43,7 +43,7 @@ export default {
 <style scoped>
   .task{
     margin: 15px 0 15px 0;
-    width: 250px;
+    min-width: 250px;
     height: 200px;
     display: flex;
     flex-wrap: nowrap;

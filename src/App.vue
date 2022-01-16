@@ -67,5 +67,12 @@ export default {
 </script>
 
 <style>
-
+.headline {
+  font-family: Inter, sans-serif;
+  font-size: 48px;
+  font-weight: bold;
+  color: #232829;
+  line-height: 1;
+  margin: .3em 0 .7em;
+}
 </style>
