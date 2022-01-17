@@ -31,9 +31,9 @@ export default {
     }
   },
   computed: {
-    ...mapState(['components']),
+    ...mapState(['components', 'languageData']),
     language() {
-      return this.$store.getters.getLanguageData[this.components.TASKS] || {};
+      return this.languageData[this.components.TASKS] || {};
     }
   },
   components: {

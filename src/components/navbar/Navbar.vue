@@ -77,9 +77,9 @@ export default {
     }
   },
   computed: {
-    ...mapState(['components', 'selectedLanguage']),
+    ...mapState(['components', 'selectedLanguage', 'languageData']),
     language() {
-      return this.$store.getters.getLanguageData[this.components.NAVBAR] || {};
+      return this.languageData[this.components.NAVBAR] || {};
     }
   },
   methods: {

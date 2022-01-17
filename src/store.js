@@ -41,9 +41,6 @@ const store = new Vuex.Store({
     getters: {
         isSignedIn(state) {
             return Object.values(state.currentUser).every(val => val !== '');
-        },
-        getLanguageData(state) {
-            return state.languageData;
         }
     },
     mutations: {

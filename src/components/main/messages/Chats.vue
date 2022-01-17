@@ -58,9 +58,9 @@ import { mapState } from 'vuex'
 export default {
   name: "Chats",
   computed: {
-    ...mapState(['components']),
+    ...mapState(['components', 'languageData']),
     language() {
-      return this.$store.getters.getLanguageData[this.components.MESSAGES] || {};
+      return this.languageData[this.components.MESSAGES] || {};
     }
   }
 }

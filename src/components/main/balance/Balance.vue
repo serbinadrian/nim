@@ -78,9 +78,9 @@ import { mapState } from 'vuex'
 export default {
   name: "Balance",
   computed: {
-    ...mapState(['components']),
+    ...mapState(['components', 'languageData']),
     language() {
-      return this.$store.getters.getLanguageData[this.components.BALANCE] || {};
+      return this.languageData[this.components.BALANCE] || {};
     }
   }
 }

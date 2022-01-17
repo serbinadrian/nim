@@ -109,9 +109,9 @@ export default {
   },
   
   computed: {
-    ...mapState(['components']),
+    ...mapState(['components', 'languageData']),
     language() {
-      return this.$store.getters.getLanguageData[this.components.DEALS] || {};
+      return this.languageData[this.components.DEALS] || {};
     },
     statusToClass() {
       return this.status.replace(' ', '-').toLowerCase() || '';
