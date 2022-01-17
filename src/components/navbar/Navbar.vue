@@ -130,6 +130,7 @@ export default {
 .application-menu {
   height: 100%;
   width: 60px;
+  font-size: 16px;
   display: -webkit-flex;
   display: -ms-flex;
   display: flex;

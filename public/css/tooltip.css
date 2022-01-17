@@ -1,7 +1,6 @@
 [data-tooltip] {
     position: relative;
     cursor: pointer;
-    font-size: 16px;
 }
 [data-tooltip]:before,
 [data-tooltip]:after {
