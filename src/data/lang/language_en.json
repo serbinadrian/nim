@@ -39,7 +39,8 @@
   },
   "Messages": {
     "search": "Search",
-    "type your message here": "Type your message here…"
+    "type your message here": "Type your message here…",
+    "please select a chat": "Please select a chat"
   },
   "Balance": {
     "balance": "Balance",

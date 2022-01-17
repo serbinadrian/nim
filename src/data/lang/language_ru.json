@@ -39,7 +39,8 @@
   },
   "Messages": {
     "search": "Поиск",
-    "type your message here": "Напишите сообщение…"
+    "type your message here": "Напишите сообщение…",
+    "please select a chat": "Пожалуйста выберите чат"
   },
   "Balance": {
     "balance": "Баланс",
