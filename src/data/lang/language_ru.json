@@ -39,6 +39,10 @@
   },
   "Messages": {
     "search": "Поиск",
+    "create single": "Создать одиночный",
+    "create group": "Создать групповой",
+    "create single chat": "Создать одиночный чат",
+    "create group chat": "Создать групповой чат",
     "type your message here": "Напишите сообщение…",
     "please select a chat": "Пожалуйста выберите чат"
   },

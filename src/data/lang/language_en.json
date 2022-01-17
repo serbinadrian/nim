@@ -39,6 +39,10 @@
   },
   "Messages": {
     "search": "Search",
+    "create single": "Create single",
+    "create group": "Create group",
+    "create single chat": "Create single chat",
+    "create group chat": "Create group chat",
     "type your message here": "Type your message here…",
     "please select a chat": "Please select a chat"
   },
