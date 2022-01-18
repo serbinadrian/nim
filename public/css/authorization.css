@@ -103,6 +103,7 @@
 .form__submit:focus {
   color: var(--mint-solid);
   outline: none;
+  transition-duration: .05s;
 }
 
 .form__email:disabled,

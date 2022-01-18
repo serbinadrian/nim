@@ -284,11 +284,13 @@ background: #26493E
 }
 
 .add-chat-button {
-  flex: 1 1;
+  flex: 1;
+
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
+  
   padding: 1em 1.2em;
   border-radius: 100px;
   border: none;
@@ -296,8 +298,8 @@ background: #26493E
   font-weight: 600;
   line-height: 1;
   cursor: pointer;
-  color: var(--asphalt-tinted);
   outline: none;
+  color: var(--asphalt-tinted);
   background-color: var(--olive-tinted);
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
   filter: brightness(1);
@@ -342,10 +344,8 @@ background: #26493E
   border-radius: 30px;
   -webkit-border-radius: 30px;
   cursor: pointer;
-}
-
-.chat:last-child{
-  margin-bottom: 50px;
+  background-color: transparent;
+  transition: background-color .2s ease-out;
 }
 
 .chat-preview {
@@ -381,6 +381,7 @@ background: #26493E
 }
 
 .application-current-chat {
+  flex: 1 0;
   margin-left: 25px;
   overflow: hidden;
   width: 100%;

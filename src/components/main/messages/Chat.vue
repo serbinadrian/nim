@@ -16,7 +16,7 @@
                             </svg>
       </div>
       <div class="person-name">
-        Albert Einstein
+        {{ room.name }}
       </div>
       <div class="make-call chat-menu-item">
           <svg class="icon" width="31" height="31" viewBox="0 0 31 31">
@@ -46,7 +46,7 @@
       </ul>
     </div>
     <div class="chat-block" id="chat-block">
-      <ul class="right-click-menu" id="right-click-menu">
+      <ul :class="{'active': rightClicked}" class="right-click-menu" id="right-click-menu">
         <li class="right-click-menu__reply">
           <div class="right-click-menu-item">Reply</div>
         </li>
@@ -64,30 +64,21 @@
         </li>
       </ul>
       <div class="messages">
-        <div class="message-holder incoming">
-          <div class="message">
-            <pre class="message-content">Hello there!</pre>
-            <div class="message-timestamp">13:42</div>
+        <template
+          v-for="(message, index) of room.timeline"
+          >
+          <div
+            v-if="message.event.type === 'm.room.message'"
+            :key="index"
+            :class="isIncoming(message) ? 'incoming' : 'outcoming'"
+            @click.right.prevent="rightClick"
+            class="message-holder">
+            <div class="message">
+              <pre class="message-content">{{ message.event.content.body }}</pre>
+              <div class="message-timestamp">{{ unixTimestampToLocalTime(message.event.origin_server_ts) }}</div>
+            </div>
           </div>
-        </div>
-        <div class="message-holder outcoming">
-          <div class="message">
-            <pre class="message-content">Hi</pre>
-            <div class="message-timestamp">13:43</div>
-          </div>
-        </div>
-        <div class="message-holder outcoming">
-          <div class="message">
-            <pre class="message-content">long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long message</pre>
-            <div class="message-timestamp">13:43</div>
-          </div>
-        </div>
-        <div class="message-holder incoming">
-          <div class="message">
-            <pre class="message-content">Something about science</pre>
-            <div class="message-timestamp">13:43</div>
-          </div>
-        </div>
+        </template>
       </div>
     </div>
     <div class="send-message">
@@ -99,8 +90,9 @@
       </div>
       <div class="write-message ">
         <textarea 
-          v-model="message"
+          v-model="typedMessage"
           @input="messageBoxHeightCalculate"
+          @keydown.enter.exact.prevent="sendMessage"
           rows="1"
           :placeholder="language['type your message here']">
         </textarea>
@@ -122,16 +114,51 @@ export default {
   name: "Chat",
   data() {
     return {
-      message: "",
+      typedMessage: "",
+      rightClicked: false
     }
   },
+  props: {
+    room: Object
+  },
   computed: {
-    ...mapState(['components', 'languageData']),
+    ...mapState(['components', 'languageData', 'currentUser', 'matrixClient']),
     language() {
       return this.languageData[this.components.MESSAGES] || {};
     }
   },
   methods: {
+    isIncoming(message) {
+      return message.event.sender !== this.currentUser.matrixUserId;
+    },
+    unixTimestampToLocalTime(unixTimestamp) {
+      return new Date(unixTimestamp).toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit', hour12: false});
+    },
+    sendMessage(event) {
+      const content = {
+        "body": this.typedMessage,
+        "msgtype": "m.text"
+      };
+      this.matrixClient.sendEvent(this.room.roomId, "m.room.message", content, "");
+      this.typedMessage = '';
+      event.target.style.height = 'auto';
+    },
+    rightClick(event) {
+      //TODO
+      const messagesBox = document.querySelector('.messages');
+      const menu = document.querySelector('.right-click-menu');
+
+      const messagesSizes = messagesBox.getBoundingClientRect();
+      const top = event.target.offsetTop + event.layerY > messagesBox.scrollHeight - menu.scrollHeight - 15
+                  ? messagesBox.scrollHeight - menu.scrollHeight - 15
+                  : event.target.offsetTop + event.layerY;
+      const left = event.clientX - messagesSizes.left > messagesBox.scrollWidth - menu.scrollWidth - 15
+                  ? messagesBox.scrollWidth - menu.scrollWidth - 15
+                  : event.clientX - messagesSizes.left;
+      menu.style.top = `${top}px`;
+      menu.style.left = `${left}px`;
+      menu.classList.add("active");
+    },
     messageBoxHeightCalculate(event) {
       const messageBoxMaxRows = 10;
       const messageBoxLineHeight = 18;

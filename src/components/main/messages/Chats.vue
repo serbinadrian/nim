@@ -4,6 +4,7 @@
         <button 
           class="add-chat-button" 
           type="button"
+          @click="createSingle"
           :data-tooltip="language['create single chat']"
           data-flow="bottom">
           <span class="add-chat-button__icon">
@@ -28,42 +29,21 @@
         </button>
       </div>
       <div class="chats" id="chats">
-        <div class="chat" data-roomId="">
+        <div 
+          class="chat"
+          :class="{'active': room === activeRoom}"
+          v-for="(room, index) of rooms"
+          :key="index"
+          @click="makeActive(room)">
           <div class="person-avatar">
             <img src="../../../../public/img/room-image.png" alt="">
           </div>
           <div class="chat-preview">
             <div class="person-name">
-              Satoshi Nakamoto
+              {{ room.name }}
             </div>
             <div class="person-message">
-              You: Are you Japanese?
-            </div>
-          </div>
-        </div>
-        <div class="chat active" data-roomId="">
-          <div class="person-avatar">
-            <img src="../../../../public/img/room-image.png" alt="">
-          </div>
-          <div class="chat-preview">
-            <div class="person-name">
-              Albert Einstein
-            </div>
-            <div class="person-message">
-              Something about science
-            </div>
-          </div>
-        </div>
-        <div class="chat" data-roomId="">
-          <div class="person-avatar">
-            <img src="../../../../public/img/room-image.png" alt="">
-          </div>
-          <div class="chat-preview">
-            <div class="person-name">
-              Test
-            </div>
-            <div class="person-message">
-              test message
+              {{ findTheLastMessageFromTimeline(room, currentUser.matrixUserId) }}
             </div>
           </div>
         </div>
@@ -76,11 +56,64 @@ import { mapState } from 'vuex'
 
 export default {
   name: "Chats",
+  data() {
+    return {
+      rooms: [],
+      activeRoom: {}
+    };
+  },
   computed: {
-    ...mapState(['components', 'languageData']),
+    ...mapState(['components', 'languageData', 'currentUser', 'matrixClient']),
     language() {
       return this.languageData[this.components.MESSAGES] || {};
     }
+  },
+  methods: {
+    findTheLastMessageFromTimeline(room, userId) {
+      const timeline = room.timeline;
+      for (let i = timeline.length - 1; i >= 0; i--) {
+        const message = timeline[i].event;
+        if (message.type === 'm.room.message') {
+          return (userId === message.sender ? 'You: ' : '') + message.content.body;
+        }
+      }
+      return '';
+    },
+    makeActive(room) {
+      this.activeRoom = room;
+      this.$emit('active-room-selected', room);
+    },
+    createSingle() {
+      this.$emit('create-single');
+    }
+  },
+  created() {
+    this.matrixClient.startClient()
+      .then(() => {
+        if (this.matrixClient.isInitialSyncComplete()) {
+          this.rooms = this.matrixClient.getRooms();
+        } else {
+          this.matrixClient.once("sync", () => {
+            this.rooms = this.matrixClient.getRooms();
+            for (const room of this.matrixClient.getRooms())
+              if (room.selfMembership === 'invite')
+                this.matrixClient.joinRoom(room.roomId);
+
+            this.matrixClient.on("RoomMember.membership", (event, member) => {
+              if (member.membership === "invite" && member.userId === this.currentUser.matrixUserId) {
+                this.matrixClient.joinRoom(member.roomId)
+                  .then(function() {
+                    this.rooms = this.matrixClient.getRooms();
+                  })
+              }
+              this.matrixClient.once("sync", () => { this.rooms = this.matrixClient.getRooms() });
+            });
+          });
+        }
+      });
+  },
+  destroyed() {
+
   }
 }
 </script>

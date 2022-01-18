@@ -31,7 +31,7 @@ const store = new Vuex.Store({
             matrixAccessToken: '',
             matrixUserId: ''
         },
-        matrixUser: {},
+        matrixClient: {},
 
         /*App props*/
         selectedLanguage: '',
@@ -53,8 +53,8 @@ const store = new Vuex.Store({
             state.currentUser.matrixAccessToken = newCurrentUser.matrixAccessToken ?? '';
             state.currentUser.matrixUserId = newCurrentUser.matrixUserId ?? '';
         },
-        setMatrixUser(state, newMatrixUser) {
-            state.matrixUser = newMatrixUser;
+        setMatrixClient(state, newMatrixClient) {
+            state.matrixClient = newMatrixClient;
         },
         setSelectedLanguage(state, language) {
             state.selectedLanguage = language;
@@ -67,10 +67,6 @@ const store = new Vuex.Store({
         /*Global*/
         defineCurrentComponent({ commit, getters }) {
             commit('setCurrentComponent', getters.isSignedIn ? components.MESSAGES : components.SIGN_IN);
-        },
-
-        defineMatrixUser({ commit, state }) {
-            commit('setMatrixUser', matrixSDK.createClient(state.matrixURL));
         },
 
         defineLanguageData({ state, commit }, languageToSet) {
@@ -87,6 +83,34 @@ const store = new Vuex.Store({
                     // eslint-disable-next-line no-console
                     console.log(err);
                 });
+        },
+
+        /*Matrix CLient*/
+        defineMatrixClient({ commit, state }) {
+            commit('setMatrixClient', matrixSDK.createClient({
+                baseUrl: state.matrixURL,
+                accessToken: state.currentUser.matrixAccessToken,
+                userId: state.currentUser.matrixUserId
+            }));
+
+            // state.matrixClient.startClient()
+            //     .then(() => {
+            //         state.matrixClient.on("sync", function(matrixState) {
+            //             switch (matrixState) {
+            //               case "ERROR":
+            //                 // update UI to say "Connection Lost"
+            //                 break;
+            //               case "SYNCING":
+            //                 // update UI to remove any "Connection Lost" message
+            //                 break;
+            //               case "PREPARED":
+            //                 // the client instance is ready to be queried.
+            //                 // eslint-disable-next-line no-console
+            //                 console.log(state.matrixClient.getRooms());
+            //                 break;
+            //             }
+            //         });
+            //     });
         },
         
         /*Auth*/

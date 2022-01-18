@@ -60,7 +60,7 @@ export default {
   },
   methods:{
     ...mapMutations(['setCurrentComponent', 'setCurrentUser']),
-    ...mapActions(['defineMatrixUser']),
+    ...mapActions(['defineMatrixClient']),
     signIn(credentials){
       this.waitingForResponse = true;
       this.errorMessage = '';
@@ -74,7 +74,7 @@ export default {
           response.json().then(data => {
             this.setCurrentComponent(this.components.MESSAGES);
             this.setCurrentUser(data);
-            this.defineMatrixUser();
+            this.defineMatrixClient();
           });
         } else if (response.status === 400) {
           this.errorMessage =  'Неверный пароль';

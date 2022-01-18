@@ -21,6 +21,7 @@ export default {
 
 <style scoped>
 .application-blank {
+  flex: 1 0;
   position: relative;
   margin-left: 25px;
   overflow: hidden;
@@ -29,7 +30,6 @@ export default {
   background: var(--secondary-color-light);
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
   border-radius: 30px;
-  flex: auto; 
   display: -webkit-flex;
   display: -ms-flex;
   display: flex;

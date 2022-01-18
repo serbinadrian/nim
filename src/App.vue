@@ -41,18 +41,18 @@ export default {
     Deals
   },
   computed:{
-    ...mapState(['currentComponent']),
+    ...mapState(['currentComponent', 'matrixClient']),
     ...mapGetters(['isSignedIn']),
     currentComponentApplicationBodyClass() {
       return `application-body_${this.currentComponent}`;
     }
   },
   methods: {
-    ...mapActions(['defineCurrentComponent', 'defineMatrixUser', 'defineLanguageData'])
+    ...mapActions(['defineCurrentComponent', 'defineMatrixClient', 'defineLanguageData'])
   },
   created() {
     if (this.isSignedIn)
-      this.defineMatrixUser();
+      this.defineMatrixClient();
     this.defineLanguageData();
     this.defineCurrentComponent();
     window.addEventListener('load', function handler() {
