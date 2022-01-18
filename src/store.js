@@ -36,7 +36,18 @@ const store = new Vuex.Store({
         /*App props*/
         selectedLanguage: '',
         languageData: {},
-        currentComponent: ''
+        currentComponent: '',
+        isModalDisplayed: true,
+
+        /*Transfer Object*/
+        transferObject: {
+            executorAddress: '',
+            customerAddress: '',
+            name: '',
+            deposit: '',
+            deadline: '',
+            description: ''
+        }
     },
     getters: {
         isSignedIn(state) {
@@ -62,6 +73,12 @@ const store = new Vuex.Store({
         setLanguageData(state, languageData) {
             state.languageData = languageData;
         },
+        setModalVisibility(state, visibility) {
+            state.isModalDisplayed = visibility;
+        },
+        setTransferObject(state, transferObject) {
+            Object.assign(state.transferObject, transferObject);
+        }
     },
     actions: {
         /*Global*/

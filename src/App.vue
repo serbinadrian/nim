@@ -17,6 +17,8 @@
       </div>
     </div>
 
+    <Modal v-if="isModalDisplayed"/>
+
   </main>
 </template>
 
@@ -29,6 +31,7 @@ import Messages from "./components/main/messages/Messages";
 import Balance from "./components/main/balance/Balance";
 import Tasks from "./components/main/tasks/Tasks";
 import Deals from "./components/main/deals/Deals";
+import Modal from "./components/modal/modal";
 export default {
   name: 'App',
   components: {
@@ -38,10 +41,11 @@ export default {
     Messages,
     Balance,
     Tasks,
-    Deals
+    Deals,
+    Modal
   },
   computed:{
-    ...mapState(['currentComponent']),
+    ...mapState(['currentComponent', 'isModalDisplayed']),
     ...mapGetters(['isSignedIn']),
     currentComponentApplicationBodyClass() {
       return `application-body_${this.currentComponent}`;
