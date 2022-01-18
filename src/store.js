@@ -37,7 +37,7 @@ const store = new Vuex.Store({
         selectedLanguage: '',
         languageData: {},
         currentComponent: '',
-        isModalDisplayed: true,
+        isModalDisplayed: false,
 
         /*Transfer Object*/
         transferObject: {

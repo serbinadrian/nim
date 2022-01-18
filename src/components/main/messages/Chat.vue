@@ -143,21 +143,21 @@ export default {
       this.typedMessage = '';
       event.target.style.height = 'auto';
     },
-    rightClick(event) {
+    rightClick(/*event*/) {
       //TODO
-      const messagesBox = document.querySelector('.messages');
-      const menu = document.querySelector('.right-click-menu');
+      // const messagesBox = document.querySelector('.messages');
+      // const menu = document.querySelector('.right-click-menu');
 
-      const messagesSizes = messagesBox.getBoundingClientRect();
-      const top = event.target.offsetTop + event.layerY > messagesBox.scrollHeight - menu.scrollHeight - 15
-                  ? messagesBox.scrollHeight - menu.scrollHeight - 15
-                  : event.target.offsetTop + event.layerY;
-      const left = event.clientX - messagesSizes.left > messagesBox.scrollWidth - menu.scrollWidth - 15
-                  ? messagesBox.scrollWidth - menu.scrollWidth - 15
-                  : event.clientX - messagesSizes.left;
-      menu.style.top = `${top}px`;
-      menu.style.left = `${left}px`;
-      menu.classList.add("active");
+      // const messagesSizes = messagesBox.getBoundingClientRect();
+      // const top = event.target.offsetTop + event.layerY > messagesBox.scrollHeight - menu.scrollHeight - 15
+      //             ? messagesBox.scrollHeight - menu.scrollHeight - 15
+      //             : event.target.offsetTop + event.layerY;
+      // const left = event.clientX - messagesSizes.left > messagesBox.scrollWidth - menu.scrollWidth - 15
+      //             ? messagesBox.scrollWidth - menu.scrollWidth - 15
+      //             : event.clientX - messagesSizes.left;
+      // menu.style.top = `${top}px`;
+      // menu.style.left = `${left}px`;
+      // menu.classList.add("active");
     },
     messageBoxHeightCalculate(event) {
       const messageBoxMaxRows = 10;
