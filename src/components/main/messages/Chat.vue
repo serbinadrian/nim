@@ -1,5 +1,5 @@
 <template>
-  <div class="application-current-chat" id="main-current-chat">
+  <div class="application-current-chat" id="main-current-chat" @contextmenu.prevent="rightClick">
     <div class="current-chat-menu">
       <div class="chat-menu-item back hide" id="back-to-chats">
         <svg xmlns="http://www.w3.org/2000/svg" width="40px" height="40px" x="0px" y="0px"
@@ -56,7 +56,7 @@
         <li class="right-click-menu__copy">
           <div class="right-click-menu-item">Copy message</div>
         </li>
-        <li class="right-click-menu__escrow">
+        <li class="right-click-menu__escrow" @click="setModalVisibility(true), hideMenu()">
           <div class="right-click-menu-item">Create Escrow deal</div>
         </li>
         <li class="right-click-menu__task">
@@ -108,7 +108,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 
 export default {
   name: "Chat",
@@ -123,6 +123,7 @@ export default {
   },
   computed: {
     ...mapState(['components', 'languageData', 'currentUser', 'matrixClient']),
+    ...mapMutations(['setModalVisibility']),
     language() {
       return this.languageData[this.components.MESSAGES] || {};
     }
@@ -143,10 +144,21 @@ export default {
       this.typedMessage = '';
       event.target.style.height = 'auto';
     },
-    rightClick(/*event*/) {
+    hideMenu(){
+      const menu = document.querySelector('.right-click-menu');
+      menu.classList.remove("active");
+    },
+    rightClick(event) {
+      const x = event.clientX ;
+      const y = event.clientY;
+      const menu = document.querySelector('.right-click-menu');
+      menu.style.top = `${y}px`;
+      menu.style.left = `${x}px`;
+      menu.classList.add("active");
+
       //TODO
       // const messagesBox = document.querySelector('.messages');
-      // const menu = document.querySelector('.right-click-menu');
+      //
 
       // const messagesSizes = messagesBox.getBoundingClientRect();
       // const top = event.target.offsetTop + event.layerY > messagesBox.scrollHeight - menu.scrollHeight - 15

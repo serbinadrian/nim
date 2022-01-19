@@ -29,7 +29,8 @@ const store = new Vuex.Store({
             accessToken: '',
             refreshToken: '',
             matrixAccessToken: '',
-            matrixUserId: ''
+            matrixUserId: '',
+            wallet: ''
         },
         matrixClient: {},
 
@@ -82,11 +83,11 @@ const store = new Vuex.Store({
     },
     actions: {
         /*Global*/
-        defineCurrentComponent({ commit, getters }) {
+        defineCurrentComponent({commit, getters}) {
             commit('setCurrentComponent', getters.isSignedIn ? components.MESSAGES : components.SIGN_IN);
         },
 
-        defineLanguageData({ state, commit }, languageToSet) {
+        defineLanguageData({state, commit}, languageToSet) {
             if (state.selectedLanguage === '')
                 commit('setSelectedLanguage', 'ru');
             else if (languageToSet)
@@ -103,7 +104,7 @@ const store = new Vuex.Store({
         },
 
         /*Matrix CLient*/
-        defineMatrixClient({ commit, state }) {
+        defineMatrixClient({commit, state}) {
             commit('setMatrixClient', matrixSDK.createClient({
                 baseUrl: state.matrixURL,
                 accessToken: state.currentUser.matrixAccessToken,
@@ -129,13 +130,45 @@ const store = new Vuex.Store({
             //         });
             //     });
         },
-        
+
         /*Auth*/
-        
+
         /*Messages*/
 
         /*Deals*/
-
+        getDeals() {
+            fetch(this.state.backendUrl + '/api/v1/escrow/deals', {
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + this.state.currentUser.accessToken
+                }
+            })
+            .then(response => {
+                // eslint-disable-next-line no-console
+                console.log(response)
+            })
+        },
+        createDeal() {
+            fetch(this.state.backendUrl + '/api/v1/escrow/', {
+                method: 'POST',
+                headers: {
+                    'Authorization': 'Bearer ' + this.state.currentUser.accessToken,
+                    'Content-Type': 'application/json'
+                },
+                body : JSON.stringify({
+                    executor: 'test',
+                    customer: 'admin',
+                    name: 'test',
+                    description: 'description',
+                    deposit: '1',
+                    deadline: '1639129184'
+                })
+            })
+            .then(response => {
+                // eslint-disable-next-line no-console
+                console.log(response)
+            })
+        }
         /*Tasks*/
     }
 });

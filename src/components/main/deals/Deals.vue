@@ -1,5 +1,7 @@
 <template>
   <div class="deals">
+    <button @click="createDeal()">create</button>
+    <button @click="getDeals()">get</button>
     <h1 class="headline">
       {{ language['deals'] }}
     </h1>
@@ -47,7 +49,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex'
+import { mapState, mapGetters, mapActions } from 'vuex'
 import deal from './Deal.vue'
 
 export default {
@@ -62,6 +64,7 @@ export default {
   },
   computed: {
     ...mapState(['components', 'dealStatus', 'languageData']),
+    ...mapActions(['getDeals', 'createDeal']),
     language() {
       return this.languageData[this.components.DEALS] || {};
     },
