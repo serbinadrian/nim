@@ -1,7 +1,7 @@
 <template>
   <div class="deals">
-    <button @click="createDeal()">create</button>
-    <button @click="getDeals()">get</button>
+    <button @click="createDeal">create</button>
+    <button @click="getDeals">get</button>
     <h1 class="headline">
       {{ language['deals'] }}
     </h1>
@@ -64,7 +64,6 @@ export default {
   },
   computed: {
     ...mapState(['components', 'dealStatus', 'languageData']),
-    ...mapActions(['getDeals', 'createDeal']),
     language() {
       return this.languageData[this.components.DEALS] || {};
     },
@@ -131,6 +130,7 @@ export default {
     // this.dealStatus = this.getDealStatus();
   },
   methods: {
+    ...mapActions(['getDeals', 'createDeal']),
     ...mapGetters(['getDealStatus']),
   }
 }

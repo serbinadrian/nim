@@ -30,7 +30,8 @@ const store = new Vuex.Store({
             refreshToken: '',
             matrixAccessToken: '',
             matrixUserId: '',
-            wallet: ''
+            wallet: '',
+            balance: ''
         },
         matrixClient: {},
 
@@ -52,7 +53,8 @@ const store = new Vuex.Store({
     },
     getters: {
         isSignedIn(state) {
-            return Object.values(state.currentUser).every(val => val !== '');
+            //return Object.values(state.currentUser).every(val => val !== '');
+            return state.currentUser.accessToken !== '';
         }
     },
     mutations: {
@@ -133,8 +135,23 @@ const store = new Vuex.Store({
 
         /*Auth*/
 
-        /*Messages*/
-
+        /*Wallet*/
+        getWallet() {
+            fetch(this.state.backendUrl + '/api/v1/wallet', {
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + this.state.currentUser.accessToken
+                }
+            })
+                .then(response => {
+                    response.json().then(data => {
+                        this.state.currentUser.wallet = data.wallet;
+                        this.state.currentUser.balance = data.balance;
+                        // eslint-disable-next-line no-console
+                        console.log("WALLET", this.state.currentUser);
+                    });
+                });
+        },
         /*Deals*/
         getDeals() {
             fetch(this.state.backendUrl + '/api/v1/escrow/deals', {
@@ -156,12 +173,12 @@ const store = new Vuex.Store({
                     'Content-Type': 'application/json'
                 },
                 body : JSON.stringify({
-                    executor: 'test',
-                    customer: 'admin',
+                    executor: '0x6abb69b635e5db345c83A26d3Be396bb8230BBD9',
+                    customer: '0x6abb69b635e5db345c83A26d3Be396bb8230BBD9',
                     name: 'test',
                     description: 'description',
                     deposit: '1',
-                    deadline: '1639129184'
+                    deadline: '1674158806'
                 })
             })
             .then(response => {
