@@ -123,12 +123,12 @@ export default {
   },
   computed: {
     ...mapState(['components', 'languageData', 'currentUser', 'matrixClient']),
-    ...mapMutations(['setModalVisibility']),
     language() {
       return this.languageData[this.components.MESSAGES] || {};
     }
   },
   methods: {
+    ...mapMutations(['setModalVisibility', 'setRoomMate']),
     isIncoming(message) {
       return message.event.sender !== this.currentUser.matrixUserId;
     },
@@ -149,6 +149,7 @@ export default {
       menu.classList.remove("active");
     },
     rightClick(event) {
+      this.setRoomMate(this.room.name);
       const x = event.clientX ;
       const y = event.clientY;
       const menu = document.querySelector('.right-click-menu');

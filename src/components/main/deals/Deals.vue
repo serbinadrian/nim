@@ -1,7 +1,5 @@
 <template>
   <div class="deals">
-    <button @click="createDeal">create</button>
-    <button @click="getDeals">get</button>
     <h1 class="headline">
       {{ language['deals'] }}
     </h1>
@@ -16,7 +14,7 @@
     <div class="deals__lists">
       <div class="list">
         <deal 
-          v-for="(deal, index) in deals.asCustomer" 
+          v-for="(deal, index) in deals.customer"
           :key="index"
 
           displayAs="customer"
@@ -31,7 +29,7 @@
       </div>
       <div class="list">
         <deal 
-          v-for="(deal, index) in deals.asExecutor" 
+          v-for="(deal, index) in deals.executor"
           :key="index"
 
           displayAs="executor"
@@ -63,13 +61,13 @@ export default {
     };
   },
   computed: {
-    ...mapState(['components', 'dealStatus', 'languageData']),
+    ...mapState(['components', 'dealStatus', 'languageData', 'deals']),
     language() {
       return this.languageData[this.components.DEALS] || {};
     },
-    deals() {
+    /*deals() {
       return {
-        asCustomer: [
+        asCustomer: [],/*[
           {
             title: 'Security system "Marci"',
             nameTo: 'Babbage',
@@ -92,7 +90,7 @@ export default {
             status: this.dealStatus.PENDING
           }
         ],
-        asExecutor: [
+        asExecutor: [][
           {
             title: 'Security system "Marci"',
             nameTo: 'Babbage',
@@ -122,9 +120,7 @@ export default {
             status: this.dealStatus.CANCELLED
           }
         ]
-      };
-    }
-
+      };*/
   },
   created() {
     // this.dealStatus = this.getDealStatus();

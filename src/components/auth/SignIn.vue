@@ -59,9 +59,10 @@ export default {
     },
   },
   methods:{
-    ...mapMutations(['setCurrentComponent', 'setCurrentUser']),
+    ...mapMutations(['setCurrentComponent', 'setCurrentUser', 'setUsername']),
     ...mapActions(['defineMatrixClient', 'getWallet']),
     signIn(credentials){
+      this.setUsername(credentials.username);
       this.waitingForResponse = true;
       this.errorMessage = '';
       fetch(this.backendUrl + `/api/v1/user/auth`, {

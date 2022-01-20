@@ -26,6 +26,7 @@ const store = new Vuex.Store({
 
         /*Auth props*/
         currentUser: {
+            username: '',
             accessToken: '',
             refreshToken: '',
             matrixAccessToken: '',
@@ -42,14 +43,11 @@ const store = new Vuex.Store({
         isModalDisplayed: false,
 
         /*Transfer Object*/
-        transferObject: {
-            executorAddress: '',
-            customerAddress: '',
-            name: '',
-            deposit: '',
-            deadline: '',
-            description: ''
-        }
+        deals: {
+            customer: [],
+            executor: []
+        },
+        roomMate: ''
     },
     getters: {
         isSignedIn(state) {
@@ -58,8 +56,14 @@ const store = new Vuex.Store({
         }
     },
     mutations: {
+        setRoomMate(state, mate){
+          state.roomMate = mate;
+        },
         setCurrentComponent(state, component) {
             state.currentComponent = component;
+        },
+        setUsername(state, username) {
+          state.currentUser.username = username;
         },
         setCurrentUser(state, newCurrentUser) {
             state.currentUser.accessToken = newCurrentUser.accessToken ?? '';
@@ -79,8 +83,15 @@ const store = new Vuex.Store({
         setModalVisibility(state, visibility) {
             state.isModalDisplayed = visibility;
         },
-        setTransferObject(state, transferObject) {
-            Object.assign(state.transferObject, transferObject);
+        pushDeal(state, deal) {
+            if(deal.nameTo === state.currentUser.username){
+                let dealToPush = Object.assign({}, deal);
+                state.deals.executor.push(dealToPush);
+            }
+            if(deal.nameFrom === state.currentUser.username){
+                let dealToPush = Object.assign({}, deal);
+                state.deals.customer.push(dealToPush);
+            }
         }
     },
     actions: {
