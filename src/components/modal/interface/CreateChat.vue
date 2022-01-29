@@ -1,22 +1,20 @@
 <template>
-  <div @click="closeCreateSingle()" class="create-room-modal__back">
-    <div @click.stop class="create-room-modal" id="application-blank">
-      <div class="create-room-modal__title">Start single chat with: </div>
-      <div class="create-room-modal__field">
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M10 10C12.7625 10 15 7.7625 15 5C15 2.2375 12.7625 0 10 0C7.2375 0 5 2.2375 5 5C5 7.7625 7.2375 10 10 10ZM10 12.5C6.6625 12.5 0 14.175 0 17.5V20H20V17.5C20 14.175 13.3375 12.5 10 12.5Z" fill="#232829"/>
-        </svg>
-        <input 
-          :disabled="waitingForResponse" 
-          @keydown.enter.prevent="createSingle" 
-          v-model="username" 
-          class="create-room-modal__input" 
-          placeholder="@example" 
-          spellcheck="false"
-          type="text">
-      </div>
-      <button :disabled="!username || waitingForResponse" @click="createSingle" class="create-room-modal__button" type="button">Start</button>
+  <div @click.stop class="create-room-modal" id="application-blank">
+    <div class="create-room-modal__title">Start single chat with: </div>
+    <div class="create-room-modal__field">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M10 10C12.7625 10 15 7.7625 15 5C15 2.2375 12.7625 0 10 0C7.2375 0 5 2.2375 5 5C5 7.7625 7.2375 10 10 10ZM10 12.5C6.6625 12.5 0 14.175 0 17.5V20H20V17.5C20 14.175 13.3375 12.5 10 12.5Z" fill="#232829"/>
+      </svg>
+      <input 
+        :disabled="waitingForResponse" 
+        @keydown.enter.prevent="createSingle" 
+        v-model="username" 
+        class="create-room-modal__input" 
+        placeholder="@example" 
+        spellcheck="false"
+        type="text">
     </div>
+    <button :disabled="!username || waitingForResponse" @click="createSingle" class="create-room-modal__button" type="button">Start</button>
   </div>
 </template>
 
@@ -25,9 +23,6 @@ import { mapState } from 'vuex'
 
 export default {
   name: "BlankChat",
-  props: {
-    closeCreateSingle: Function
-  },
   data() {
     return {
       username: '',
@@ -55,7 +50,7 @@ export default {
         .then(() => {
           this.waitingForResponse = false;
           this.username = '';
-          this.closeCreateSingle();
+          this.$emit('close');
         })
         .catch(() => {
           this.waitingForResponse = false;
@@ -66,16 +61,6 @@ export default {
 </script>
 
 <style scoped>
-  .create-room-modal__back {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 100;
-  }
-
   .create-room-modal {
     position: absolute;
     top: 50%;

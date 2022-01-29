@@ -3,21 +3,25 @@
       <Chats 
         @active-room-selected="activeRoomSelected"
         @create-single="toggleSingle"/>
-      <Chat :room="activeRoom" v-if="!isBlank"/>
-      <BlankChat v-if="isBlank"/>
-      <transition name="show">
-        <CreateRoomModal
-          v-show="isCreateSingleModalActive"
-          :closeCreateSingle="toggleSingle"/>
-      </transition>
+      <Chat 
+        v-if="!isBlank" 
+        :room="activeRoom"/>
+      <BlankChat 
+        v-if="isBlank"/>
+      <ModalTemplate 
+        :display-as="modals.CREATE_CHAT"
+        :is-displayed="isCreateSingleModalActive"
+        @close="toggleSingle"/>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 import Chats from "./Chats";
 import Chat from "./Chat";
 import BlankChat from "./BlankChat";
-import CreateRoomModal from "./CreateRoomModal";
+import ModalTemplate from "../../modal/ModalTemplate.vue"
 export default {
   name: "Messages",
   data(){
@@ -30,9 +34,10 @@ export default {
     Chats,
     Chat,
     BlankChat,
-    CreateRoomModal
+    ModalTemplate
   },
   computed: {
+    ...mapState(['modals']),
     isBlank() {
       return this.activeRoom === null;
     }

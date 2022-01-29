@@ -133,7 +133,7 @@ export default {
       return message.event.sender !== this.currentUser.matrixUserId;
     },
     unixTimestampToLocalTime(unixTimestamp) {
-      return new Date(unixTimestamp).toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit', hour12: false});
+      return new Date(unixTimestamp).toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit', hourCycle: 'h23'});
     },
     sendMessage(event) {
       const content = {

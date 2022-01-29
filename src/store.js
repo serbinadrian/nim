@@ -6,6 +6,7 @@ import * as matrixSDK from "matrix-js-sdk";
 import errCodes from './data/status/errCodes.json'
 import components from './data/components/components.json'
 import dealStatus from './data/status/dealStatus.json'
+import modals from './data/components/modals.json'
 
 Vue.use(Vuex)
 
@@ -19,6 +20,7 @@ const store = new Vuex.Store({
         errCodes: errCodes,
         components: components,
         dealStatus: dealStatus,
+        modals: modals,
 
         /*net props*/
         backendUrl: 'http://bonch-ikt.ru:12881',
