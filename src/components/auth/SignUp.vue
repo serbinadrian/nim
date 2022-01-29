@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import {mapState, mapMutations} from "vuex";
+import {mapState, mapMutations, mapActions} from "vuex";
 export default {
   name: "SignUp",
   data(){
@@ -96,7 +96,8 @@ export default {
     }
   },
   methods:{
-    ...mapMutations(['setCurrentComponent']),
+    ...mapMutations(['setCurrentComponent', 'setCurrentUser', 'setUsername']),
+    ...mapActions(['defineMatrixClient', 'getWallet']),
     signUp(credentials){
       this.waitingForResponse = true;
       this.errorMessage = '';
@@ -105,13 +106,27 @@ export default {
         body: JSON.stringify(credentials)
       })
       .then(response => {
-        this.waitingForResponse = false;
         if (response.status === 200) {
-          this.setCurrentComponent(this.components.SIGN_IN);
+          return fetch(this.backendUrl + `/api/v1/user/auth`, {
+            method: 'POST',
+            body: JSON.stringify(credentials)
+          });
         }  else {
           // eslint-disable-next-line no-console
           console.log(response);
           this.errorMessage= 'Произошла ошибка, попробуйте позже';
+          return Promise.reject();
+        }
+      })
+      .then(response => {
+        if (response.status === 200) {
+          response.json().then(data => {
+            this.setUsername(credentials.username);
+            this.setCurrentComponent(this.components.MESSAGES);
+            this.setCurrentUser(data);
+            this.getWallet();
+            this.defineMatrixClient();
+          })
         }
       })
       .catch(error => {
