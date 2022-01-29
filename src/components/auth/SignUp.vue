@@ -114,12 +114,12 @@ export default {
         }  else {
           // eslint-disable-next-line no-console
           console.log(response);
+          this.waitingForResponse = false;
           this.errorMessage= 'Произошла ошибка, попробуйте позже';
-          return Promise.reject();
         }
       })
       .then(response => {
-        if (response.status === 200) {
+        if (response?.status === 200) {
           response.json().then(data => {
             this.setUsername(credentials.username);
             this.setCurrentComponent(this.components.MESSAGES);
