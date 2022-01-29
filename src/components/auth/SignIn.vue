@@ -62,7 +62,6 @@ export default {
     ...mapMutations(['setCurrentComponent', 'setCurrentUser', 'setUsername']),
     ...mapActions(['defineMatrixClient', 'getWallet']),
     signIn(credentials){
-      this.setUsername(credentials.username);
       this.waitingForResponse = true;
       this.errorMessage = '';
       fetch(this.backendUrl + `/api/v1/user/auth`, {
@@ -73,6 +72,7 @@ export default {
         this.waitingForResponse = false;
         if (response.status === 200) {
           response.json().then(data => {
+            this.setUsername(credentials.username);
             this.setCurrentComponent(this.components.MESSAGES);
             this.setCurrentUser(data);
             this.getWallet();

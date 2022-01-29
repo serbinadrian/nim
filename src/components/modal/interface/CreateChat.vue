@@ -52,7 +52,9 @@ export default {
           this.username = '';
           this.$emit('close');
         })
-        .catch(() => {
+        .catch(err => {
+          // eslint-disable-next-line no-console
+          console.log(err);
           this.waitingForResponse = false;
         });
     }

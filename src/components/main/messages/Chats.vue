@@ -92,6 +92,15 @@ export default {
       .then(() => {
         if (this.matrixClient.isInitialSyncComplete()) {
           this.rooms = this.matrixClient.getRooms();
+          this.matrixClient.on("RoomMember.membership", (event, member) => {
+            if (member.membership === "invite" && member.userId === this.currentUser.matrixUserId) {
+              this.matrixClient.joinRoom(member.roomId)
+                .then(function() {
+                  this.rooms = this.matrixClient.getRooms();
+                })
+            }
+            this.matrixClient.once("sync", () => { this.rooms = this.matrixClient.getRooms() });
+          });
         } else {
           this.matrixClient.once("sync", () => {
             this.rooms = this.matrixClient.getRooms();

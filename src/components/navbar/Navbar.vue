@@ -83,7 +83,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(['setCurrentComponent', 'setCurrentUser', 'setMatrixClient']),
+    ...mapMutations(['setCurrentComponent', 'setCurrentUser', 'setMatrixClient', 'setWalletData', 'setUsername']),
     ...mapActions(['defineLanguageData']),
     selectNavbarItem(item) {
       this.setCurrentComponent(item);
@@ -93,6 +93,8 @@ export default {
       this.setCurrentComponent(this.components.SIGN_IN);
       this.setCurrentUser({});
       this.setMatrixClient({});
+      this.setWalletData({});
+      this.setUsername('');
     }
   }
 }

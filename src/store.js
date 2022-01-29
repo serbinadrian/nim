@@ -73,6 +73,10 @@ const store = new Vuex.Store({
             state.currentUser.matrixAccessToken = newCurrentUser.matrixAccessToken ?? '';
             state.currentUser.matrixUserId = newCurrentUser.matrixUserId ?? '';
         },
+        setWalletData(state, walletData) {
+            state.currentUser.wallet = walletData.address ?? '';
+            state.currentUser.balance = walletData.balance ?? '';
+        },
         setMatrixClient(state, newMatrixClient) {
             state.matrixClient = newMatrixClient;
         },
@@ -149,20 +153,16 @@ const store = new Vuex.Store({
         /*Auth*/
 
         /*Wallet*/
-        getWallet() {
-            fetch(this.state.backendUrl + '/api/v1/wallet', {
+        getWallet({ commit }) {
+            fetch(this.state.backendUrl + '/api/v1/wallet/', {
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + this.state.currentUser.accessToken
                 }
             })
-                .then(response => {
-                    response.json().then(data => {
-                        this.state.currentUser.wallet = data.wallet;
-                        this.state.currentUser.balance = data.balance;
-                        // eslint-disable-next-line no-console
-                        console.log("WALLET", this.state.currentUser);
-                    });
+                .then(response => response.json())
+                .then(data => {
+                    commit('setWalletData', data);
                 });
         },
         /*Deals*/
