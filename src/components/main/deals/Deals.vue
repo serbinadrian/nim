@@ -64,7 +64,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(['components', 'dealStatus', 'languageData', 'currentUser']),
+    ...mapState(['components', 'dealStatus', 'languageData', 'currentUser', 'backendUrl']),
     language() {
       return this.languageData[this.components.DEALS] || {};
     },
@@ -80,10 +80,9 @@ export default {
           'Authorization': 'Bearer ' + this.currentUser.accessToken
         }
       })
-          .then(response => response.text())
+          .then(response => response.json())
           // eslint-disable-next-line no-console
-          .then(data => console.log(data)
-      /*data => {
+          .then(data => {
             if (data.message === 'ok') {
               alert('success');
               this.deals.customer = data.customerDeals;
@@ -91,7 +90,8 @@ export default {
             }
             else {
               alert(data.message);
-            }*/)
+            }
+          });
     },
   }
 }

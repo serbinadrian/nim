@@ -60,7 +60,7 @@ export default {
   },
   methods:{
     ...mapMutations(['setCurrentComponent', 'setCurrentUser', 'setUsername']),
-    ...mapActions(['defineMatrixClient', 'getWallet']),
+    ...mapActions(['defineMatrixClient']),
     signIn(credentials){
       this.waitingForResponse = true;
       this.errorMessage = '';
@@ -75,7 +75,6 @@ export default {
             this.setUsername(credentials.username);
             this.setCurrentComponent(this.components.MESSAGES);
             this.setCurrentUser(data);
-            this.getWallet();
             this.defineMatrixClient();
           });
         } else if (response.status === 400) {
