@@ -5,7 +5,10 @@
     </h1>
     <div class="top_balance">
       <div class="balance__info">
-        <p class="balance__value">42.745 <span class="value__name">NIM</span></p>
+        <p class="balance__value">
+          {{ currentUser.balance }} <span class="value__name">NIM</span>
+        </p>
+        <button @click="faucet">fauset</button>
       </div>
       <div class="operations">
         <p id="income">{{ language['income'] }} : +74.125 </p>
@@ -13,74 +16,52 @@
         <p id="outcome">{{ language['outcome'] }} : -19.28 </p>
       </div>
     </div>
-    <div class="transaction__list">
-      <p class="headline__table">Transactions</p>
-      <table>
-        <tr class="header__table">
-          <th>
-            Address sender
-          </th>
-          <th>
-            Address receiver
-          </th>
-          <th class="sum">
-            Sum
-          </th>
-        </tr>
-        <tr>
-          <td>0xab3b229eb4bcff881275e7ea2f0fd24eeac8c83a</td>
-          <td>0xea674fdde714fd979de3edf0f56aa9716b898ec8</td>
-          <td class="sum">0.5</td>
-        </tr>
-        <tr>
-          <td>0xab3b229eb4bcff881275e7ea2f0fd24eeac8c83a</td>
-          <td>0xea674fdde714fd979de3edf0f56aa9716b898ec8</td>
-          <td class="sum">0.24</td>
-        </tr>
-        <tr>
-          <td>0xea674fdde714fd979de3edf0f56aa9716b898ec8</td>
-          <td>0xab3b229eb4bcff881275e7ea2f0fd24eeac8c83a</td>
-          <td class="sum">7.5</td>
-        </tr>
-        <tr>
-          <td>0xab3b229eb4bcff881275e7ea2f0fd24eeac8c83a</td>
-          <td>0xea674fdde714fd979de3edf0f56aa9716b898ec8</td>
-          <td class="sum">0.5</td>
-        </tr>
-        <tr>
-          <td>0xea674fdde714fd979de3edf0f56aa9716b898ec8</td>
-          <td>0xea674fdde714fd979de3edf0f56aa9716b898ec8</td>
-          <td class="sum">11</td>
-        </tr>
-        <tr>
-          <td>0xab3b229eb4bcff881275e7ea2f0fd24eeac8c83a</td>
-          <td>0xea674fdde714fd979de3edf0f56aa9716b898ec8</td>
-          <td class="sum">16.247</td>
-        </tr>
-        <tr>
-          <td>0xab3b229eb4bcff881275e7ea2f0fd24eeac8c83a</td>
-          <td>0xea674fdde714fd979de3edf0f56aa9716b898ec8</td>
-          <td class="sum">0.5</td>
-        </tr>
-        <tr>
-          <td>0xab3b229eb4bcff881275e7ea2f0fd24eeac8c83a</td>
-          <td>0xea674fdde714fd979de3edf0f56aa9716b898ec8</td>
-          <td class="sum">0.28</td>
-        </tr>
-      </table>
-    </div>
   </div>
 </template>
 
 <script>
-import { mapState} from 'vuex'
+import {mapState, mapMutations} from 'vuex'
 
 export default {
   name: "Balance",
+  created() {
+    this.getWallet();
+  },
   computed: {
-    ...mapState(['components', 'languageData']),
+    ...mapState(['backendUrl', 'components', 'languageData', 'currentUser']),
     language() {
       return this.languageData[this.components.BALANCE] || {};
+    }
+  },
+  methods: {
+    ...mapMutations(['setWalletData']),
+    getWallet() {
+      fetch(this.backendUrl + '/api/v1/wallet/', {
+        method: 'GET',
+        headers: {
+          'Authorization': 'Bearer ' + this.currentUser.accessToken
+        }
+      }).then(response => response.json())
+          .then(data => {
+            this.setWalletData(data);
+          });
+    },
+    faucet() {
+      fetch(this.backendUrl + '/api/v1/wallet/faucet', {
+        method: 'POST',
+        headers: {
+          'Authorization': 'Bearer ' + this.currentUser.accessToken
+        }
+      }).then(response => response.json())
+          .then(data => {
+            if(data.message === 'ok'){
+              alert('success! wait some time to update balance');
+              this.getWallet();
+            }
+            else {
+              alert(data.message);
+            }
+          });
     }
   }
 }
@@ -108,7 +89,7 @@ export default {
 }
 
 .top_balance {
-  display: flex; 
+  display: flex;
   justify-content: space-between;
   margin-bottom: 210px;
 }
@@ -122,9 +103,17 @@ export default {
   font-size: 28px;
 }
 
-#income {color: var(--olive-dark);}
-#gas {color: var(--asphalt-tinted);}
-#outcome {color: var(--dark-context);}
+#income {
+  color: var(--olive-dark);
+}
+
+#gas {
+  color: var(--asphalt-tinted);
+}
+
+#outcome {
+  color: var(--dark-context);
+}
 
 .headline__table {
   color: var(--secondary-color-dark);
@@ -194,7 +183,7 @@ export default {
 
 .transaction__list .sum {
   text-align: center;
-  font-size:24px;
+  font-size: 24px;
   font-weight: bold;
 }
 </style>

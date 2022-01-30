@@ -44,7 +44,7 @@
         </div>
         <div class="modal__row">
           <fieldset class="modal__cell">
-            <button @click="pushDeal(dealObject), setModalVisibility(false)">Create a deal</button>
+            <button @click="createDeal(dealObject); setModalVisibility(false)">Create a deal</button>
           </fieldset>
         </div>
       </form>
@@ -77,7 +77,7 @@ export default {
     this.dealObject.nameTo = this.roomMate;
   },
   computed: {
-    ...mapState(['currentUser', 'roomMate'])
+    ...mapState(['currentUser', 'roomMate', 'backendUrl'])
   },
   methods: {
     ...mapMutations(['setModalVisibility', 'pushDeal']),
@@ -91,6 +91,26 @@ export default {
       console.log(temp);
       this.dealObject.nameTo = this.dealObject.nameFrom;
       this.dealObject.nameFrom = temp;
+    },
+    createDeal(dealObject) {
+      fetch(this.backendUrl + '/api/v1/escrow/', {
+        method: 'POST',
+        headers: {
+          'Authorization': 'Bearer ' + this.currentUser.accessToken,
+          'Content-Type': 'application/json'
+        },
+        body : JSON.stringify({
+          executor: dealObject.executor,
+          customer: dealObject.customer,
+          name: dealObject.title,
+          description: dealObject.description,
+          deposit: dealObject.price,
+          deadline: '1674158806'
+        })
+      })
+          .then(response => response.json())
+          // eslint-disable-next-line no-console
+      .then(data=>console.log(data));
     }
   }
 }

@@ -47,7 +47,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters, mapActions } from 'vuex'
+import {mapState} from 'vuex'
 import deal from './Deal.vue'
 
 export default {
@@ -57,77 +57,42 @@ export default {
   },
   data() {
     return {
-      // dealStatus: {},
+      deals: {
+        customer: [],
+        executor: []
+      }
     };
   },
   computed: {
-    ...mapState(['components', 'dealStatus', 'languageData', 'deals']),
+    ...mapState(['components', 'dealStatus', 'languageData', 'currentUser']),
     language() {
       return this.languageData[this.components.DEALS] || {};
     },
-    /*deals() {
-      return {
-        asCustomer: [],/*[
-          {
-            title: 'Security system "Marci"',
-            nameTo: 'Babbage',
-            price: 14.621,
-            description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt voluptates molestiae qui magnam perspiciatis amet reprehenderit provident? Dignissimos fuga dolor, dolorem alias sit quae accusantium optio mollitia modi esse! Nesciunt!Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt voluptates molestiae qui magnam perspiciatis amet reprehenderit provident? Dignissimos fuga dolor, dolorem alias sit quae accusantium optio mollitia modi esse! Nesciunt!',
-            status: this.dealStatus.CANCELLED
-          },
-          {
-            title: 'Computing of bigINT',
-            nameTo: 'Buterin',
-            price: 0.457,
-            description: 'Some description',
-            status: this.dealStatus.CONFIRMED
-          },
-          {
-            title: 'long long long long long long a a a a a a a a a a a a a a a a a  long long long long long long long long long long long long long ',
-            nameTo: 'long long long long long long a a a a a a a a a a a a a a a a a',
-            price: 7.2,
-            description: 'Firstly, we need a backup for our invention to prove we did it, we created this masterpiece of techical progress. Secondly, we have to test it. Write a program for this machine, launch this one and try again until successful changes.',
-            status: this.dealStatus.PENDING
-          }
-        ],
-        asExecutor: [][
-          {
-            title: 'Security system "Marci"',
-            nameTo: 'Babbage',
-            price: 14.621,
-            description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt voluptates molestiae qui magnam perspiciatis amet reprehenderit provident? Dignissimos fuga dolor, dolorem alias sit quae accusantium optio mollitia modi esse! Nesciunt!Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt voluptates molestiae qui magnam perspiciatis amet reprehenderit provident? Dignissimos fuga dolor, dolorem alias sit quae accusantium optio mollitia modi esse! Nesciunt!',
-            status: this.dealStatus.IN_PROGRESS
-          },
-          {
-            title: 'Security system "Marci"',
-            nameTo: 'Babbage',
-            price: 14.621,
-            description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt voluptates molestiae qui magnam perspiciatis amet reprehenderit provident? Dignissimos fuga dolor, dolorem alias sit quae accusantium optio mollitia modi esse! Nesciunt!Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt voluptates molestiae qui magnam perspiciatis amet reprehenderit provident? Dignissimos fuga dolor, dolorem alias sit quae accusantium optio mollitia modi esse! Nesciunt!',
-            status: this.dealStatus.SUBMITTED
-          },
-          {
-            title: 'Security system "Marci"',
-            nameTo: 'Babbage',
-            price: 14.621,
-            description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt voluptates molestiae qui magnam perspiciatis amet reprehenderit provident? Dignissimos fuga dolor, dolorem alias sit quae accusantium optio mollitia modi esse! Nesciunt!Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt voluptates molestiae qui magnam perspiciatis amet reprehenderit provident? Dignissimos fuga dolor, dolorem alias sit quae accusantium optio mollitia modi esse! Nesciunt!',
-            status: this.dealStatus.PENDING
-          },
-          {
-            title: 'Security system "Marci"',
-            nameTo: 'Babbage',
-            price: 14.621,
-            description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt voluptates molestiae qui magnam perspiciatis amet reprehenderit provident? Dignissimos fuga dolor, dolorem alias sit quae accusantium optio mollitia modi esse! Nesciunt!Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt voluptates molestiae qui magnam perspiciatis amet reprehenderit provident? Dignissimos fuga dolor, dolorem alias sit quae accusantium optio mollitia modi esse! Nesciunt!',
-            status: this.dealStatus.CANCELLED
-          }
-        ]
-      };*/
   },
   created() {
-    // this.dealStatus = this.getDealStatus();
+    this.getDeals();
   },
   methods: {
-    ...mapActions(['getDeals', 'createDeal']),
-    ...mapGetters(['getDealStatus']),
+    getDeals() {
+      fetch(this.backendUrl + '/api/v1/escrow/deals', {
+        method: 'GET',
+        headers: {
+          'Authorization': 'Bearer ' + this.currentUser.accessToken
+        }
+      })
+          .then(response => response.text())
+          // eslint-disable-next-line no-console
+          .then(data => console.log(data)
+      /*data => {
+            if (data.message === 'ok') {
+              alert('success');
+              this.deals.customer = data.customerDeals;
+              this.deals.executor = data.executorDeals;
+            }
+            else {
+              alert(data.message);
+            }*/)
+    },
   }
 }
 </script>

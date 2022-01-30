@@ -45,10 +45,6 @@ const store = new Vuex.Store({
         isModalDisplayed: false,
 
         /*Transfer Object*/
-        deals: {
-            customer: [],
-            executor: []
-        },
         roomMate: ''
     },
     getters: {
@@ -147,59 +143,8 @@ const store = new Vuex.Store({
             //                 break;
             //             }
             //         });
-            //     });
-        },
-
-        /*Auth*/
-
-        /*Wallet*/
-        getWallet({ commit }) {
-            fetch(this.state.backendUrl + '/api/v1/wallet/', {
-                method: 'GET',
-                headers: {
-                    'Authorization': 'Bearer ' + this.state.currentUser.accessToken
-                }
-            })
-                .then(response => response.json())
-                .then(data => {
-                    commit('setWalletData', data);
-                });
-        },
-        /*Deals*/
-        getDeals() {
-            fetch(this.state.backendUrl + '/api/v1/escrow/deals', {
-                method: 'GET',
-                headers: {
-                    'Authorization': 'Bearer ' + this.state.currentUser.accessToken
-                }
-            })
-            .then(response => {
-                // eslint-disable-next-line no-console
-                console.log(response)
-            })
-        },
-        createDeal() {
-            fetch(this.state.backendUrl + '/api/v1/escrow/', {
-                method: 'POST',
-                headers: {
-                    'Authorization': 'Bearer ' + this.state.currentUser.accessToken,
-                    'Content-Type': 'application/json'
-                },
-                body : JSON.stringify({
-                    executor: '0x6abb69b635e5db345c83A26d3Be396bb8230BBD9',
-                    customer: '0x6abb69b635e5db345c83A26d3Be396bb8230BBD9',
-                    name: 'test',
-                    description: 'description',
-                    deposit: '1',
-                    deadline: '1674158806'
-                })
-            })
-            .then(response => {
-                // eslint-disable-next-line no-console
-                console.log(response)
-            })
+            //
         }
-        /*Tasks*/
     }
 });
 
