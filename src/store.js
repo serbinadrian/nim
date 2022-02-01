@@ -42,7 +42,6 @@ const store = new Vuex.Store({
         selectedLanguage: '',
         languageData: {},
         currentComponent: '',
-        isModalDisplayed: false,
 
         /*Transfer Object*/
         roomMate: ''

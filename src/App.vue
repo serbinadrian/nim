@@ -12,12 +12,16 @@
         id="main-body">
 
         <Navbar v-if="isSignedIn"/>
-        <component :is="currentComponent"/>
+        <component 
+          :is="currentComponent"
+          :set-modal="setDisplayModalAs"/>
 
       </div>
     </div>
 
-    <Modal v-if="isModalDisplayed"/>
+    <ModalTemplate 
+        :display-as="displayModalAs"
+        @close="setDisplayModalAs('')"/>
 
   </main>
 </template>
@@ -32,6 +36,7 @@ import Balance from "./components/main/balance/Balance";
 import Tasks from "./components/main/tasks/Tasks";
 import Deals from "./components/main/deals/Deals";
 import Modal from "./components/modal/modal";
+import ModalTemplate from "./components/modal/ModalTemplate";
 export default {
   name: 'App',
   components: {
@@ -42,7 +47,13 @@ export default {
     Balance,
     Tasks,
     Deals,
-    Modal
+    Modal,
+    ModalTemplate
+  },
+  data() {
+    return {
+      displayModalAs: ''
+    };
   },
   computed:{
     ...mapState(['currentComponent', 'matrixClient', 'isModalDisplayed']),
@@ -52,7 +63,10 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['defineCurrentComponent', 'defineMatrixClient', 'defineLanguageData'])
+    ...mapActions(['defineCurrentComponent', 'defineMatrixClient', 'defineLanguageData']),
+    setDisplayModalAs(newDisplayModalAs) {
+      this.displayModalAs = newDisplayModalAs;
+    }
   },
   created() {
     if (this.isSignedIn)

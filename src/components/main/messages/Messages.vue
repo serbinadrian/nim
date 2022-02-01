@@ -1,43 +1,39 @@
 <template>
   <div class="user-messages">
       <Chats 
+        :set-modal="setModal"
         @active-room-selected="activeRoomSelected"
-        @create-single="toggleSingle"/>
+        />
       <Chat 
         v-if="!isBlank" 
+        :set-modal="setModal"
         :room="activeRoom"/>
       <BlankChat 
         v-if="isBlank"/>
-      <ModalTemplate 
-        :display-as="modals.CREATE_CHAT"
-        :is-displayed="isCreateSingleModalActive"
-        @close="toggleSingle"/>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
-
 import Chats from "./Chats";
 import Chat from "./Chat";
 import BlankChat from "./BlankChat";
-import ModalTemplate from "../../modal/ModalTemplate.vue"
+
 export default {
   name: "Messages",
+  props: {
+    setModal: Function
+  },
   data(){
     return{
       activeRoom: null,
-      isCreateSingleModalActive: false,
     }
   },
   components: {
     Chats,
     Chat,
-    BlankChat,
-    ModalTemplate
+    BlankChat
   },
   computed: {
-    ...mapState(['modals']),
     isBlank() {
       return this.activeRoom === null;
     }
@@ -46,9 +42,6 @@ export default {
     activeRoomSelected(room) {
       this.activeRoom = room;
     },
-    toggleSingle() {
-      this.isCreateSingleModalActive = !this.isCreateSingleModalActive;
-    }
   }
 }
 </script>

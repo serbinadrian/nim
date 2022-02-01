@@ -1,55 +1,52 @@
 <template>
-  <div class="modal">
-    <div class="modal__content">
-      <h2 class="modal__header">Create a deal</h2>
-      <form action="#" class="modal__form">
-        <div class="modal__row">
-          <fieldset class="modal__cell">
-            <label for="modal__executor-address">Executor</label>
-            <input id="modal__executor-address" v-model="dealObject.nameTo" type="text">
-          </fieldset>
-        </div>
-        <div class="modal__row right">
-          <svg @click="swapCustomerAndExecutor()" width="25" height="25" viewBox="0 0 40 28" fill="none" xmlns="http://www.w3.org/2000/svg" style="transform: rotate(90deg)">
-            <path d="M14.02 18H0V22H14.02V28L22 20L14.02 12V18ZM25.98 16V10H40V6H25.98V0L18 8L25.98 16Z" />
-          </svg>
-        </div>
-        <div class="modal__row">
-          <fieldset class="modal__cell">
-            <label for="modal__customer-address">Customer</label>
-            <input id="modal__customer-address" v-model="dealObject.nameFrom" type="text">
-          </fieldset>
-        </div>
-        <div class="modal__row">
-          <fieldset class="modal__cell">
-            <label for="modal__name">Title</label>
-            <input id="modal__name" v-model="dealObject.title" type="text">
-          </fieldset>
-          <fieldset class="modal__cell">
-            <label for="modal__deposit">Deposit</label>
-            <input id="modal__deposit" v-model="dealObject.price" type="number" step="any">
-          </fieldset>
-        </div>
-        <div class="modal__row">
-          <fieldset class="modal__cell">
-            <label for="modal__deadline">Deadline</label>
-            <input id="modal__deadline" v-model="dealObject.deadline" type="datetime-local">
-          </fieldset>
-        </div>
-        <div class="modal__row">
-          <fieldset class="modal__cell">
-            <label for="modal__description">Description</label>
-            <textarea id="modal__description" v-model="dealObject.description" name="" rows="10"></textarea>
-          </fieldset>
-        </div>
-        <div class="modal__row">
-          <fieldset class="modal__cell">
-            <button @click="pushDeal(dealObject), setModalVisibility(false)">Create a deal</button>
-          </fieldset>
-        </div>
-      </form>
-    </div>
-    <div class="modal__cross" @click="setModalVisibility(false)">╳</div>
+  <div @click.stop class="modal__content">
+    <h2 class="modal__header">Create a deal</h2>
+    <form action="#" class="modal__form">
+      <div class="modal__row">
+        <fieldset class="modal__cell">
+          <label for="modal__executor-address">Executor</label>
+          <input id="modal__executor-address" v-model="dealObject.nameTo" type="text">
+        </fieldset>
+      </div>
+      <div class="modal__row right">
+        <svg @click="swapCustomerAndExecutor()" width="25" height="25" viewBox="0 0 40 28" fill="none" xmlns="http://www.w3.org/2000/svg" style="transform: rotate(90deg)">
+          <path d="M14.02 18H0V22H14.02V28L22 20L14.02 12V18ZM25.98 16V10H40V6H25.98V0L18 8L25.98 16Z" />
+        </svg>
+      </div>
+      <div class="modal__row">
+        <fieldset class="modal__cell">
+          <label for="modal__customer-address">Customer</label>
+          <input id="modal__customer-address" v-model="dealObject.nameFrom" type="text">
+        </fieldset>
+      </div>
+      <div class="modal__row">
+        <fieldset class="modal__cell">
+          <label for="modal__name">Title</label>
+          <input id="modal__name" v-model="dealObject.title" type="text">
+        </fieldset>
+        <fieldset class="modal__cell">
+          <label for="modal__deposit">Deposit</label>
+          <input id="modal__deposit" v-model="dealObject.price" type="number" step="any">
+        </fieldset>
+      </div>
+      <div class="modal__row">
+        <fieldset class="modal__cell">
+          <label for="modal__deadline">Deadline</label>
+          <input id="modal__deadline" v-model="dealObject.deadline" type="datetime-local">
+        </fieldset>
+      </div>
+      <div class="modal__row">
+        <fieldset class="modal__cell">
+          <label for="modal__description">Description</label>
+          <textarea id="modal__description" v-model="dealObject.description" name="" rows="10"></textarea>
+        </fieldset>
+      </div>
+      <div class="modal__row">
+        <fieldset class="modal__cell">
+          <button @click="pushDeal(dealObject), setModalVisibility(false)">Create a deal</button>
+        </fieldset>
+      </div>
+    </form>
   </div>
 </template>
 
@@ -97,52 +94,12 @@ export default {
 </script>
 
 <style scoped>
-  .modal {
-    padding: 20px 0;
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.35);
-    overflow: auto;
-    transition: opacity .5s ease-in-out;
-    z-index: 10;
-  }
-
-  .modal__cross {
-    position: fixed;
-    top: 25px;
-    right: 25px;
-    font-size: 24px;
-    line-height: 1;
-    user-select: none;
-    cursor: pointer;
-    color: #333;
-    opacity: 0.25;
-    transition: opacity .25s ease-in-out;
-  }
-
-  .modal:hover .modal__content:not(:hover) + .modal__cross {
-    opacity: .9;
-  }
-
-  .modal_active {
-    visibility: visible;
-    opacity: 1;
-  }
-
   .modal__content {
-    position: relative;
-    top: 5%;
     margin: 0 auto;
     padding: 50px 50px 30px;
     width: 700px;
     border-radius: 30px;
     background-color: var(--olive-tinted);
-    transition: top .5s ease-in-out;
-  }
-
-  .modal_active .modal__content {
-    top: 0;
   }
 
   .modal__header {

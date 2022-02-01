@@ -2,7 +2,7 @@
   <transition 
     name="fade-in"
     @after-enter="isContentDisplayed = true">
-    <div v-if="isDisplayed" class="modal">
+    <div v-if="displayAs" class="modal">
       <div
         @click="isContentDisplayed = false"
         class="modal__background">
@@ -25,20 +25,21 @@
 <script>
 import { mapState } from 'vuex'
 import CreateChat from './interface/CreateChat.vue'
+import CreateDeal from './interface/CreateDeal.vue'
 
 export default {
   name: 'ModalTemplate',
+  props: {
+    displayAs: String
+  },
   data() {
     return {
       isContentDisplayed: false
     };
   },
-  props: {
-    displayAs: String,
-    isDisplayed: Boolean
-  },
   components: {
-    CreateChat
+    CreateChat,
+    CreateDeal
   },
   computed: {
     ...mapState(['modals', 'isModalDisplayed'])
@@ -63,14 +64,13 @@ export default {
     bottom: 0;
     left: 0;
     background-color: rgba(0, 0, 0, .6);
+    overflow-y: scroll;
   }
 
   .modal__content-wrapper {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
+    position: relative;
+    padding: 100px 0;
+    min-height: 100vh;
   }
 
 
@@ -80,7 +80,7 @@ export default {
   }
 
   .fade-in-enter-active, .fade-in-leave-active {
-    transition: opacity .15s ease-out;
+    transition: opacity .1s ease-out;
   }
 
   .fade-in-enter-to, .fade-in-leave {
@@ -94,7 +94,7 @@ export default {
   }
 
   .pop-up-enter-active, .pop-up-leave-active {
-    transition: all .15s ease-out;
+    transition: all .1s ease-out;
   }
 
   .pop-up-enter-to, .pop-up-leave {

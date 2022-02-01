@@ -17,6 +17,7 @@
         <button 
           class="add-chat-button" 
           type="button"
+          @click="createGroup"
           :data-tooltip="language['create group chat']"
           data-flow="bottom">
           <span class="add-chat-button__icon">
@@ -56,6 +57,9 @@ import { mapState } from 'vuex'
 
 export default {
   name: "Chats",
+  props: {
+    setModal: Function
+  },
   data() {
     return {
       rooms: [],
@@ -63,7 +67,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(['components', 'languageData', 'currentUser', 'matrixClient']),
+    ...mapState(['components', 'languageData', 'currentUser', 'matrixClient', 'modals']),
     language() {
       return this.languageData[this.components.MESSAGES] || {};
     }
@@ -84,7 +88,10 @@ export default {
       this.$emit('active-room-selected', room);
     },
     createSingle() {
-      this.$emit('create-single');
+      this.setModal(this.modals.CREATE_CHAT);
+    },
+    createGroup() {
+      // this.setModal(this.modals.CREATE_DEAL);
     }
   },
   created() {

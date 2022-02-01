@@ -46,7 +46,7 @@
       </ul>
     </div>
     <div class="chat-block" id="chat-block">
-      <ul :class="{'active': rightClicked}" class="right-click-menu" id="right-click-menu">
+      <ul :class="{'active': rightClicked}" @click="hideMenu()" class="right-click-menu" id="right-click-menu">
         <li class="right-click-menu__reply">
           <div class="right-click-menu-item">Reply</div>
         </li>
@@ -56,8 +56,8 @@
         <li class="right-click-menu__copy">
           <div class="right-click-menu-item">Copy message</div>
         </li>
-        <li class="right-click-menu__escrow" @click="setModalVisibility(true), hideMenu()">
-          <div class="right-click-menu-item">Create Escrow deal</div>
+        <li class="right-click-menu__escrow">
+          <div class="right-click-menu-item" @click="setModal(modals.CREATE_DEAL)">Create Escrow deal</div>
         </li>
         <li class="right-click-menu__task">
           <div class="right-click-menu-item">Add new task</div>
@@ -119,16 +119,17 @@ export default {
     }
   },
   props: {
-    room: Object
+    room: Object,
+    setModal: Function
   },
   computed: {
-    ...mapState(['components', 'languageData', 'currentUser', 'matrixClient']),
+    ...mapState(['components', 'languageData', 'currentUser', 'matrixClient', 'modals']),
     language() {
       return this.languageData[this.components.MESSAGES] || {};
     }
   },
   methods: {
-    ...mapMutations(['setModalVisibility', 'setRoomMate']),
+    ...mapMutations(['setRoomMate']),
     isIncoming(message) {
       return message.event.sender !== this.currentUser.matrixUserId;
     },
