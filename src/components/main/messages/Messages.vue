@@ -1,12 +1,10 @@
 <template>
   <div class="user-messages">
       <Chats 
-        :set-modal="setModal"
         @active-room-selected="activeRoomSelected"
         />
       <Chat 
         v-if="!isBlank" 
-        :set-modal="setModal"
         :room="activeRoom"/>
       <BlankChat 
         v-if="isBlank"/>
@@ -20,9 +18,6 @@ import BlankChat from "./BlankChat";
 
 export default {
   name: "Messages",
-  props: {
-    setModal: Function
-  },
   data(){
     return{
       activeRoom: null,

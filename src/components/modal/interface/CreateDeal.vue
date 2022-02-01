@@ -5,7 +5,7 @@
       <div class="modal__row">
         <fieldset class="modal__cell">
           <label for="modal__executor-address">Executor</label>
-          <input id="modal__executor-address" v-model="dealObject.nameTo" type="text">
+          <input id="modal__executor-address" v-model="dealObject.executor" type="text">
         </fieldset>
       </div>
       <div class="modal__row right">
@@ -16,17 +16,17 @@
       <div class="modal__row">
         <fieldset class="modal__cell">
           <label for="modal__customer-address">Customer</label>
-          <input id="modal__customer-address" v-model="dealObject.nameFrom" type="text">
+          <input id="modal__customer-address" v-model="dealObject.customer" type="text">
         </fieldset>
       </div>
       <div class="modal__row">
         <fieldset class="modal__cell">
           <label for="modal__name">Title</label>
-          <input id="modal__name" v-model="dealObject.title" type="text">
+          <input id="modal__name" v-model="dealObject.name" type="text">
         </fieldset>
         <fieldset class="modal__cell">
           <label for="modal__deposit">Deposit</label>
-          <input id="modal__deposit" v-model="dealObject.price" type="number" step="any">
+          <input id="modal__deposit" v-model="dealObject.deposit" type="number" step="any">
         </fieldset>
       </div>
       <div class="modal__row">
@@ -43,7 +43,7 @@
       </div>
       <div class="modal__row">
         <fieldset class="modal__cell">
-          <button @click="pushDeal(dealObject), setModalVisibility(false)">Create a deal</button>
+          <button @click="createDeal()">Create a deal</button>
         </fieldset>
       </div>
     </form>
@@ -55,39 +55,55 @@ import {mapMutations, mapState} from "vuex";
 //import dealStatus from "@/data/status/dealStatus.json";
 
 export default {
-  name: "modal",
+  name: "CreateDeal",
   data(){
     return {
       dealObject: {
-        title: '',
-        nameTo: '',
-        nameFrom: '',
-        price: 0,
-        deadline: '',
-        description: '',
-        status: ''
+        name: '',
+        executor: '',
+        customer: '',
+        deposit: 0,
+        deadline: Date.now(),
+        description: ''
       }
     }
   },
   created() {
-    this.dealObject.nameFrom = this.currentUser.username;
-    this.dealObject.nameTo = this.roomMate;
+    this.dealObject.customer = this.currentUser.username;
+    this.dealObject.executor = this.roomMate;
   },
   computed: {
-    ...mapState(['currentUser', 'roomMate'])
+    ...mapState(['currentUser', 'roomMate', 'modals', 'backendUrl'])
   },
   methods: {
-    ...mapMutations(['setModalVisibility', 'pushDeal']),
+    ...mapMutations(['setDisplayModalAs']),
     recordState(){
       // eslint-disable-next-line no-console
       console.log(this.dealObject);
     },
     swapCustomerAndExecutor(){
-      let temp = this.dealObject.nameTo;
+      let temp = this.dealObject.executor;
       // eslint-disable-next-line no-console
       console.log(temp);
-      this.dealObject.nameTo = this.dealObject.nameFrom;
-      this.dealObject.nameFrom = temp;
+      this.dealObject.executor = this.dealObject.customer;
+      this.dealObject.customer = temp;
+    },
+    createDeal() {
+      fetch(this.backendUrl + `/api/v1/escrow`, {
+        method: 'POST',
+        headers: {
+          'Authorization': 'Bearer ' + this.currentUser.accessToken,
+          'Content-Type': 'application/json'
+        },
+        body : JSON.stringify(this.dealObject)
+      })
+      .then(() => {
+          this.$emit('close');
+        })
+      .catch(err => {
+        // eslint-disable-next-line no-console
+        console.log(err);
+      });
     }
   }
 }

@@ -42,6 +42,7 @@ const store = new Vuex.Store({
         selectedLanguage: '',
         languageData: {},
         currentComponent: '',
+        displayModalAs: modals.HIDDEN,
 
         /*Transfer Object*/
         roomMate: ''
@@ -81,18 +82,8 @@ const store = new Vuex.Store({
         setLanguageData(state, languageData) {
             state.languageData = languageData;
         },
-        setModalVisibility(state, visibility) {
-            state.isModalDisplayed = visibility;
-        },
-        pushDeal(state, deal) {
-            if(deal.nameTo === state.currentUser.username){
-                let dealToPush = Object.assign({}, deal);
-                state.deals.executor.push(dealToPush);
-            }
-            if(deal.nameFrom === state.currentUser.username){
-                let dealToPush = Object.assign({}, deal);
-                state.deals.customer.push(dealToPush);
-            }
+        setDisplayModalAs(state, modal) {
+            state.displayModalAs = modal;
         }
     },
     actions: {

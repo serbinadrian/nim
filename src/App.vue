@@ -12,16 +12,12 @@
         id="main-body">
 
         <Navbar v-if="isSignedIn"/>
-        <component 
-          :is="currentComponent"
-          :set-modal="setDisplayModalAs"/>
+        <component :is="currentComponent"/>
 
       </div>
     </div>
 
-    <ModalTemplate 
-        :display-as="displayModalAs"
-        @close="setDisplayModalAs('')"/>
+    <ModalTemplate :display-as="displayModalAs"/>
 
   </main>
 </template>
@@ -35,7 +31,6 @@ import Messages from "./components/main/messages/Messages";
 import Balance from "./components/main/balance/Balance";
 import Tasks from "./components/main/tasks/Tasks";
 import Deals from "./components/main/deals/Deals";
-import Modal from "./components/modal/modal";
 import ModalTemplate from "./components/modal/ModalTemplate";
 export default {
   name: 'App',
@@ -47,26 +42,17 @@ export default {
     Balance,
     Tasks,
     Deals,
-    Modal,
     ModalTemplate
   },
-  data() {
-    return {
-      displayModalAs: ''
-    };
-  },
   computed:{
-    ...mapState(['currentComponent', 'matrixClient', 'isModalDisplayed']),
+    ...mapState(['currentComponent', 'matrixClient', 'displayModalAs']),
     ...mapGetters(['isSignedIn']),
     currentComponentApplicationBodyClass() {
       return `application-body_${this.currentComponent}`;
     }
   },
   methods: {
-    ...mapActions(['defineCurrentComponent', 'defineMatrixClient', 'defineLanguageData']),
-    setDisplayModalAs(newDisplayModalAs) {
-      this.displayModalAs = newDisplayModalAs;
-    }
+    ...mapActions(['defineCurrentComponent', 'defineMatrixClient', 'defineLanguageData'])
   },
   created() {
     if (this.isSignedIn)

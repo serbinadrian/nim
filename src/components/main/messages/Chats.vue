@@ -53,13 +53,10 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 
 export default {
   name: "Chats",
-  props: {
-    setModal: Function
-  },
   data() {
     return {
       rooms: [],
@@ -73,6 +70,7 @@ export default {
     }
   },
   methods: {
+    ...mapMutations(['setDisplayModalAs']),
     findTheLastMessageFromTimeline(room, userId) {
       const timeline = room.timeline;
       for (let i = timeline.length - 1; i >= 0; i--) {
@@ -88,10 +86,10 @@ export default {
       this.$emit('active-room-selected', room);
     },
     createSingle() {
-      this.setModal(this.modals.CREATE_CHAT);
+      this.setDisplayModalAs(this.modals.CREATE_CHAT);
     },
     createGroup() {
-      // this.setModal(this.modals.CREATE_DEAL);
+      // this.setDisplayModalAs(this.modals.CREATE_DEAL);
     }
   },
   created() {

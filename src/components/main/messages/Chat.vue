@@ -57,7 +57,7 @@
           <div class="right-click-menu-item">Copy message</div>
         </li>
         <li class="right-click-menu__escrow">
-          <div class="right-click-menu-item" @click="setModal(modals.CREATE_DEAL)">Create Escrow deal</div>
+          <div class="right-click-menu-item" @click="setDisplayModalAs(modals.CREATE_DEAL)">Create Escrow deal</div>
         </li>
         <li class="right-click-menu__task">
           <div class="right-click-menu-item">Add new task</div>
@@ -129,7 +129,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(['setRoomMate']),
+    ...mapMutations(['setRoomMate', 'setDisplayModalAs']),
     isIncoming(message) {
       return message.event.sender !== this.currentUser.matrixUserId;
     },

@@ -8,13 +8,13 @@
         class="modal__background">
         <transition 
           name="pop-up"
-          @after-leave="$emit('close')">
+          @after-leave="setDisplayModalAs(modals.HIDDEN)">
           <div 
             v-if="isContentDisplayed"
             class="modal__content-wrapper">
             <component 
               :is="displayAs"
-              @close="$emit('close')"/>
+              @close="isContentDisplayed = false"/>
           </div>
         </transition>
       </div>
@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapMutations, mapState } from 'vuex'
 import CreateChat from './interface/CreateChat.vue'
 import CreateDeal from './interface/CreateDeal.vue'
 
@@ -42,7 +42,10 @@ export default {
     CreateDeal
   },
   computed: {
-    ...mapState(['modals', 'isModalDisplayed'])
+    ...mapState(['modals'])
+  },
+  methods: {
+    ...mapMutations(['setDisplayModalAs'])
   }
 }
 </script>

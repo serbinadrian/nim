@@ -22,7 +22,7 @@
 import { mapState } from 'vuex'
 
 export default {
-  name: "BlankChat",
+  name: "CreateChat",
   data() {
     return {
       username: '',
