@@ -1,0 +1,10 @@
+{
+  "AUTH": "/api/v1/user/auth",
+  "USER": "/api/v1/user",
+
+  "GET_WALLET": "/api/v1/wallet",
+  "FAUCET": "/api/v1/wallet/faucet",
+
+  "GET_DEALS": "/api/v1/escrow/deals",
+  "CREATE_DEAL": "/api/v1/escrow"
+}

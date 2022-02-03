@@ -22,8 +22,15 @@
           <button :disabled="isEmpty || waitingForResponse"
                   class="form__submit"
                   type="submit"
-                  @click.prevent="signIn({ username, password })">{{ language['sign in'] }}</button>
-          <div class="form__signup-text">{{ language['or'] }} <button type="button" :disabled="waitingForResponse" @click="setCurrentComponent(components.SIGN_UP)" class="form__signup-link">{{ language['sign up'] }}</button></div>
+                  @click.prevent="signIn({ username, password })">
+                  {{ language['sign in'] }}
+          </button>
+          <div class="form__signup-text">{{ language['or'] }}
+            <button type="button" :disabled="waitingForResponse"
+                    @click="setCurrentComponent(components.SIGN_UP)"
+                    class="form__signup-link">
+                    {{ language['sign up'] }}
+            </button></div>
         </div>
       </form>
     </div>
@@ -77,7 +84,7 @@ export default {
             this.setCurrentUser(data);
             this.defineMatrixClient();
           });
-        } else if (response.status === 400) {
+        } else if (response.status === this.errCodes.BAD_REQUEST) {
           this.errorMessage =  'Неверный пароль';
         } else if (response.status === this.errCodes.NOT_FOUND) {
           this.errorMessage = 'Пользователь не найден';

@@ -54,14 +54,14 @@ const store = new Vuex.Store({
         }
     },
     mutations: {
-        setRoomMate(state, mate){
-          state.roomMate = mate;
+        setRoomMate(state, mate) {
+            state.roomMate = mate;
         },
         setCurrentComponent(state, component) {
             state.currentComponent = component;
         },
         setUsername(state, username) {
-          state.currentUser.username = username;
+            state.currentUser.username = username;
         },
         setCurrentUser(state, newCurrentUser) {
             state.currentUser.accessToken = newCurrentUser.accessToken ?? '';
