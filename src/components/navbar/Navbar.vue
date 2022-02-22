@@ -6,7 +6,7 @@
     <button class="application-menu-item messenger"
          :class="{'active': selectedNavbarItem === components.MESSAGES}"
          @click="selectNavbarItem(components.MESSAGES)"
-         :data-tooltip="language['messages']" data-flow="top">
+         :data-tooltip="language['messages']" data-flow="right">
       <div class="application-menu-item__wrapper">
         <svg class="icon" width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
           <path d="M36 0H4C1.8 0 0 1.8 0 4V40L8 32H36C38.2 32 40 30.2 40 28V4C40 1.8 38.2 0 36 0ZM36 28H8L4 32V4H36V28Z"/>
@@ -27,7 +27,7 @@
     <button class="application-menu-item deals"
          :class="{'active': selectedNavbarItem === components.DEALS}"
          @click="selectNavbarItem(components.DEALS)"
-         :data-tooltip="language['deals']" data-flow="bottom">
+         :data-tooltip="language['deals']" data-flow="right">
       <div class="application-menu-item__wrapper">
         <svg class="stroke-icon" width="32" height="40" viewBox="0 0 43 51" xmlns="http://www.w3.org/2000/svg">
           <path
@@ -38,7 +38,7 @@
     <button class="application-menu-item tasks"
          :class="{'active': selectedNavbarItem === components.TASKS}"
          @click="selectNavbarItem(components.TASKS)"
-         :data-tooltip="language['tasks']" data-flow="left">
+         :data-tooltip="language['tasks']" data-flow="right">
       <div class="application-menu-item__wrapper">
         <svg class="icon" width="40" height="33" viewBox="0 0 40 33" xmlns="http://www.w3.org/2000/svg">
           <path d="M32.95 4.71667L35.2833 7.05L14.05 28.2833L4.71667 18.95L7.05 16.6167L14.05 23.6167L32.95 4.71667ZM32.95 0L14.05 18.9L7.05 11.9L0 18.95L14.05 33L40 7.05L32.95 0Z"/>
@@ -127,7 +127,7 @@ export default {
 /*  /Theme transitions  */
 
 
-/*  #Other styles  */
+/*  #Generic styles  */
 .application-menu {
   height: 100%;
   width: 60px;
@@ -205,5 +205,5 @@ export default {
 .application-menu .stroke-icon {
   stroke: var(--secondary-font-color);
 }
-/*  /Other styles  */
+/*  /Generic styles  */
 </style>
