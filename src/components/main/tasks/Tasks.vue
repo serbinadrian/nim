@@ -18,6 +18,7 @@
 import { mapState } from 'vuex'
 import Task from './Task.vue'
 import taskCategories from './../../../data/status/taskStatus.json'
+
 export default {
   name: "Tasks",
   data(){

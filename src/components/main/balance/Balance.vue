@@ -6,15 +6,15 @@
     <div class="top_balance">
       <div class="balance__info">
         <p class="balance__value">
-          {{ currentUser.balance }} <span class="value__name">NIM</span>
+          {{ currentUser.balance }} <span class="value__name">ETH</span>
         </p>
-        <button @click="faucet">fauset</button>
+        <button class="balance__faucet button" @click="faucet">faucet</button>
       </div>
-      <div class="operations">
+      <!-- <div class="operations">
         <p id="income">{{ language['income'] }} : +74.125 </p>
         <p id="gas">{{ language['gas'] }}: -12.1</p>
         <p id="outcome">{{ language['outcome'] }} : -19.28 </p>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -72,13 +72,14 @@ export default {
   margin-left: 20px;
   flex: 1;
   overflow: auto;
+  position: relative;
 }
 
 .balance__value {
   font-family: Inter, sans-serif;
   font-size: 96px;
   font-weight: bold;
-  color: #232829;
+  color: var(--secondary-font-color);
   margin-top: 26px;
 }
 
@@ -115,8 +116,22 @@ export default {
   color: var(--dark-context);
 }
 
+.balance__faucet {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0.5em 1.5em;
+  margin: 1em;
+
+  font-size: 2rem;
+  line-height: 1;
+  font-weight: 600;
+  border: none;
+  border-radius: 100px;
+}
+
 .headline__table {
-  color: var(--secondary-color-dark);
+  color: var(--secondary-color);
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 25px;

@@ -2,19 +2,25 @@
   <div @click.stop class="create-room-modal" id="application-blank">
     <div class="create-room-modal__title">Start single chat with: </div>
     <div class="create-room-modal__field">
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M10 10C12.7625 10 15 7.7625 15 5C15 2.2375 12.7625 0 10 0C7.2375 0 5 2.2375 5 5C5 7.7625 7.2375 10 10 10ZM10 12.5C6.6625 12.5 0 14.175 0 17.5V20H20V17.5C20 14.175 13.3375 12.5 10 12.5Z" fill="#232829"/>
+      <svg class="icon" width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+        <path d="M10 10C12.7625 10 15 7.7625 15 5C15 2.2375 12.7625 0 10 0C7.2375 0 5 2.2375 5 5C5 7.7625 7.2375 10 10 10ZM10 12.5C6.6625 12.5 0 14.175 0 17.5V20H20V17.5C20 14.175 13.3375 12.5 10 12.5Z"/>
       </svg>
       <input 
         :disabled="waitingForResponse" 
         @keydown.enter.prevent="createSingle" 
         v-model="username" 
-        class="create-room-modal__input" 
+        class="create-room-modal__input input" 
         placeholder="@example" 
         spellcheck="false"
         type="text">
     </div>
-    <button :disabled="!username || waitingForResponse" @click="createSingle" class="create-room-modal__button" type="button">Start</button>
+    <button 
+      :disabled="!username || waitingForResponse" 
+      @click="createSingle" 
+      class="create-room-modal__button button" 
+      type="button">
+        Start
+    </button>
   </div>
 </template>
 
@@ -69,7 +75,7 @@ export default {
     left: 50%;
     transform: translate(-50%, -50%);
     padding: 25px 30px;
-    background-color: var(--olive-tinted);
+    background-color: var(--primary-color);
     border-radius: 30px;
   }
 
@@ -78,6 +84,7 @@ export default {
     font-weight: bold;
     line-height: 1;
     margin-bottom: 2rem;
+    color: var(--secondary-font-color);
   }
 
   .create-room-modal__field {
@@ -94,29 +101,15 @@ export default {
     line-height: 1;
     padding: .75em 1.2em;
     border-radius: 100px;
-    background-color: var(--asphalt-tinted);
-    color: var(--mint-solid);
-    outline: 1px solid transparent;
-    transition-property: outline, opacity;
-    transition-duration: .25s;
-    transition-timing-function: ease-out;
-  }
-
-  .create-room-modal__input:focus {
-    outline: 3px solid var(--olive-dark);
-  }
-
-  .create-room-modal__input::placeholder {
-    color: var(--olive-dark);
   }
 
   .create-room-modal__button {
     display: block;
     margin: 2rem auto 0;
     min-width: 10rem;
-    background-color: var(--dark-context);
-    color: #fff;
-    font-size: 1.6rem;
+    background-color: var(--primary-button-color);
+    color: var(--primary-button-font-color);
+    font-size: 1.8rem;
     font-weight: 600;
     line-height: 1;
     padding: .5em 1.2em;
@@ -124,21 +117,5 @@ export default {
     border: none;
     cursor: pointer;
     outline: none;
-    transition: filter .25s ease-in-out;
-    filter: brightness(1);
-  }
-
-  .create-room-modal__button:not(:disabled):hover,
-  .create-room-modal__button:not(:disabled):focus {
-    filter: brightness(1.2);
-  }
-
-  .create-room-modal__button:not(:disabled):active {
-    filter: brightness(0.85);
-    transition-duration: .05s;
-  }
-
-  .create-room-modal__button:disabled {
-    opacity: .7;
   }
 </style>

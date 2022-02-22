@@ -133,5 +133,126 @@ export default {
 </script>
 
 <style scoped>
+.application-chats {
+  width: 300px;
+  margin-left: 25px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
 
+.add-chat-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.add-chat-button {
+  flex: 1;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  
+  padding: 1em 1.2em;
+  border-radius: 100px;
+  border: none;
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  outline: none;
+  color: var(--secondary-sub-font-color);
+  background-color: var(--secondary-color);
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
+  filter: brightness(1);
+  transition-property: box-shadow, filter;
+  transition-duration: .2s;
+  transition-timing-function: ease-out;
+}
+
+.add-chat-button:hover {
+  filter: brightness(1.05);
+  box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.5);
+}
+
+.add-chat-button:active {
+  transition-duration: .1s;
+  filter: brightness(0.9);
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5);
+}
+
+.add-chat-button__icon svg {
+  fill: var(--secondary-sub-font-color);
+}
+
+.chats {
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
+  border-radius: 30px;
+  -webkit-border-radius: 30px;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background: var(--secondary-color);
+}
+
+.chat {
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+  flex-wrap: nowrap;
+  -ms-align-items: center;
+  align-items: center;
+  margin: 2px 2px 10px 2px;
+  padding: 10px 10px 10px 10px;
+  border-radius: 30px;
+  -webkit-border-radius: 30px;
+  cursor: pointer;
+  background-color: transparent;
+  transition: background-color .2s ease-out;
+}
+
+.chat:hover {
+  outline: 1px solid var(--primary-color);
+}
+
+.chat.active {
+  background: var(--primary-color);
+}
+
+.chat-preview {
+  max-width: calc(100% - 90px);
+}
+
+.person-avatar {
+  margin-right: 10px;
+}
+
+.person-avatar img {
+  border-radius: 100px;
+  width: 60px;
+  height: 60px;
+}
+
+.person-name {
+  margin-bottom: 6px;
+  font-size: 2rem;
+  font-weight: bold;
+  overflow-x: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: var(--secondary-font-color);
+}
+
+.person-message {
+  font-weight: 600;
+  font-size: 1.6rem;
+  /* width: 90%; */
+  overflow-x: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: var(--secondary-sub-font-color);
+}
 </style>

@@ -1,22 +1,22 @@
 {
     "TO_DO": {
         "category": "to do",
-        "color": "#72B1EB"
+        "color": "#9CCFFF"
     },
     "IN_PROGRESS": {
         "category": "in progress",
-        "color": "#f6e924"
+        "color": "#FFF27A"
     } ,
     "REVIEW": {
         "category": "review",
-        "color": "#de9de3"
+        "color": "#DBD2E0"
     },
     "COMPLETE": {
         "category": "complete",
-        "color": "#38b000"
+        "color": "#95C77D"
     },
     "CANCELLED": {
         "category": "cancelled",
-        "color": "#df7c7c"
+        "color": "#F1ABAB"
     }
 }

@@ -5,45 +5,45 @@
       <div class="modal__row">
         <fieldset class="modal__cell">
           <label for="modal__executor-address">Executor</label>
-          <input id="modal__executor-address" v-model="dealObject.executor" type="text">
+          <input id="modal__executor-address" class="input" v-model="dealObject.executor" type="text">
         </fieldset>
       </div>
       <div class="modal__row right">
-        <svg @click="swapCustomerAndExecutor()" width="25" height="25" viewBox="0 0 40 28" fill="none" xmlns="http://www.w3.org/2000/svg" style="transform: rotate(90deg)">
+        <svg @click="swapCustomerAndExecutor()" class="icon" width="25" height="25" viewBox="0 0 40 28" xmlns="http://www.w3.org/2000/svg" style="transform: rotate(90deg)">
           <path d="M14.02 18H0V22H14.02V28L22 20L14.02 12V18ZM25.98 16V10H40V6H25.98V0L18 8L25.98 16Z" />
         </svg>
       </div>
       <div class="modal__row">
         <fieldset class="modal__cell">
           <label for="modal__customer-address">Customer</label>
-          <input id="modal__customer-address" v-model="dealObject.customer" type="text">
+          <input id="modal__customer-address" class="input" v-model="dealObject.customer" type="text">
         </fieldset>
       </div>
       <div class="modal__row">
         <fieldset class="modal__cell">
           <label for="modal__name">Title</label>
-          <input id="modal__name" v-model="dealObject.name" type="text">
+          <input id="modal__name" class="input" v-model="dealObject.name" type="text">
         </fieldset>
         <fieldset class="modal__cell">
           <label for="modal__deposit">Deposit</label>
-          <input id="modal__deposit" v-model="dealObject.deposit" type="number" step="any">
+          <input id="modal__deposit" class="input" v-model="dealObject.deposit" type="number" step="any">
         </fieldset>
       </div>
       <div class="modal__row">
         <fieldset class="modal__cell">
           <label for="modal__deadline">Deadline</label>
-          <input id="modal__deadline" v-model="dealObject.deadline" type="datetime-local">
+          <input id="modal__deadline" class="input" v-model="dealObject.deadline" type="datetime-local">
         </fieldset>
       </div>
       <div class="modal__row">
         <fieldset class="modal__cell">
           <label for="modal__description">Description</label>
-          <textarea id="modal__description" v-model="dealObject.description" name="" rows="10"></textarea>
+          <textarea id="modal__description" class="input" v-model="dealObject.description" name="" rows="10"></textarea>
         </fieldset>
       </div>
       <div class="modal__row">
         <fieldset class="modal__cell">
-          <button @click="createDeal()">Create a deal</button>
+          <button class="button" @click="createDeal()">Create a deal</button>
         </fieldset>
       </div>
     </form>
@@ -115,14 +115,14 @@ export default {
     padding: 50px 50px 30px;
     width: 700px;
     border-radius: 30px;
-    background-color: var(--olive-tinted);
+    background-color: var(--secondary-color);
   }
 
   .modal__header {
     font-size: 2.8rem;
     font-weight: bold;
     margin-bottom: 30px;
-    color: var(--secondary-font-color-light);
+    color: var(--secondary-font-color);
   }
 
   .modal__form {
@@ -151,7 +151,7 @@ export default {
     font-weight: 600;
     margin-left: 20px;
     margin-bottom: 5px;
-    color: var(--secondary-font-color-light);
+    color: var(--secondary-font-color);
   }
 
   .modal__cell input,
@@ -161,15 +161,8 @@ export default {
     font-size: 1.6rem;
     line-height: 1;
     font-weight: 400;
-    background-color: var(--olive-dark);
-    color: var(--secondary-font-color-light);
     border: none;
     border-radius: 30px;
-  }
-
-  .modal__cell input:focus,
-  .modal__cell textarea:focus {
-    outline: 2px solid var(--secondary-font-color-light);
   }
 
   .modal__cell input::-webkit-outer-spin-button,
@@ -197,12 +190,6 @@ export default {
     border-radius: 30px;
     cursor: pointer;
     user-select: none;
-    background-color: var(--dark-context);
-    color: var(--gray);
-  }
-
-  .modal__cell button:disabled {
-    opacity: 0.5;
   }
 
   .modal{
@@ -217,14 +204,10 @@ export default {
     z-index: 90;
     display: flex;
     justify-content: end;
+    cursor: pointer;
   }
 
   .right svg{
     position: absolute;
-    fill: #26493E;
-  }
-
-  .right svg:hover{
-    fill: #70a694;
   }
 </style>

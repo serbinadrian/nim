@@ -42,6 +42,15 @@ export default {
 </script>
 
 <style scoped>
+.user-messages {
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+  flex: auto;
+}
+
+
+
 /*-----transitions-----*/
 .show-enter,
 .show-leave-to {

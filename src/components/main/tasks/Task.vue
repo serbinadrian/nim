@@ -47,7 +47,7 @@ export default {
     height: 200px;
     display: flex;
     flex-wrap: nowrap;
-    box-shadow: 0 0 4px rgba(255, 255, 255, 0.5);
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
     border-radius: 30px;
     overflow: hidden;
   }
@@ -59,7 +59,7 @@ export default {
   }
 
   .task-body{
-    background: #90CFBA;
+    background: var(--secondary-color);
     width: 90%;
     height: 100%;
     position: relative;
@@ -68,7 +68,7 @@ export default {
   .task-to-complete{
     font-size: 24px;
     line-height: 29px;
-    color: #232829;
+    color: var(--secondary-font-color);
     font-weight: bold;
     padding: 20px 10px 10px 10px;
   }
@@ -108,7 +108,7 @@ export default {
   }
 
   .task-reward{
-    color: #232829;
+    color: var(--secondary-font-color);
     font-weight: bold;
     font-size: 18px;
   }

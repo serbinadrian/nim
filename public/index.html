@@ -17,110 +17,120 @@
     <meta name="theme-color" content="#293133">
     <!-- Place favicon.ico in the root directory -->
 
-    <link rel="stylesheet" type="text/css" href="css/vendor/fonts.css">
-    <link rel="stylesheet" type="text/css" href="css/vendor/variables.css">
-    <link rel="stylesheet" type="text/css" href="css/vendor/normalize.css">
-    <link rel="stylesheet" type="text/css" href="css/vendor/base.css">
-    <link rel="stylesheet" type="text/css" href="css/vendor/helpers.css">
+    <style>
+        .preloader {
+            background-color: #B3F8E1;
+        }
 
-    <link rel="stylesheet" type="text/css" href="css/main.css">
-    <link rel="stylesheet" type="text/css" href="css/authorization.css">
-    <link rel="stylesheet" type="text/css" href="css/tooltip.css">
+        .preloader svg {
+            fill: #232829;
+        }
 
+        @media (prefers-color-scheme: dark) {
+            .preloader {
+                background-color: #293133;
+            }
+
+            .preloader svg {
+                fill: #7EDEBE;
+            }
+        }
+
+        .preloader {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 10;
+            user-select: none;
+            opacity: 1;
+            visibility: visible;
+            transition: opacity .25s ease-out;
+        }
+    
+        .preloader svg {
+            vertical-align: middle;
+        }
+        
+        .preloader__logogroup {
+            font-family: 'Red Hat Display', sans-serif;
+            font-weight: 900;
+            font-size: 64px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .preloader__n {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .preloader__brackets {
+            display: flex;
+            transform-origin: center 52px;
+            animation: brackets 1.5s ease-in-out infinite both;
+        }
+        
+        .preloader_hiding {
+            opacity: 0;
+        }
+    
+        .preloader_hidden {
+            opacity: 1;
+            visibility: hidden;
+        }
+    
+        .preloader_hidden .preloader__brackets {
+            animation-play-state: paused;
+        }
+    
+        @keyframes brackets {
+            0% {
+                gap: 1ch;
+                transform: rotate(0deg);
+            }
+            80% {
+                gap: 2ch;
+                transform: rotate(720deg);
+            }
+            95% {
+                gap: .8ch;
+                transform: rotate(720deg);
+            }
+            100% {
+                gap: 1ch;
+                transform: rotate(720deg);
+            }
+        }
+    </style>
 </head>
 <body>
 <div class="preloader">
     <div class="preloader__logogroup">
         <div class="preloader__brackets">
             <div class="preloader__open-bracket">
-                <svg width="20" height="55" viewBox="0 0 20 55" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M19.5767 54.9H0.496719V-2.86102e-06H19.5767V7.56H9.67672V47.34H19.5767V54.9Z" fill="#293133"/>
+                <svg width="20" height="55" viewBox="0 0 20 55" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M19.5767 54.9H0.496719V-2.86102e-06H19.5767V7.56H9.67672V47.34H19.5767V54.9Z"/>
                 </svg>
             </div>
             <div class="preloader__close-bracket">
-                <svg width="20" height="55" viewBox="0 0 20 55" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M0.416719 -2.86102e-06H19.4967V54.9H0.416719V47.34H10.3167V7.56H0.416719V-2.86102e-06Z" fill="#293133"/>
+                <svg width="20" height="55" viewBox="0 0 20 55" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0.416719 -2.86102e-06H19.4967V54.9H0.416719V47.34H10.3167V7.56H0.416719V-2.86102e-06Z"/>
                 </svg>
             </div>
         </div>
         <div class="preloader__n">
-            <svg width="32" height="33" viewBox="0 0 32 33" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M0.160156 33V1.26H9.88016V3.42C11.0402 2.54 12.3402 1.86 13.7802 1.38C15.2602 0.899998 16.8002 0.659998 18.4002 0.659998C22.1202 0.659998 25.1602 1.86 27.5202 4.26C29.8802 6.66 31.0602 9.72 31.0602 13.44V33H21.3402V14.76C21.3402 13.04 20.8002 11.66 19.7202 10.62C18.6802 9.54 17.3002 9 15.5802 9C14.3402 9 13.2402 9.22 12.2802 9.66C11.3202 10.1 10.5202 10.72 9.88016 11.52V33H0.160156Z" fill="#293133"/>
+            <svg width="32" height="33" viewBox="0 0 32 33" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0.160156 33V1.26H9.88016V3.42C11.0402 2.54 12.3402 1.86 13.7802 1.38C15.2602 0.899998 16.8002 0.659998 18.4002 0.659998C22.1202 0.659998 25.1602 1.86 27.5202 4.26C29.8802 6.66 31.0602 9.72 31.0602 13.44V33H21.3402V14.76C21.3402 13.04 20.8002 11.66 19.7202 10.62C18.6802 9.54 17.3002 9 15.5802 9C14.3402 9 13.2402 9.22 12.2802 9.66C11.3202 10.1 10.5202 10.72 9.88016 11.52V33H0.160156Z"/>
             </svg>
         </div>
     </div>
 </div>
-<style>
-    .preloader {
-        position: fixed;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        background-color: var(--primary-color-light);
-        z-index: 10;
-        user-select: none;
-        opacity: 1;
-        visibility: visible;
-        transition: opacity .25s ease-out;
-    }
-
-    .preloader_hiding {
-        opacity: 0;
-    }
-
-    .preloader_hidden {
-        opacity: 0;
-        visibility: hidden;
-    }
-
-    .preloader__logogroup {
-        font-family: 'Red Hat Display', sans-serif;
-        font-weight: 900;
-        font-size: 64px;
-        color: var(--asphalt-tinted);
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-
-    .preloader__n {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-
-    .preloader__brackets {
-        display: flex;
-        transform-origin: center 52px;
-        animation: brackets 1.5s ease-in-out infinite both;
-    }
-
-    .preloader_hidden .preloader__brackets {
-        animation-play-state: paused;
-    }
-
-    @keyframes brackets {
-        0% {
-            gap: 1ch;
-            transform: rotate(0deg);
-        }
-        80% {
-            gap: 2ch;
-            transform: rotate(720deg);
-        }
-        95% {
-            gap: .8ch;
-            transform: rotate(720deg);
-        }
-        100% {
-            gap: 1ch;
-            transform: rotate(720deg);
-        }
-    }
-</style>
 <noscript>
     <strong>We're sorry but NIM doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
 </noscript>

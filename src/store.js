@@ -7,13 +7,14 @@ import errCodes from './data/status/errCodes.json'
 import components from './data/components/components.json'
 import dealStatus from './data/status/dealStatus.json'
 import modals from './data/components/modals.json'
+import themes from './data/theme/themes.json'
 
 Vue.use(Vuex)
 
 
 const store = new Vuex.Store({
     plugins: [createPersistedState({
-        paths: ['currentUser', 'selectedLanguage']
+        paths: ['currentUser', 'selectedTheme', 'selectedLanguage']
     })],
     state: {
         /*data*/
@@ -21,6 +22,7 @@ const store = new Vuex.Store({
         components: components,
         dealStatus: dealStatus,
         modals: modals,
+        themes: themes,
 
         /*net props*/
         backendUrl: 'http://bonch-ikt.ru:12881',
@@ -39,6 +41,7 @@ const store = new Vuex.Store({
         matrixClient: {},
 
         /*App props*/
+        selectedTheme: themes.LIGHT,
         selectedLanguage: '',
         languageData: {},
         currentComponent: '',
@@ -84,6 +87,9 @@ const store = new Vuex.Store({
         },
         setDisplayModalAs(state, modal) {
             state.displayModalAs = modal;
+        },
+        setSelectedTheme(state, theme) {
+            state.selectedTheme = theme;
         }
     },
     actions: {

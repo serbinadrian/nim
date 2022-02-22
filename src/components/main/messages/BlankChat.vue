@@ -27,7 +27,7 @@ export default {
   overflow: hidden;
   width: 100%;
   height: 100%;
-  background: var(--secondary-color-light);
+  background: var(--secondary-color);
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
   border-radius: 30px;
   display: -webkit-flex;
@@ -48,7 +48,7 @@ export default {
   font-style: normal;
   font-weight: 900;
   font-size: 150px;
-  color: var(--asphalt-tinted);
+  color: var(--secondary-sub-font-color);
   opacity: 0.05;
   line-height: 1.333;
   letter-spacing: 0.07em;
@@ -58,5 +58,6 @@ export default {
 
 .application-blank__text {
   font-size: 20px;
+  color: var(--secondary-sub-font-color);
 }
 </style>

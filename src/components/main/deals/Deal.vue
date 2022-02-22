@@ -11,7 +11,7 @@
         <div class="deal__to">
           {{ language['to'] }}: <span class="deal__to-name">{{ nameTo }}</span>
         </div>
-        <div class="deal__price">{{ price }} NIM</div>
+        <div class="deal__price">{{ price }} ETH</div>
       </div>
       <transition name="expand">
         <div v-show="active">
@@ -25,13 +25,13 @@
             <button
               :disabled="status === dealStatus.CONFIRMED"
               @click.stop="status = dealStatus.CONFIRMED"
-              class="deal__control deal__confirm">
+              class="deal__control deal__confirm button">
               {{ language['confirm'] }}
             </button>
             <button
               :disabled="status === dealStatus.CANCELLED"
               @click.stop="status = dealStatus.CANCELLED"
-              class="deal__control deal__cancel">
+              class="deal__control deal__cancel button">
               {{ language['cancel'] }}
             </button>
           </div>
@@ -49,7 +49,7 @@
         <div class="deal__to">
           {{ language['to'] }}: <span class="deal__to-name">{{ nameTo }}</span>
         </div>
-        <div class="deal__price">{{ price }} NIM</div>
+        <div class="deal__price">{{ price }} ETH</div>
       </div>
       <transition name="expand">
         <div v-show="active">
@@ -63,19 +63,19 @@
             <button
               :disabled="status === dealStatus.SUBMITTED"
               @click.stop="status = dealStatus.SUBMITTED"
-              class="deal__control deal__submit">
+              class="deal__control deal__submit button">
               {{ language['submit'] }}
             </button>
             <button
               :disabled="status === dealStatus.IN_PROGRESS"
               @click.stop="status = dealStatus.IN_PROGRESS"
-              class="deal__control deal__in-progress">
+              class="deal__control deal__in-progress button">
               {{ language['in progress'] }}
             </button>
             <button
               :disabled="status === dealStatus.CANCELLED"
               @click.stop="status = dealStatus.CANCELLED"
-              class="deal__control deal__cancel">
+              class="deal__control deal__cancel button">
               {{ language['cancel'] }}
             </button>
           </div>
@@ -124,7 +124,7 @@ export default {
 .deal {
   position: relative;
   padding: 20px 24px 20px 36px;
-  background-color: var(--olive-tinted);
+  background-color: var(--secondary-color);
   border-radius: 30px;
   box-shadow: 0 0 4px rgba(0,0,0,.5);
   cursor: pointer;
@@ -145,27 +145,27 @@ export default {
   font-size: 11px;
   line-height: 1;
   border-radius: 50px;
-  color: #fff;  
+  color: var(--primary-button-font-color);  
 }
 
 .deal__control.deal__confirm,
 .deal__status.confirmed {
-  background-color: var(--dark-context);
-}
-
-.deal__control.deal__cancel,
-.deal__status.cancelled {
-  background-color: var(--red-custom);
+  background-color: var(--submit-button-color);
 }
 
 .deal__control.deal__submit,
 .deal__status.submitted {
-  background-color: var(--dark-context);
+  background-color: var(--submit-button-color);
 }
 
 .deal__control.deal__in-progress,
 .deal__status.in-progress {
-  background-color: var(--olive-dark);
+  background-color: var(--in-progress-button-color);
+}
+
+.deal__control.deal__cancel,
+.deal__status.cancelled {
+  background-color: var(--cancelled-button-color);
 }
 
 .deal__title {
@@ -173,7 +173,7 @@ export default {
   padding-right: 120px;
   margin-bottom: 1em;
   font-weight: bold;
-  color: var(--dark-context);
+  color: var(--secondary-font-color);
 }
 
 .deal__to-price {
@@ -186,14 +186,14 @@ export default {
 .deal__to {
   font-size: 18px;
   font-weight: bold;
-  color: var(--dark-context);
+  color: var(--secondary-font-color);
 }
 
 .deal__to-name,
 .deal__price {
   font-size: 24px;
   font-weight: bold;
-  color: var(--asphalt-solid);
+  color: var(--secondary-sub-font-color);
 }
 
 .deal__price {
@@ -206,12 +206,12 @@ export default {
 }
 
 .deal__description-title {
-  color: var(--dark-context);
+  color: var(--secondary-font-color);
   margin-bottom: 1em;
 }
 
 .deal__description-content {
-  color: var(--asphalt-solid);
+  color: var(--secondary-sub-font-color);
 }
 
 .deal__controls {
@@ -228,16 +228,8 @@ export default {
   font-weight: 600;
   border: none;
   border-radius: 50px;
-  color: #fff;
+  color: var(--primary-button-font-color);
   cursor: pointer;
-}
-
-.deal__control:hover {
-  opacity: 0.9;
-}
-
-.deal__control:disabled {
-  opacity: 0.6;
 }
 
 

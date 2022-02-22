@@ -117,7 +117,8 @@ export default {
   font-size: 24px;
   line-height: 1;
   font-weight: bold;
-  border: 1px solid var(--olive-dark);
+  background-color: var(--secondary-color);
+  color: var(--secondary-font-color);
   border-radius: 50px;
   box-shadow: 0 0 4px rgba(0,0,0,.5);
 }
