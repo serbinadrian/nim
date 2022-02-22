@@ -146,6 +146,7 @@ export default {
     margin-bottom: 20px;
     position: relative;
     left: 0;
+    will-change: left;
   }
     
   .authorization__row:nth-child(2n - 1) {
@@ -272,7 +273,8 @@ export default {
     cursor: pointer;
   }
   
-  .not-validated, .weak{
-    outline: 3px solid brown;
+  .not-validated, 
+  .weak {
+    outline: 2px solid brown !important;
   }
 </style>
