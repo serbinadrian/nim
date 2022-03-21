@@ -119,8 +119,7 @@ export default {
     }
   },
   props: {
-    room: Object,
-    setModal: Function
+    room: Object
   },
   computed: {
     ...mapState(['components', 'languageData', 'currentUser', 'matrixClient', 'modals']),

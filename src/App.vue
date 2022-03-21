@@ -26,8 +26,7 @@
 
 <script>
 import { mapState, mapGetters, mapActions } from 'vuex'
-import SignIn from "./components/auth/SignIn";
-import SignUp from "./components/auth/SignUp";
+import Authorization from "./components/auth/Authorization";
 import Navbar from "./components/navbar/Navbar";
 import Messages from "./components/main/messages/Messages";
 import Balance from "./components/main/balance/Balance";
@@ -37,8 +36,7 @@ import ModalTemplate from "./components/modal/ModalTemplate";
 export default {
   name: 'App',
   components: {
-    SignIn,
-    SignUp,
+    Authorization,
     Navbar,
     Messages,
     Balance,

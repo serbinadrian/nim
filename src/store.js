@@ -95,7 +95,7 @@ const store = new Vuex.Store({
     actions: {
         /*Global*/
         defineCurrentComponent({commit, getters}) {
-            commit('setCurrentComponent', getters.isSignedIn ? components.MESSAGES : components.SIGN_IN);
+            commit('setCurrentComponent', getters.isSignedIn ? components.MESSAGES : components.AUTHORIZATION);
         },
 
         defineLanguageData({state, commit}, languageToSet) {

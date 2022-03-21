@@ -1,7 +1,6 @@
 {
   "NAVBAR": "Navbar",
-  "SIGN_IN": "SignIn",
-  "SIGN_UP": "SignUp",
+  "AUTHORIZATION": "Authorization",
   "MESSAGES": "Messages",
   "BALANCE": "Balance",
   "DEALS": "Deals",

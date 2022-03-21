@@ -22,21 +22,14 @@
     "submitted": "Submitted",
     "confirmed": "Confirmed"
   },
-  "SignIn": {
-    "login": "login",
-    "password": "password",
-    "sign in": "SIGN IN",
-    "or": "or",
-    "sign up": "sign up"
-  },
-  "SignUp": {
+  "Authorization": {
     "login": "login",
     "email": "email",
     "password": "password",
     "repeat password": "repeat password",
-    "sign up": "SIGN UP",
     "or": "or",
-    "sign in": "sign in"
+    "sign in": "sign in",
+    "sign up": "sign up"
   },
   "Messages": {
     "search": "Search",

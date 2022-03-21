@@ -96,7 +96,7 @@ export default {
       this.selectedNavbarItem = item;
     },
     signOut(){
-      this.setCurrentComponent(this.components.SIGN_IN);
+      this.setCurrentComponent(this.components.AUTHORIZATION);
       this.setCurrentUser({});
       this.setMatrixClient({});
       this.setWalletData({});

@@ -22,21 +22,14 @@
     "submitted": "Отправлено",
     "confirmed": "Подтверждено"
   },
-  "SignIn": {
-    "login": "логин",
-    "password": "пароль",
-    "sign in": "ВОЙТИ",
-    "or": "или",
-    "sign up": "зарегистрироваться"
-  },
-  "SignUp": {
+  "Authorization": {
     "login": "логин",
     "email": "email",
     "password": "пароль",
     "repeat password": "повторите пароль",
-    "sign up": "ЗАРЕГИСТРИРОВАТЬСЯ",
     "or": "или",
-    "sign in": "войти"
+    "sign in": "войти",
+    "sign up": "зарегистрироваться"
   },
   "Messages": {
     "search": "Поиск",
